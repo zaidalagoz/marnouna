@@ -36,6 +36,7 @@
             color: #6c5860;
             margin-left: 20px;
             font-weight: 600;
+            cursor: pointer;
         }
         nav a:hover {
             color: #d63384;
@@ -66,6 +67,8 @@
             display: inline-block;
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3);
+            border: none;
+            cursor: pointer;
         }
         .btn:hover {
             background-color: #b0246b;
@@ -98,6 +101,7 @@
             padding-bottom: 20px;
             border: 1px solid #fce4ec;
             transition: transform 0.3s;
+            text-align: right;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -108,7 +112,7 @@
             object-fit: cover;
         }
         .product-card h4 {
-            margin: 15px 0 8px;
+            margin: 15px 15px 8px;
             font-size: 20px;
             color: #333;
         }
@@ -122,7 +126,7 @@
             font-weight: bold;
             color: #d63384;
             font-size: 18px;
-            margin-bottom: 15px;
+            margin: 0 15px 15px;
             display: block;
         }
         .whatsapp-btn {
@@ -135,9 +139,21 @@
             font-weight: bold;
             display: inline-block;
             transition: 0.3s;
+            margin: 0 15px;
         }
         .whatsapp-btn:hover {
             background-color: #1ebe57;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            margin: 10px 15px 0;
+            display: none;
         }
         .contact-section {
             background-color: #fce4ec;
@@ -146,6 +162,32 @@
             margin: 40px auto;
             max-width: 900px;
             text-align: center;
+        }
+        #admin-panel {
+            display: none;
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: right;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
         }
         footer {
             background-color: #33292e;
@@ -161,62 +203,194 @@
     <header>
         <h1>مرنونا | Marnouna</h1>
         <nav>
-            <a href="#">الرئيسية</a>
-            <a href="#products">المنتجات والبوكيهات</a>
-            <a href="#contact">تواصل معنا</a>
+            <a onclick="showSection('home')">الرئيسية</a>
+            <a onclick="showSection('products')">المنتجات</a>
+            <a onclick="showSection('admin-login')">لوحة التحكم (Admin)</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <h2>أجمل بوكيهات الورد واكسسوارات الأفراح ✨</h2>
-        <p>مصنوعة بأعلى جودة وبأدق التفاصيل عشان ليلة العمر تكون أسطورية.</p>
-        <a href="#products" class="btn">تصفح المنتجات</a>
-    </section>
+    <div id="home-section">
+        <section class="hero">
+            <h2>أجمل بوكيهات الورد واكسسوارات الأفراح ✨</h2>
+            <p>مصنوعة بأعلى جودة وبأدق التفاصيل عشان ليلة العمر تكون أسطورية.</p>
+            <a onclick="showSection('products')" class="btn">تصفح المنتجات</a>
+        </section>
+    </div>
 
-    <div class="section" id="products">
+    <div class="section" id="products-section">
         <h3>تشكيلة مرنونا المميزة</h3>
         <p class="subtitle">اختر اللحظة المناسبة، وسبقنا ننفذهالك بأجمل شكل</p>
         
-        <div class="products-grid">
-            <!-- منتج 1 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80" alt="بوكيه ورد عروسة">
-                <h4>بوكيه ورد عروسة فخم</h4>
-                <p>تنسيق راقي من الورد الطبيعي/الصناعي بتصميم مميز لليلة العمر.</p>
-                <span class="price">للرغبة في معرفة السعر</span>
-                <a href="https://wa.me/200000000000?text=مرحباً، مهتم بالاستفسار عن بوكيه ورد عروسة فخم" target="_blank" class="whatsapp-btn">اطلب عبر واتساب</a>
-            </div>
-
-            <!-- منتج 2 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=500&q=80" alt="اكسسوارات أفراح">
-                <h4>طقم اكسسوارات خطوبة وأفراح</h4>
-                <p>تشكيلة أنيقة من الإكسسوارات الخاصة بالعرائس والمناسبات السعيدة.</p>
-                <span class="price">تصميم حسب الطلب</span>
-                <a href="https://wa.me/200000000000?text=مرحباً، مهتم بالاستفسار عن طقم اكسسوارات الخطوبة والأفراح" target="_blank" class="whatsapp-btn">اطلب عبر واتساب</a>
-            </div>
-
-            <!-- منتج 3 -->
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=80" alt="تنسيقات ورود">
-                <h4>تنسيقات ورد هاند ميد</h4>
-                <p>بوكيهات هدايا وتوزيعات مميزة تناسب كل المناسبات والأفراح.</p>
-                <span class="price">أسعار مناسبة</span>
-                <a href="https://wa.me/200000000000?text=مرحباً، مهتم بالاستفسار عن تنسیقات الورد الهاند ميد" target="_blank" class="whatsapp-btn">اطلب عبر واتساب</a>
-            </div>
+        <div class="products-grid" id="products-container">
+            <!-- المنتجات -->
         </div>
+    </div>
+
+    <!-- تسجيل دخول الأدمن -->
+    <div id="admin-login" style="display: none; max-width: 400px; margin: 80px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: right;">
+        <h3 style="color: #d63384; margin-bottom: 20px; text-align: center;">تسجيل دخول لوحة التحكم</h3>
+        <div class="form-group">
+            <label>اسم المستخدم</label>
+            <input type="text" id="username" placeholder="اكتب اسم المستخدم (ميرنا)">
+        </div>
+        <div class="form-group">
+            <label>كلمة المرور</label>
+            <input type="password" id="password" placeholder="اكتب كلمة المرور">
+        </div>
+        <button class="btn" style="width: 100%; margin-top: 10px;" onclick="checkLogin()">دخول</button>
+    </div>
+
+    <!-- لوحة التحكم -->
+    <div id="admin-panel">
+        <h3 style="color: #d63384; margin-bottom: 20px;">إدارة منتجات مرنونا 🛠️</h3>
+        <div class="form-group">
+            <label>اسم المنتج</label>
+            <input type="text" id="p-title" placeholder="مثال: بوكيه ورد ملكي">
+        </div>
+        <div class="form-group">
+            <label>وصف المنتج</label>
+            <textarea id="p-desc" placeholder="تفاصيل المنتج..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>السعر / ملاحظة</label>
+            <input type="text" id="p-price" placeholder="مثال: 500 جنيه أو حسب الطلب">
+        </div>
+        <div class="form-group">
+            <label>رابط الصورة (URL)</label>
+            <input type="text" id="p-img" placeholder="حط لينك الصورة هنا">
+        </div>
+        <button class="btn" onclick="addProduct()">إضافة المنتج للموقع</button>
+        <button class="btn" style="background-color: #666; margin-right: 10px;" onclick="logoutAdmin()">تسجيل خروج</button>
     </div>
 
     <div class="contact-section" id="contact">
         <h3>تواصل مع مرنونا مباشرة</h3>
         <p>عندك تصميم معين في بالك؟ أو حابب تطلب بوكيه أو اكسسوار بمواصفات خاصة؟ كلمنا فوراً وهنساعدك!</p>
         <br>
-        <a href="https://wa.me/200000000000" target="_blank" class="btn">تواصل معنا عبر واتساب</a>
+        <a href="https://wa.me/201100329703" target="_blank" class="btn">تواصل معنا عبر واتساب</a>
     </div>
 
     <footer>
         <p>جميع الحقوق محفوظة © 2026 - مرنونا (Marnouna) لبوكيهات الورد واكسسوارات الأفراح</p>
     </footer>
 
+    <script>
+        let products = JSON.parse(localStorage.getItem('marnouna_products')) || [
+            {
+                title: "بوكيه ورد عروسة فخم",
+                desc: "تنسيق راقي من الورد بتصميم مميز لليلة العمر.",
+                price: "حسب الطلب",
+                img: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                title: "طقم اكسسوارات خطوبة وأفراح",
+                desc: "تشكيلة أنيقة من الإكسسوارات الخاصة بالعرائس والمناسبات.",
+                price: "تصميم حسب الطلب",
+                img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        let isAdmin = localStorage.getItem('marnouna_admin') === 'true';
+
+        function renderProducts() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+            products.forEach((p, index) => {
+                container.innerHTML += `
+                    <div class="product-card">
+                        <img src="${p.img}" alt="${p.title}">
+                        <h4>${p.title}</h4>
+                        <p>${p.desc}</p>
+                        <span class="price">${p.price}</span>
+                        <a href="https://wa.me/201100329703?text=مرحباً، مهتم بالاستفسار عن ${p.title}" target="_blank" class="whatsapp-btn">اطلب عبر واتساب</a>
+                        ${isAdmin ? `<button class="delete-btn" style="display:block;" onclick="deleteProduct(${index})">حذف المنتج</button>` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function showSection(sectionId) {
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('admin-login').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+
+            if (sectionId === 'home') {
+                document.getElementById('home-section').style.display = 'block';
+                document.getElementById('products-section').style.display = 'block';
+            } else if (sectionId === 'products') {
+                document.getElementById('products-section').style.display = 'block';
+            } else if (sectionId === 'admin-login') {
+                if (isAdmin) {
+                    document.getElementById('admin-panel').style.display = 'block';
+                } else {
+                    document.getElementById('admin-login').style.display = 'block';
+                }
+            }
+        }
+
+        function checkLogin() {
+            let user = document.getElementById('username').value;
+            let pass = document.getElementById('password').value;
+
+            if (user === 'ميرنا' && pass === '112233') {
+                isAdmin = true;
+                localStorage.setItem('marnouna_admin', 'true');
+                alert('أهلاً بك يا ميرنا في لوحة التحكم الخاصة بمرنونا!');
+                showSection('admin-login');
+                renderProducts();
+            } else {
+                alert('اسم المستخدم أو كلمة المرور خطأ!');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            localStorage.setItem('marnouna_admin', 'false');
+            alert('تم تسجيل الخروج بنجاح');
+            showSection('home');
+            renderProducts();
+        }
+
+        function addProduct() {
+            let title = document.getElementById('p-title').value;
+            let desc = document.getElementById('p-desc').value;
+            let price = document.getElementById('p-price').value;
+            let img = document.getElementById('p-img').value;
+
+            if (!title || !price) {
+                alert('من فضلك اكتب اسم المنتج والسعر على الأقل!');
+                return;
+            }
+
+            products.push({
+                title: title,
+                desc: desc || "تصميم راقي من مرنونا",
+                price: price,
+                img: img || "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80"
+            });
+
+            localStorage.setItem('marnouna_products', JSON.stringify(products));
+            alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
+            
+            document.getElementById('p-title').value = '';
+            document.getElementById('p-desc').value = '';
+            document.getElementById('p-price').value = '';
+            document.getElementById('p-img').value = '';
+
+            showSection('products');
+            renderProducts();
+        }
+
+        function deleteProduct(index) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+                products.splice(index, 1);
+                localStorage.setItem('marnouna_products', JSON.stringify(products));
+                renderProducts();
+            }
+        }
+
+        renderProducts();
+    </script>
 </body>
 </html>
