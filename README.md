@@ -163,7 +163,6 @@
             max-width: 900px;
             text-align: center;
         }
-        /* لوحة التحكم */
         #admin-panel {
             display: none;
             max-width: 800px;
@@ -210,7 +209,6 @@
         </nav>
     </header>
 
-    <!-- الصفحة الرئيسية -->
     <div id="home-section">
         <section class="hero">
             <h2>أجمل بوكيهات الورد واكسسوارات الأفراح ✨</h2>
@@ -219,22 +217,21 @@
         </section>
     </div>
 
-    <!-- قسم المنتجات -->
     <div class="section" id="products-section">
         <h3>تشكيلة مرنونا المميزة</h3>
         <p class="subtitle">اختر اللحظة المناسبة، وسبقنا ننفذهالك بأجمل شكل</p>
         
         <div class="products-grid" id="products-container">
-            <!-- المنتجات هتتضاف هنا بالتشغيل التلقائي -->
+            <!-- المنتجات -->
         </div>
     </div>
 
-    <!-- صفحة تسجيل دخول الأدمن -->
+    <!-- تسجيل دخول الأدمن -->
     <div id="admin-login" style="display: none; max-width: 400px; margin: 80px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: right;">
         <h3 style="color: #d63384; margin-bottom: 20px; text-align: center;">تسجيل دخول لوحة التحكم</h3>
         <div class="form-group">
             <label>اسم المستخدم</label>
-            <input type="text" id="username" placeholder="اكتب اسم المستخدم">
+            <input type="text" id="username" placeholder="اكتب اسم المستخدم (ميرنا)">
         </div>
         <div class="form-group">
             <label>كلمة المرور</label>
@@ -243,7 +240,7 @@
         <button class="btn" style="width: 100%; margin-top: 10px;" onclick="checkLogin()">دخول</button>
     </div>
 
-    <!-- لوحة التحكم لإضافة المنتجات -->
+    <!-- لوحة التحكم -->
     <div id="admin-panel">
         <h3 style="color: #d63384; margin-bottom: 20px;">إدارة منتجات مرنونا 🛠️</h3>
         <div class="form-group">
@@ -278,7 +275,6 @@
     </footer>
 
     <script>
-        // بيانات المنتجات الأساسية
         let products = JSON.parse(localStorage.getItem('marnouna_products')) || [
             {
                 title: "بوكيه ورد عروسة فخم",
@@ -337,11 +333,11 @@
             let user = document.getElementById('username').value;
             let pass = document.getElementById('password').value;
 
-            // اليوزر والباسورد بتوعك (تقدر تغيرهم زي ما تحب)
-            if (user === 'zaid' && pass === '1234') {
+            // اليوزر ميرنا والباسورد 112233
+            if (user === 'ميرنا' && pass === '112233') {
                 isAdmin = true;
                 localStorage.setItem('marnouna_admin', 'true');
-                alert('أهلاً بك يا باشمهندس زياد في لوحة التحكم!');
+                alert('أهلاً بك يا ميرنا في لوحة التحكم الخاصة بمرنونا!');
                 showSection('admin-login');
                 renderProducts();
             } else {
@@ -352,7 +348,7 @@
         function logoutAdmin() {
             isAdmin = false;
             localStorage.setItem('marnouna_admin', 'false');
-            alert تم تسجيل الخروج بنجاح;
+            alert('تم تسجيل الخروج بنجاح');
             showSection('home');
             renderProducts();
         }
@@ -378,7 +374,6 @@
             localStorage.setItem('marnouna_products', JSON.stringify(products));
             alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
             
-            // تفريغ الحقول
             document.getElementById('p-title').value = '';
             document.getElementById('p-desc').value = '';
             document.getElementById('p-price').value = '';
@@ -396,7 +391,6 @@
             }
         }
 
-        // تشغيل عرض المنتجات أول ما الصفحة تفتح
         renderProducts();
     </script>
 </body>
