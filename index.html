@@ -3,591 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marnouna | لمسة من مرنونا</title>
+    <title>مرنونا | Marnouna</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #faf9f6;
-            color: #2c2c2c;
+            background-color: #ffffff;
+            color: #111111;
             line-height: 1.6;
-            min-height: 100vh;
         }
-        /* هيدر أبيض عصري راقي جداً شبه فلوكا */
+        /* الهيدر المطابق تماماً لستايل فلوكا */
         header {
             background-color: #ffffff;
-            padding: 20px 50px;
+            padding: 20px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid #f0f0f0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-        .logo-container {
+        .logo h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #111111;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+        nav ul {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            list-style: none;
+            gap: 35px;
         }
-        .logo-container img {
-            width: 55px;
-            height: 55px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        header h1 {
-            color: #1a1a1a;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-        nav a {
+        nav ul li a {
             text-decoration: none;
-            color: #4a4a4a;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
+            color: #333333;
+            font-weight: 500;
             font-size: 15px;
+            transition: 0.2s;
         }
-        nav a:hover {
-            color: #d63384;
+        nav ul li a:hover {
+            color: #000000;
+            font-weight: 700;
         }
-        /* واجهة الـ Hero الأنيقة النظيفة */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* واجهة الـ Hero */
         .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 130px 20px;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=80') center/cover;
             color: white;
+            padding: 0 20px;
         }
         .hero h2 {
             font-size: 48px;
-            margin-bottom: 15px;
             font-weight: 800;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
         .hero p {
-            font-size: 20px;
-            margin-bottom: 35px;
-            font-weight: 500;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 400;
+            max-width: 600px;
         }
-        .btn {
-            background-color: #1a1a1a;
-            color: white;
+        .hero-btn {
+            background-color: #ffffff;
+            color: #111111;
             padding: 14px 35px;
-            border-radius: 4px;
             text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: 0.3s;
-            border: none;
-            cursor: pointer;
+            border-radius: 2px;
+        }
+        .hero-btn:hover {
+            background-color: #111111;
+            color: #ffffff;
+        }
+
+        /* قسم المنتجات */
+        .products-section {
+            max-width: 1300px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-header h3 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #111111;
+            margin-bottom: 10px;
+        }
+        .section-header p {
+            color: #666666;
             font-size: 15px;
         }
-        .btn:hover {
-            background-color: #d63384;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 60px 20px;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        .section-subtitle {
-            text-align: center;
-            color: #777777;
-            margin-bottom: 50px;
-            font-size: 16px;
-        }
-        /* شبكة المنتجات العصرية */
+
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
         .product-card {
-            background: #ffffff;
-            border-radius: 8px;
+            background: #fff;
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid #eaeaea;
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
             transition: 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            cursor: pointer;
         }
         .product-card img {
             width: 100%;
-            height: 280px;
+            height: 380px;
             object-fit: cover;
+            background-color: #f7f7f7;
         }
-        .product-info {
-            padding: 20px;
-        }
-        .product-card h4 {
-            font-size: 20px;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        .product-card p {
-            color: #666666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .price {
-            font-weight: 700;
-            color: #d63384;
-            font-size: 18px;
-            display: block;
-            margin-bottom: 15px;
-        }
-        .card-actions {
-            padding: 0 20px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .cart-btn {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 12px;
-            border-radius: 4px;
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-        }
-        .cart-btn:hover {
-            background-color: #d63384;
-        }
-        .delete-btn {
-            background-color: #fff0f5;
-            color: #d63384;
-            border: 1px solid #d63384;
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            display: none;
-        }
-        /* سلة المشتروات */
-        .cart-section {
-            background: #ffffff;
-            border: 1px solid #eaeaea;
-            padding: 40px;
-            border-radius: 8px;
-            margin-top: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        }
-        .cart-section h3 {
-            color: #1a1a1a;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .checkout-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 500px;
-            margin: 20px auto 0;
-        }
-        .checkout-form input {
-            padding: 14px;
-            background: #faf9f6;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 15px;
-        }
-        /* لوحة التحكم الفخمة */
-        .admin-box {
-            max-width: 450px;
-            margin: 60px auto;
-            background: #ffffff;
-            border: 1px solid #eaeaea;
-            padding: 40px;
-            border-radius: 8px;
+        .product-details {
+            padding: 20px 5px;
             text-align: right;
-            display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
-        .admin-box h3 {
-            color: #1a1a1a;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
+        .product-details h4 {
+            font-size: 16px;
             font-weight: 600;
-            color: #444;
+            color: #111111;
+            margin-bottom: 8px;
         }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            background: #faf9f6;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        .product-details .price {
             font-size: 15px;
+            font-weight: 700;
+            color: #111111;
         }
-        .contact-section {
-            background-color: #ffffff;
-            border: 1px solid #eaeaea;
-            border-radius: 8px;
-            padding: 50px;
-            margin: 60px auto;
-            max-width: 900px;
+        .buy-btn {
+            display: block;
+            width: 100%;
+            background: #111111;
+            color: #fff;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-        .music-bar {
-            background: #1a1a1a;
-            color: white;
             padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
+            margin-top: 10px;
+            text-decoration: none;
             font-size: 13px;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: 0.2s;
         }
+        .buy-btn:hover {
+            background: #333333;
+        }
+
+        /* الفوتر */
         footer {
-            background-color: #1a1a1a;
-            color: #aaaaaa;
+            background-color: #111111;
+            color: #ffffff;
+            padding: 60px 40px;
             text-align: center;
-            padding: 35px;
-            margin-top: 60px;
+            margin-top: 100px;
         }
-        .clear-admin-btn {
-            background-color: transparent;
-            color: #777;
-            border: none;
-            cursor: pointer;
-            font-size: 12px;
-            margin-top: 15px;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .clear-admin-btn:hover {
-            color: #d63384;
+        footer p {
+            font-size: 14px;
+            color: #999999;
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط الموسيقى music.weba شغال تلقائي -->
-    <div class="music-bar">
-        <span>🎻 استمع إلى الموسيقى الهادئة:</span>
-        <audio controls autoplay loop style="height: 30px;">
-            <source src="music.weba" type="audio/webm">
-            متصفحك لا يدعم الصوت.
-        </audio>
-    </div>
-
+    <!-- الهيدر بنفس الستايل النظيف البسيط -->
     <header>
-        <div class="logo-container">
-            <img src="logo_lamsa_marnona_1.png" alt="Marnouna">
-            <h1>Marnouna</h1>
+        <div class="logo">
+            <h1>MARNOUNA</h1>
         </div>
         <nav>
-            <a onclick="showSection('home')">الرئيسية</a>
-            <a onclick="showSection('products')">المنتجات</a>
-            <a onclick="showSection('cart')">سلة الشراء (<span id="cart-count">0</span>)</a>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#shop">المجموعات</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
         </nav>
+        <div class="header-icons">
+            <span>🛒 السلة</span>
+        </div>
     </header>
 
-    <div id="home-section">
-        <section class="hero">
-            <h2>Luxury Floral & Wedding Accessories ✨</h2>
-            <p>مصنوعة بأعلى جودة وبأدق التفاصيل عشان ليلة العمر تكون أسطورية.</p>
-            <a onclick="showSection('products')" class="btn">تصفح المنتجات</a>
-        </section>
-    </div>
+    <!-- واجهة البداية -->
+    <section class="hero">
+        <h2>MARNOUNA COLLECTION</h2>
+        <p>اكتشف أحدث تشكيلة مصممة خصيصاً لتناسب أروع ليلة في عمرك.</p>
+        <a href="#shop" class="hero-btn">تسوق الآن</a>
+    </section>
 
-    <div class="container" id="products-section">
-        <h3 class="section-title">Marnouna Collection</h3>
-        <p class="section-subtitle">اختر اللحظة المناسبة، وسبقنا ننفذهالك بأجمل شكل</p>
-        
-        <div class="products-grid" id="products-container"></div>
-    </div>
+    <!-- المنتجات -->
+    <section class="products-section" id="shop">
+        <div class="section-header">
+            <h3>منتجاتنا المميزة</h3>
+            <p>اختر ما يعبر عن ذوقك الرفيع</p>
+        </div>
 
-    <div class="container" id="cart-section" style="display: none;">
-        <h3 class="section-title">سلة المشتريات الخاصة بك</h3>
-        <div id="cart-items" style="background: #ffffff; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #eaeaea;"></div>
-        
-        <div class="cart-section">
-            <h3>إتمام الطلب عبر الواتساب</h3>
-            <div class="checkout-form">
-                <input type="text" id="client-name" placeholder="الاسم بالكامل">
-                <input type="text" id="client-address" placeholder="العنوان بالتفصيل">
-                <input type="text" id="client-phone" placeholder="رقم التليفون">
-                <button class="btn" style="width: 100%;" onclick="sendOrderToWhatsApp()">إرسال الطلب عبر الواتساب</button>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="منتج 1">
+                <div class="product-details">
+                    <h4>Luxury Bridal Bouquet</h4>
+                    <span class="price">850 EGP</span>
+                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Luxury Bridal Bouquet" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=600&q=80" alt="منتج 2">
+                <div class="product-details">
+                    <h4>Wedding Accessories Set</h4>
+                    <span class="price">1350 EGP</span>
+                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Wedding Accessories Set" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80" alt="منتج 3">
+                <div class="product-details">
+                    <h4>Custom Rose Box</h4>
+                    <span class="price">550 EGP</span>
+                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Custom Rose Box" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="admin-box" id="admin-login">
-        <h3>تسجيل دخول لوحة التحكم</h3>
-        <div class="form-group">
-            <label>اسم المستخدم</label>
-            <input type="text" id="username" placeholder="اكتب اسم المستخدم (ميرنا)">
-        </div>
-        <div class="form-group">
-            <label>كلمة المرور</label>
-            <input type="password" id="password" placeholder="اكتب كلمة المرور (112233)">
-        </div>
-        <button class="btn" style="width: 100%;" onclick="checkLogin()">دخول</button>
-        <button class="btn" style="width: 100%; background: #666; margin-top: 10px;" onclick="showSection('home')">إلغاء</button>
-    </div>
-
-    <div class="admin-box" id="admin-panel">
-        <h3>إدارة منتجات Marnouna 🛠️</h3>
-        <div class="form-group">
-            <label>اسم المنتج</label>
-            <input type="text" id="p-title" placeholder="مثال: Royal Bridal Bouquet">
-        </div>
-        <div class="form-group">
-            <label>وصف المنتج</label>
-            <textarea id="p-desc" placeholder="تفاصيل المنتج..."></textarea>
-        </div>
-        <div class="form-group">
-            <label>السعر</label>
-            <input type="text" id="p-price" placeholder="مثال: 850 EGP">
-        </div>
-        <div class="form-group">
-            <label>اختر صورة المنتج من جهازك</label>
-            <input type="file" id="p-img-file" accept="image/*">
-        </div>
-        <button class="btn" style="width: 100%; margin-bottom: 10px;" onclick="addProduct()">إضافة المنتج للموقع</button>
-        <button class="btn" style="width: 100%; background-color: #666;" onclick="logoutAdmin()">تسجيل خروج</button>
-    </div>
-
-    <div class="contact-section" id="contact">
-        <h3>تواصل مع Marnouna مباشرة</h3>
-        <p>عندك تصميم معين في بالك؟ أو حابب تطلب بوكيه أو اكسسوار بمواصفات خاصة؟ كلمنا فوراً وهنساعدك!</p>
-        <br>
-        <a href="https://wa.me/201100329703" target="_blank" class="btn">تواصل معنا عبر واتساب</a>
-    </div>
-
-    <footer>
-        <p>All Rights Reserved © 2026 - Marnouna</p>
-        <button class="clear-admin-btn" onclick="showSection('admin-login')">⚙️ لوحة إدارة الموقع</button>
+    <!-- الفوتر -->
+    <footer id="contact">
+        <p>جميع الحقوق محفوظة © 2026 - MARNOUNA</p>
     </footer>
 
-    <script>
-        let products = JSON.parse(localStorage.getItem('marnouna_floukaa_products')) || [
-            {
-                title: "Luxury Bridal Bouquet",
-                desc: "بوكيه ورد طبيعي فاخر لليلة العمر بتصميم ملكي ساحر.",
-                price: "850 EGP",
-                img: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                title: "Wedding Accessories Set",
-                desc: "طقم إكسسوارات عرائس راقي مرصع بأدق التفاصيل.",
-                price: "1350 EGP",
-                img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                title: "Custom Rose Box",
-                desc: "بوكس ورد هاند ميد هدايا ومناسبات خاصة.",
-                price: "550 EGP",
-                img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80"
-            }
-        ];
-
-        let cart = JSON.parse(localStorage.getItem('marnouna_floukaa_cart')) || [];
-        let isAdmin = localStorage.getItem('marnouna_floukaa_admin') === 'true';
-
-        function renderProducts() {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
-            products.forEach((p, index) => {
-                container.innerHTML += `
-                    <div class="product-card">
-                        <img src="${p.img}" alt="${p.title}">
-                        <div class="product-info">
-                            <h4>${p.title}</h4>
-                            <p>${p.desc}</p>
-                            <span class="price">${p.price}</span>
-                        </div>
-                        <div class="card-actions">
-                            <button class="cart-btn" onclick="addToCart('${p.title}', '${p.price}')">إضافة إلى السلة</button>
-                            <button class="delete-btn" style="display: ${isAdmin ? 'block' : 'none'};" onclick="deleteProduct(${index})">حذف المنتج</button>
-                        </div>
-                    </div>
-                `;
-            });
-            document.getElementById('cart-count').innerText = cart.length;
-        }
-
-        function showSection(sectionId) {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('products-section').style.display = 'none';
-            document.getElementById('cart-section').style.display = 'none';
-            document.getElementById('admin-login').style.display = 'none';
-            document.getElementById('admin-panel').style.display = 'none';
-
-            if (sectionId === 'home') {
-                document.getElementById('home-section').style.display = 'block';
-                document.getElementById('products-section').style.display = 'block';
-            } else if (sectionId === 'products') {
-                document.getElementById('products-section').style.display = 'block';
-            } else if (sectionId === 'cart') {
-                document.getElementById('cart-section').style.display = 'block';
-                renderCart();
-            } else if (sectionId === 'admin-login') {
-                if (isAdmin) {
-                    document.getElementById('admin-panel').style.display = 'block';
-                } else {
-                    document.getElementById('admin-login').style.display = 'block';
-                }
-            }
-        }
-
-        function checkLogin() {
-            let user = document.getElementById('username').value;
-            let pass = document.getElementById('password').value;
-
-            if (user === 'ميرنا' && pass === '112233') {
-                isAdmin = true;
-                localStorage.setItem('marnouna_floukaa_admin', 'true');
-                alert('أهلاً بك يا ميرنا في لوحة التحكم!');
-                showSection('admin-login');
-                renderProducts();
-            } else {
-                alert('اسم المستخدم أو كلمة المرور خطأ!');
-            }
-        }
-
-        function logoutAdmin() {
-            isAdmin = false;
-            localStorage.setItem('marnouna_floukaa_admin', 'false');
-            alert('تم تسجيل الخروج بنجاح');
-            showSection('home');
-            renderProducts();
-        }
-
-        function addProduct() {
-            let title = document.getElementById('p-title').value;
-            let desc = document.getElementById('p-desc').value;
-            let price = document.getElementById('p-price').value;
-            let fileInput = document.getElementById('p-img-file');
-
-            if (!title || !price) {
-                alert('من فضلك اكتب اسم المنتج والسعر على الأقل!');
-                return;
-            }
-
-            if (fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    products.push({ title, desc: desc || "تصميم راقي ومميز من Marnouna", price, img: e.target.result });
-                    localStorage.setItem('marnouna_floukaa_products', JSON.stringify(products));
-                    alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
-                    document.getElementById('p-title').value = '';
-                    document.getElementById('p-desc').value = '';
-                    document.getElementById('p-price').value = '';
-                    fileInput.value = '';
-                    showSection('products');
-                    renderProducts();
-                }
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                products.push({ title, desc: desc || "تصميم راقي ومميز من Marnouna", price, img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80" });
-                localStorage.setItem('marnouna_floukaa_products', JSON.stringify(products));
-                alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
-                showSection('products');
-                renderProducts();
-            }
-        }
-
-        function deleteProduct(index) {
-            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
-                products.splice(index, 1);
-                localStorage.setItem('marnouna_floukaa_products', JSON.stringify(products));
-                renderProducts();
-            }
-        }
-
-        function addToCart(title, price) {
-            cart.push({ title, price });
-            localStorage.setItem('marnouna_floukaa_cart', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = cart.length;
-            alert('تم إضافة المنتج إلى السلة بنجاح!');
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #777;">السلة فارغة حالياً.</p>';
-                return;
-            }
-            container.innerHTML = '<ul>';
-            cart.forEach((item, index) => {
-                container.innerHTML += `<li style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px;">${item.title} - <span style="color: #d63384; font-weight:bold;">${item.price}</span> <button onclick="removeFromCart(${index})" style="background:#1a1a1a; color:white; border:none; padding:4px 10px; border-radius:4px; cursor:pointer;">حذف</button></li>`;
-            });
-            container.innerHTML += '</ul>';
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('marnouna_floukaa_cart', JSON.stringify(cart));
-            renderCart();
-            document.getElementById('cart-count').innerText = cart.length;
-        }
-
-        function sendOrderToWhatsApp() {
-            let name = document.getElementById('client-name').value;
-            let address = document.getElementById('client-address').value;
-            let phone = document.getElementById('client-phone').value;
-
-            if (!name || !address || !phone) {
-                alert('من فضلك اكتب الاسم والعنوان ورقم التليفون!');
-                return;
-            }
-            if (cart.length === 0) {
-                alert('سلة المشتريات فارغة!');
-                return;
-            }
-
-            let orderText = `مرحباً، أريد إتمام طلب جديد:%0A*الاسم:* ${name}%0A*العنوان:* ${address}%0A*رقم التليفون:* ${phone}%0A%0A*المنتجات المطلوبة:*%0A`;
-            cart.forEach(item => {
-                orderText += `- ${item.title} (${item.price})%0A`;
-            });
-
-            let whatsappUrl = `https://wa.me/201100329703?text=${orderText}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        renderProducts();
-    </script>
 </body>
 </html>
