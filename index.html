@@ -11,13 +11,11 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        /* إطار زغرفة ورد حوالين الويب سايت مع اللون الأساسي الأسود */
         body {
             background-color: #0b0708;
             color: #f1d3d7;
             line-height: 1.6;
-            border: 12px solid #140a0e;
-            border-image: linear-gradient(45deg, #8b0000, #ff1493, #0b0708, #8b0000) 1;
+            border: 8px solid #140a0e;
             min-height: 100vh;
         }
         header {
@@ -36,16 +34,17 @@
             align-items: center;
             gap: 15px;
         }
+        /* ضبط حجم اللوجو بشكل دقيق ومنسق */
         .logo-container img {
-            width: 75px;
-            height: 75px;
-            object-fit: contain;
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
             border-radius: 50%;
             border: 2px solid #ff1493;
         }
         header h1 {
             color: #ff1493;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
         }
         nav a {
@@ -61,20 +60,20 @@
         }
         .hero {
             text-align: center;
-            padding: 90px 20px;
+            padding: 80px 20px;
             background: linear-gradient(rgba(11,7,8,0.7), rgba(11,7,8,0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
             color: white;
             border-bottom: 3px solid #8b0000;
         }
         .hero h2 {
-            font-size: 40px;
+            font-size: 38px;
             margin-bottom: 15px;
             color: #ff1493;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
         }
         .hero p {
             font-size: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .btn {
             background-color: #8b0000;
@@ -98,7 +97,7 @@
         }
         .section-title {
             text-align: center;
-            font-size: 32px;
+            font-size: 30px;
             color: #ff1493;
             margin-bottom: 10px;
         }
@@ -123,9 +122,10 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        /* ضبط حجم صور المنتجات داخل الكروت لتكون متناسقة وغير مطموسة */
         .product-card img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
         }
         .product-info {
@@ -168,17 +168,18 @@
         .cart-btn:hover {
             background-color: #ff1493;
         }
+        /* زرار الحذف يظهر فقط للأدمن (ميرنا) ولا يظهر للعملاء نهائياً */
         .delete-btn {
             background-color: #331111;
             color: #ff4d4d;
             border: 1px solid #ff4d4d;
-            padding: 6px;
+            padding: 8px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
+            font-weight: bold;
             display: none;
         }
-        /* سلة المشتروات */
         .cart-section {
             background: #170d12;
             border: 1px solid #8b0000;
@@ -265,23 +266,21 @@
             margin-top: 50px;
             border-top: 2px solid #8b0000;
         }
-        /* لوحة التحكم المخفية تحت خالص */
         .hidden-admin-trigger {
             background: transparent;
             border: none;
             color: #12080c;
             cursor: pointer;
-            font-size: 11px;
-            margin-top: 10px;
+            font-size: 10px;
+            margin-top: 15px;
         }
         .hidden-admin-trigger:hover {
-            color: #8b0000;
+            color: #441111;
         }
     </style>
 </head>
 <body>
 
-    <!-- تشغيل الموسيقى music.weba تلقائياً أول ما الموقع يفتح -->
     <div class="music-bar">
         <span>🎻 استمع إلى الموسيقى الهادئة:</span>
         <audio controls autoplay loop style="height: 30px;">
@@ -310,7 +309,6 @@
         </section>
     </div>
 
-    <!-- المنتجات -->
     <div class="container" id="products-section">
         <h3 class="section-title">تشكيلة لمسة من مرنونا المميزة</h3>
         <p class="section-subtitle">اختر اللحظة المناسبة، وسبقنا ننفذهالك بأجمل شكل</p>
@@ -318,10 +316,9 @@
         <div class="products-grid" id="products-container"></div>
     </div>
 
-    <!-- سلة المشتروات -->
     <div class="container" id="cart-section" style="display: none;">
         <h3 class="section-title">سلة المشتريات الخاصة بك</h3>
-        <div id="cart-items" style="background: #170d12; padding: 20px; border-radius: 10px; margin-bottom: 20px;"></div>
+        <div id="cart-items" style="background: #170d12; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #8b0000;"></div>
         
         <div class="cart-section">
             <h3>إتمام الطلب عبر الواتساب</h3>
@@ -334,7 +331,6 @@
         </div>
     </div>
 
-    <!-- تسجيل دخول الأدمن -->
     <div class="admin-box" id="admin-login">
         <h3>تسجيل دخول لوحة التحكم</h3>
         <div class="form-group">
@@ -349,7 +345,6 @@
         <button class="btn" style="width: 100%; background: #333; margin-top: 10px;" onclick="showSection('home')">إلغاء</button>
     </div>
 
-    <!-- لوحة التحكم لإضافة ورفع الصور -->
     <div class="admin-box" id="admin-panel">
         <h3>إدارة منتجات لمسة من مرنونا 🛠️</h3>
         <div class="form-group">
@@ -381,9 +376,8 @@
 
     <footer>
         <p>جميع الحقوق محفوظة © 2026 - لمسة من مرنونا (Lamsa Min Marnouna)</p>
-        <!-- زرار مخفي تحت خالص تحت كلمة جميع الحقوق محفوظه للدخول للوحة التحكم -->
-        <br>
-        <button class="hidden-admin-trigger" onclick="showSection('admin-login')">إدارة الموقع</button>
+        <!-- زرار مخفي تحت خالص للدخول للوحة التحكم -->
+        <button class="hidden-admin-trigger" onclick="showSection('admin-login')">إدارة</button>
     </footer>
 
     <script>
@@ -545,7 +539,7 @@
 
         function sendOrderToWhatsApp() {
             let name = document.getElementById('client-name').value;
-            let address = document.getElementById('client-address').value;
+            let address = document.getElementById('client-address'`).value;
             let phone = document.getElementById('client-phone').value;
 
             if (!name || !address || !phone) {
