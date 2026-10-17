@@ -235,10 +235,13 @@
 </head>
 <body>
 
-    <!-- شريط مشغل الموسيقى الواضح -->
+    <!-- شريط تشغيل الأغنية الحقيقية المحملة -->
     <div class="music-bar">
         <span>🎻 استمع إلى موسيقى "From Pain to Peace" أثناء التصفح:</span>
-        <iframe width="300" height="60" src="https://www.youtube.com/embed/KJSnjaeZdNk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <audio controls loop style="height: 35px;">
+            <source src="music.weba" type="audio/webm">
+            متصفحك لا يدعم تشغيل الملفات الصوتية.
+        </audio>
     </div>
 
     <header>
@@ -411,7 +414,7 @@
 
             products.push({
                 title: title,
-                    desc: desc || "تصميم راقي ومميز من لمسة من مرنونا",
+                desc: desc || "تصميم راقي ومميز من لمسة من مرنونا",
                 price: price,
                 img: img || "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80"
             });
