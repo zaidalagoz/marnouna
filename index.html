@@ -32,15 +32,16 @@
             align-items: center;
             gap: 15px;
         }
+        /* تعديل مقاس اللوجو عشان يظهر كبير وواضح في المكان الأحمر */
         .logo-container img {
-            width: 55px;
-            height: 55px;
+            width: 75px;
+            height: 75px;
             object-fit: contain;
             border-radius: 50%;
         }
         header h1 {
             color: #b0246b;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
         }
         nav a {
@@ -235,17 +236,18 @@
 </head>
 <body>
 
-    <!-- شريط تشغيل الأغنية الحقيقية المحملة -->
+    <!-- شريط الموسيقى (متصل بملف الأغنية الحقيقي song.mp3) -->
     <div class="music-bar">
         <span>🎻 استمع إلى موسيقى "From Pain to Peace" أثناء التصفح:</span>
         <audio controls loop style="height: 35px;">
-            <source src="music.weba" type="audio/webm">
+            <source src="song.mp3" type="audio/mpeg">
             متصفحك لا يدعم تشغيل الملفات الصوتية.
         </audio>
     </div>
 
     <header>
         <div class="logo-container">
+            <!-- اللوجو بالحجم الجديد الواضح -->
             <img src="logo_lamsa_marnona_1.png" alt="لمسة من مرنونا">
             <h1>لمسة من مرنونا</h1>
         </div>
