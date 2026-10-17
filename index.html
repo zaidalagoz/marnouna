@@ -34,7 +34,6 @@
             align-items: center;
             gap: 15px;
         }
-        /* ضبط حجم اللوجو بشكل دقيق ومنسق */
         .logo-container img {
             width: 55px;
             height: 55px;
@@ -122,7 +121,6 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        /* ضبط حجم صور المنتجات داخل الكروت لتكون متناسقة وغير مطموسة */
         .product-card img {
             width: 100%;
             height: 220px;
@@ -168,7 +166,6 @@
         .cart-btn:hover {
             background-color: #ff1493;
         }
-        /* زرار الحذف يظهر فقط للأدمن (ميرنا) ولا يظهر للعملاء نهائياً */
         .delete-btn {
             background-color: #331111;
             color: #ff4d4d;
@@ -266,16 +263,22 @@
             margin-top: 50px;
             border-top: 2px solid #8b0000;
         }
-        .hidden-admin-trigger {
-            background: transparent;
-            border: none;
-            color: #12080c;
+        /* زرار إدارة الموقع واضح تماماً تحت خالص */
+        .clear-admin-btn {
+            background-color: #8b0000;
+            color: #ffffff;
+            border: 1px solid #ff1493;
+            padding: 8px 20px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 14px;
+            font-weight: bold;
             margin-top: 15px;
+            display: inline-block;
+            transition: 0.3s;
         }
-        .hidden-admin-trigger:hover {
-            color: #441111;
+        .clear-admin-btn:hover {
+            background-color: #ff1493;
         }
     </style>
 </head>
@@ -335,11 +338,11 @@
         <h3>تسجيل دخول لوحة التحكم</h3>
         <div class="form-group">
             <label>اسم المستخدم</label>
-            <input type="text" id="username" placeholder="اكتب اسم المستخدم">
+            <input type="text" id="username" placeholder="اكتب اسم المستخدم (ميرنا)">
         </div>
         <div class="form-group">
             <label>كلمة المرور</label>
-            <input type="password" id="password" placeholder="اكتب كلمة المرور">
+            <input type="password" id="password" placeholder="اكتب كلمة المرور (112233)">
         </div>
         <button class="btn" style="width: 100%;" onclick="checkLogin()">دخول</button>
         <button class="btn" style="width: 100%; background: #333; margin-top: 10px;" onclick="showSection('home')">إلغاء</button>
@@ -376,8 +379,8 @@
 
     <footer>
         <p>جميع الحقوق محفوظة © 2026 - لمسة من مرنونا (Lamsa Min Marnouna)</p>
-        <!-- زرار مخفي تحت خالص للدخول للوحة التحكم -->
-        <button class="hidden-admin-trigger" onclick="showSection('admin-login')">إدارة</button>
+        <!-- زرار إدارة الموقع واضح جداً تحت خالص -->
+        <button class="clear-admin-btn" onclick="showSection('admin-login')">⚙️ لوحة إدارة الموقع</button>
     </footer>
 
     <script>
@@ -539,7 +542,7 @@
 
         function sendOrderToWhatsApp() {
             let name = document.getElementById('client-name').value;
-            let address = document.getElementById('client-address'`).value;
+            let address = document.getElementById('client-address').value;
             let phone = document.getElementById('client-phone').value;
 
             if (!name || !address || !phone) {
