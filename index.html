@@ -12,22 +12,23 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0708;
-            color: #f1d3d7;
+            background-color: #faf9f6;
+            color: #2c2c2c;
             line-height: 1.6;
             min-height: 100vh;
         }
+        /* هيدر أبيض عصري راقي جداً شبه فلوكا */
         header {
-            background-color: rgba(18, 8, 12, 0.95);
-            padding: 15px 50px;
+            background-color: #ffffff;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #8b0000;
+            border-bottom: 1px solid #eaeaea;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
         .logo-container {
             display: flex;
@@ -35,98 +36,98 @@
             gap: 15px;
         }
         .logo-container img {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid #ff1493;
         }
         header h1 {
-            color: #ff1493;
+            color: #1a1a1a;
             font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
         nav {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 30px;
         }
         nav a {
             text-decoration: none;
-            color: #f1d3d7;
+            color: #4a4a4a;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 16px;
+            font-size: 15px;
         }
         nav a:hover {
-            color: #ff1493;
+            color: #d63384;
         }
+        /* واجهة الـ Hero الأنيقة النظيفة */
         .hero {
             text-align: center;
-            padding: 120px 20px;
-            background: linear-gradient(rgba(11,7,8,0.75), rgba(11,7,8,0.75)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=80') center/cover;
+            padding: 130px 20px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=80') center/cover;
             color: white;
-            border-bottom: 3px solid #8b0000;
         }
         .hero h2 {
-            font-size: 45px;
+            font-size: 48px;
             margin-bottom: 15px;
-            color: #ff1493;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+            font-weight: 800;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
         }
         .hero p {
-            font-size: 19px;
+            font-size: 20px;
             margin-bottom: 35px;
-            color: #f1d3d7;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
         }
         .btn {
-            background-color: #8b0000;
+            background-color: #1a1a1a;
             color: white;
             padding: 14px 35px;
-            border-radius: 30px;
+            border-radius: 4px;
             text-decoration: none;
             font-weight: bold;
             display: inline-block;
             transition: 0.3s;
-            border: 1px solid #ff1493;
+            border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(139,0,0,0.4);
+            font-size: 15px;
         }
         .btn:hover {
-            background-color: #ff1493;
-            transform: translateY(-2px);
+            background-color: #d63384;
         }
         .container {
             max-width: 1200px;
             margin: auto;
-            padding: 50px 20px;
+            padding: 60px 20px;
         }
         .section-title {
             text-align: center;
-            font-size: 35px;
-            color: #ff1493;
+            font-size: 36px;
+            color: #1a1a1a;
             margin-bottom: 10px;
+            font-weight: 700;
         }
         .section-subtitle {
             text-align: center;
-            color: #b08d95;
+            color: #777777;
             margin-bottom: 50px;
             font-size: 16px;
         }
+        /* شبكة المنتجات العصرية */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
         .product-card {
-            background: #170d12;
-            border-radius: 15px;
+            background: #ffffff;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(139,0,0,0.15);
-            border: 1px solid #8b0000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid #eaeaea;
             text-align: right;
             display: flex;
             flex-direction: column;
@@ -135,30 +136,31 @@
         }
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255,20,147,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
         .product-card img {
             width: 100%;
-            height: 260px;
+            height: 280px;
             object-fit: cover;
         }
         .product-info {
             padding: 20px;
         }
         .product-card h4 {
-            font-size: 21px;
-            color: #ff1493;
+            font-size: 20px;
+            color: #1a1a1a;
             margin-bottom: 8px;
+            font-weight: 600;
         }
         .product-card p {
-            color: #b08d95;
+            color: #666666;
             font-size: 14px;
             margin-bottom: 15px;
         }
         .price {
-            font-weight: bold;
-            color: #ff4d4d;
-            font-size: 19px;
+            font-weight: 700;
+            color: #d63384;
+            font-size: 18px;
             display: block;
             margin-bottom: 15px;
         }
@@ -169,40 +171,42 @@
             gap: 10px;
         }
         .cart-btn {
-            background-color: #8b0000;
+            background-color: #1a1a1a;
             color: white;
             padding: 12px;
-            border-radius: 25px;
+            border-radius: 4px;
             border: none;
-            font-size: 15px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
         }
         .cart-btn:hover {
-            background-color: #ff1493;
+            background-color: #d63384;
         }
-        /* زرار الحذف يظهر فقط للأدمن (ميرنا) */
         .delete-btn {
-            background-color: #331111;
-            color: #ff4d4d;
-            border: 1px solid #ff4d4d;
+            background-color: #fff0f5;
+            color: #d63384;
+            border: 1px solid #d63384;
             padding: 8px;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 13px;
-            font-weight: bold;
+            font-weight: 600;
             display: none;
         }
+        /* سلة المشتروات */
         .cart-section {
-            background: #170d12;
-            border: 1px solid #8b0000;
+            background: #ffffff;
+            border: 1px solid #eaeaea;
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 8px;
             margin-top: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
         .cart-section h3 {
-            color: #ff1493;
+            color: #1a1a1a;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -215,25 +219,25 @@
         }
         .checkout-form input {
             padding: 14px;
-            background: #0b0708;
-            border: 1px solid #8b0000;
-            color: white;
-            border-radius: 8px;
+            background: #faf9f6;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 15px;
         }
+        /* لوحة التحكم الفخمة */
         .admin-box {
             max-width: 450px;
             margin: 60px auto;
-            background: #170d12;
-            border: 1px solid #8b0000;
+            background: #ffffff;
+            border: 1px solid #eaeaea;
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 8px;
             text-align: right;
             display: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
         .admin-box h3 {
-            color: #ff1493;
+            color: #1a1a1a;
             margin-bottom: 25px;
             text-align: center;
         }
@@ -243,29 +247,29 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
-            color: #f1d3d7;
+            font-weight: 600;
+            color: #444;
         }
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px;
-            background: #0b0708;
-            border: 1px solid #8b0000;
-            color: white;
-            border-radius: 8px;
+            background: #faf9f6;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 15px;
         }
         .contact-section {
-            background-color: #170d12;
-            border: 1px solid #8b0000;
-            border-radius: 15px;
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
             padding: 50px;
             margin: 60px auto;
             max-width: 900px;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
         .music-bar {
-            background: #12080c;
+            background: #1a1a1a;
             color: white;
             padding: 10px;
             display: flex;
@@ -273,38 +277,34 @@
             align-items: center;
             gap: 15px;
             font-size: 13px;
-            border-bottom: 1px solid #8b0000;
         }
         footer {
-            background-color: #12080c;
-            color: #b08d95;
+            background-color: #1a1a1a;
+            color: #aaaaaa;
             text-align: center;
             padding: 35px;
             margin-top: 60px;
-            border-top: 2px solid #8b0000;
         }
         .clear-admin-btn {
-            background-color: #8b0000;
-            color: #ffffff;
-            border: 1px solid #ff1493;
-            padding: 8px 25px;
-            border-radius: 20px;
+            background-color: transparent;
+            color: #777;
+            border: none;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 12px;
             margin-top: 15px;
             display: inline-block;
             transition: 0.3s;
         }
         .clear-admin-btn:hover {
-            background-color: #ff1493;
+            color: #d63384;
         }
     </style>
 </head>
 <body>
 
+    <!-- شريط الموسيقى music.weba شغال تلقائي -->
     <div class="music-bar">
-        <span>🎻 استمع إلى الموسيقى الهادئة أثناء التسوق:</span>
+        <span>🎻 استمع إلى الموسيقى الهادئة:</span>
         <audio controls autoplay loop style="height: 30px;">
             <source src="music.weba" type="audio/webm">
             متصفحك لا يدعم الصوت.
@@ -340,7 +340,7 @@
 
     <div class="container" id="cart-section" style="display: none;">
         <h3 class="section-title">سلة المشتريات الخاصة بك</h3>
-        <div id="cart-items" style="background: #170d12; padding: 25px; border-radius: 10px; margin-bottom: 25px; border: 1px solid #8b0000;"></div>
+        <div id="cart-items" style="background: #ffffff; padding: 25px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #eaeaea;"></div>
         
         <div class="cart-section">
             <h3>إتمام الطلب عبر الواتساب</h3>
@@ -348,7 +348,7 @@
                 <input type="text" id="client-name" placeholder="الاسم بالكامل">
                 <input type="text" id="client-address" placeholder="العنوان بالتفصيل">
                 <input type="text" id="client-phone" placeholder="رقم التليفون">
-                <button class="btn" onclick="sendOrderToWhatsApp()">إرسال الطلب عبر الواتساب</button>
+                <button class="btn" style="width: 100%;" onclick="sendOrderToWhatsApp()">إرسال الطلب عبر الواتساب</button>
             </div>
         </div>
     </div>
@@ -364,7 +364,7 @@
             <input type="password" id="password" placeholder="اكتب كلمة المرور (112233)">
         </div>
         <button class="btn" style="width: 100%;" onclick="checkLogin()">دخول</button>
-        <button class="btn" style="width: 100%; background: #333; margin-top: 10px;" onclick="showSection('home')">إلغاء</button>
+        <button class="btn" style="width: 100%; background: #666; margin-top: 10px;" onclick="showSection('home')">إلغاء</button>
     </div>
 
     <div class="admin-box" id="admin-panel">
@@ -379,7 +379,7 @@
         </div>
         <div class="form-group">
             <label>السعر</label>
-            <input type="text" id="p-price" placeholder="مثال: 750 EGP">
+            <input type="text" id="p-price" placeholder="مثال: 850 EGP">
         </div>
         <div class="form-group">
             <label>اختر صورة المنتج من جهازك</label>
@@ -402,8 +402,7 @@
     </footer>
 
     <script>
-        // المنتجات والأسعار الافتراضية الفخمة المستوحاة من الشغل
-        let products = JSON.parse(localStorage.getItem('marnouna_store_products')) || [
+        let products = JSON.parse(localStorage.getItem('marnouna_floukaa_products')) || [
             {
                 title: "Luxury Bridal Bouquet",
                 desc: "بوكيه ورد طبيعي فاخر لليلة العمر بتصميم ملكي ساحر.",
@@ -424,8 +423,8 @@
             }
         ];
 
-        let cart = JSON.parse(localStorage.getItem('marnouna_store_cart')) || [];
-        let isAdmin = localStorage.getItem('marnouna_store_admin') === 'true';
+        let cart = JSON.parse(localStorage.getItem('marnouna_floukaa_cart')) || [];
+        let isAdmin = localStorage.getItem('marnouna_floukaa_admin') === 'true';
 
         function renderProducts() {
             const container = document.getElementById('products-container');
@@ -479,8 +478,8 @@
 
             if (user === 'ميرنا' && pass === '112233') {
                 isAdmin = true;
-                localStorage.setItem('marnouna_store_admin', 'true');
-                alert('أهلاً بك يا ميرنا في لوحة التحكم الخاصة بك!');
+                localStorage.setItem('marnouna_floukaa_admin', 'true');
+                alert('أهلاً بك يا ميرنا في لوحة التحكم!');
                 showSection('admin-login');
                 renderProducts();
             } else {
@@ -490,7 +489,7 @@
 
         function logoutAdmin() {
             isAdmin = false;
-            localStorage.setItem('marnouna_store_admin', 'false');
+            localStorage.setItem('marnouna_floukaa_admin', 'false');
             alert('تم تسجيل الخروج بنجاح');
             showSection('home');
             renderProducts();
@@ -511,7 +510,7 @@
                 let reader = new FileReader();
                 reader.onload = function(e) {
                     products.push({ title, desc: desc || "تصميم راقي ومميز من Marnouna", price, img: e.target.result });
-                    localStorage.setItem('marnouna_store_products', JSON.stringify(products));
+                    localStorage.setItem('marnouna_floukaa_products', JSON.stringify(products));
                     alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
                     document.getElementById('p-title').value = '';
                     document.getElementById('p-desc').value = '';
@@ -523,7 +522,7 @@
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 products.push({ title, desc: desc || "تصميم راقي ومميز من Marnouna", price, img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80" });
-                localStorage.setItem('marnouna_store_products', JSON.stringify(products));
+                localStorage.setItem('marnouna_floukaa_products', JSON.stringify(products));
                 alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
                 showSection('products');
                 renderProducts();
@@ -533,14 +532,14 @@
         function deleteProduct(index) {
             if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
                 products.splice(index, 1);
-                localStorage.setItem('marnouna_store_products', JSON.stringify(products));
+                localStorage.setItem('marnouna_floukaa_products', JSON.stringify(products));
                 renderProducts();
             }
         }
 
         function addToCart(title, price) {
             cart.push({ title, price });
-            localStorage.setItem('marnouna_store_cart', JSON.stringify(cart));
+            localStorage.setItem('marnouna_floukaa_cart', JSON.stringify(cart));
             document.getElementById('cart-count').innerText = cart.length;
             alert('تم إضافة المنتج إلى السلة بنجاح!');
         }
@@ -548,19 +547,19 @@
         function renderCart() {
             const container = document.getElementById('cart-items');
             if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #b08d95;">السلة فارغة حالياً.</p>';
+                container.innerHTML = '<p style="text-align: center; color: #777;">السلة فارغة حالياً.</p>';
                 return;
             }
             container.innerHTML = '<ul>';
             cart.forEach((item, index) => {
-                container.innerHTML += `<li style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">${item.title} - <span style="color: #ff4d4d;">${item.price}</span> <button onclick="removeFromCart(${index})" style="background:#8b0000; color:white; border:none; padding:3px 8px; border-radius:4px; cursor:pointer;">حذف</button></li>`;
+                container.innerHTML += `<li style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px;">${item.title} - <span style="color: #d63384; font-weight:bold;">${item.price}</span> <button onclick="removeFromCart(${index})" style="background:#1a1a1a; color:white; border:none; padding:4px 10px; border-radius:4px; cursor:pointer;">حذف</button></li>`;
             });
             container.innerHTML += '</ul>';
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            localStorage.setItem('marnouna_store_cart', JSON.stringify(cart));
+            localStorage.setItem('marnouna_floukaa_cart', JSON.stringify(cart));
             renderCart();
             document.getElementById('cart-count').innerText = cart.length;
         }
