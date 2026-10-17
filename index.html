@@ -216,12 +216,13 @@
         .music-bar {
             background: #33292e;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 15px;
             font-size: 14px;
+            flex-wrap: wrap;
         }
         footer {
             background-color: #33292e;
@@ -234,10 +235,10 @@
 </head>
 <body>
 
-    <!-- شريط الموسيقى يوتيوب (يشتغل تلقائي بالبصمة الموسيقية المطلوبة) -->
+    <!-- شريط مشغل الموسيقى الواضح -->
     <div class="music-bar">
-        <span>🎻 استمتع بموسيقى "From Pain to Peace" أثناء تصفح لمسة من مرنونا:</span>
-        <iframe width="200" height="30" src="https://www.youtube.com/embed/KJSnjaeZdNk?autoplay=1&loop=1&playlist=KJSnjaeZdNk" title="YouTube music player" frameborder="0" allow="autoplay"></iframe>
+        <span>🎻 استمع إلى موسيقى "From Pain to Peace" أثناء التصفح:</span>
+        <iframe width="300" height="60" src="https://www.youtube.com/embed/KJSnjaeZdNk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <header>
@@ -410,7 +411,7 @@
 
             products.push({
                 title: title,
-                desc: desc || "تصميم راقي ومميز من لمسة من مرنونا",
+                    desc: desc || "تصميم راقي ومميز من لمسة من مرنونا",
                 price: price,
                 img: img || "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80"
             });
