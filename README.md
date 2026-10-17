@@ -11,18 +11,22 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        /* إطار زغرفة ورد حوالين الويب سايت مع اللون الأساسي الأسود */
         body {
-            background-color: #fcf6f8;
-            color: #4a3b40;
+            background-color: #0b0708;
+            color: #f1d3d7;
             line-height: 1.6;
+            border: 12px solid #140a0e;
+            border-image: linear-gradient(45deg, #8b0000, #ff1493, #0b0708, #8b0000) 1;
+            min-height: 100vh;
         }
         header {
-            background-color: #ffffff;
+            background-color: #12080c;
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(214, 51, 132, 0.08);
+            border-bottom: 2px solid #8b0000;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -37,41 +41,43 @@
             height: 75px;
             object-fit: contain;
             border-radius: 50%;
+            border: 2px solid #ff1493;
         }
         header h1 {
-            color: #b0246b;
+            color: #ff1493;
             font-size: 26px;
             font-weight: bold;
         }
         nav a {
             text-decoration: none;
-            color: #6c5860;
+            color: #f1d3d7;
             margin-left: 20px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
         }
         nav a:hover {
-            color: #d63384;
+            color: #ff1493;
         }
         .hero {
             text-align: center;
             padding: 90px 20px;
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
+            background: linear-gradient(rgba(11,7,8,0.7), rgba(11,7,8,0.7)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
             color: white;
+            border-bottom: 3px solid #8b0000;
         }
         .hero h2 {
             font-size: 40px;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            color: #ff1493;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
         }
         .hero p {
             font-size: 18px;
             margin-bottom: 30px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
         }
         .btn {
-            background-color: #d63384;
+            background-color: #8b0000;
             color: white;
             padding: 12px 30px;
             border-radius: 25px;
@@ -79,12 +85,11 @@
             font-weight: bold;
             display: inline-block;
             transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(214, 51, 132, 0.3);
-            border: none;
+            border: 1px solid #ff1493;
             cursor: pointer;
         }
         .btn:hover {
-            background-color: #b0246b;
+            background-color: #ff1493;
         }
         .container {
             max-width: 1100px;
@@ -94,12 +99,12 @@
         .section-title {
             text-align: center;
             font-size: 32px;
-            color: #b0246b;
+            color: #ff1493;
             margin-bottom: 10px;
         }
         .section-subtitle {
             text-align: center;
-            color: #777;
+            color: #b08d95;
             margin-bottom: 40px;
         }
         .products-grid {
@@ -108,11 +113,11 @@
             gap: 25px;
         }
         .product-card {
-            background: white;
+            background: #170d12;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #fce4ec;
+            box-shadow: 0 4px 15px rgba(139,0,0,0.2);
+            border: 1px solid #8b0000;
             text-align: right;
             display: flex;
             flex-direction: column;
@@ -128,17 +133,17 @@
         }
         .product-card h4 {
             font-size: 20px;
-            color: #333;
+            color: #ff1493;
             margin-bottom: 8px;
         }
         .product-card p {
-            color: #666;
+            color: #b08d95;
             font-size: 14px;
             margin-bottom: 15px;
         }
         .price {
             font-weight: bold;
-            color: #d63384;
+            color: #ff4d4d;
             font-size: 18px;
             display: block;
             margin-bottom: 15px;
@@ -149,43 +154,69 @@
             flex-direction: column;
             gap: 10px;
         }
-        .whatsapp-btn {
-            background-color: #25d366;
+        .cart-btn {
+            background-color: #8b0000;
             color: white;
             padding: 10px;
             border-radius: 20px;
-            text-decoration: none;
+            border: none;
             font-size: 14px;
             font-weight: bold;
-            text-align: center;
+            cursor: pointer;
             transition: 0.3s;
         }
-        .whatsapp-btn:hover {
-            background-color: #1ebe57;
+        .cart-btn:hover {
+            background-color: #ff1493;
         }
         .delete-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px;
+            background-color: #331111;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            padding: 6px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 12px;
             display: none;
+        }
+        /* سلة المشتروات */
+        .cart-section {
+            background: #170d12;
+            border: 1px solid #8b0000;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+        }
+        .cart-section h3 {
+            color: #ff1493;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .checkout-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 20px auto 0;
+        }
+        .checkout-form input {
+            padding: 12px;
+            background: #0b0708;
+            border: 1px solid #8b0000;
+            color: white;
+            border-radius: 8px;
         }
         .admin-box {
             max-width: 450px;
-            margin: 60px auto;
-            background: white;
+            margin: 40px auto;
+            background: #170d12;
+            border: 1px solid #8b0000;
             padding: 35px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             text-align: right;
             display: none;
         }
         .admin-box h3 {
-            color: #d63384;
+            color: #ff1493;
             margin-bottom: 25px;
             text-align: center;
         }
@@ -196,17 +227,19 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #444;
+            color: #f1d3d7;
         }
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
+            background: #0b0708;
+            border: 1px solid #8b0000;
+            color: white;
             border-radius: 8px;
-            font-size: 15px;
         }
         .contact-section {
-            background-color: #fce4ec;
+            background-color: #170d12;
+            border: 1px solid #8b0000;
             border-radius: 15px;
             padding: 40px;
             margin: 50px auto;
@@ -214,32 +247,46 @@
             text-align: center;
         }
         .music-bar {
-            background: #33292e;
+            background: #12080c;
             color: white;
-            padding: 12px 20px;
+            padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 15px;
-            font-size: 14px;
-            flex-wrap: wrap;
+            font-size: 13px;
+            border-bottom: 1px solid #8b0000;
         }
         footer {
-            background-color: #33292e;
-            color: white;
+            background-color: #12080c;
+            color: #b08d95;
             text-align: center;
-            padding: 25px;
+            padding: 30px;
             margin-top: 50px;
+            border-top: 2px solid #8b0000;
+        }
+        /* لوحة التحكم المخفية تحت خالص */
+        .hidden-admin-trigger {
+            background: transparent;
+            border: none;
+            color: #12080c;
+            cursor: pointer;
+            font-size: 11px;
+            margin-top: 10px;
+        }
+        .hidden-admin-trigger:hover {
+            color: #8b0000;
         }
     </style>
 </head>
 <body>
 
+    <!-- تشغيل الموسيقى music.weba تلقائياً أول ما الموقع يفتح -->
     <div class="music-bar">
-        <span>🎻 استمع إلى موسيقى "From Pain to Peace" أثناء التصفح:</span>
-        <audio controls loop style="height: 35px;">
-            <source src="song.mp3" type="audio/mpeg">
-            متصفحك لا يدعم تشغيل الملفات الصوتية.
+        <span>🎻 استمع إلى الموسيقى الهادئة:</span>
+        <audio controls autoplay loop style="height: 30px;">
+            <source src="music.weba" type="audio/webm">
+            متصفحك لا يدعم الصوت.
         </audio>
     </div>
 
@@ -251,7 +298,7 @@
         <nav>
             <a onclick="showSection('home')">الرئيسية</a>
             <a onclick="showSection('products')">المنتجات</a>
-            <a onclick="showSection('admin-login')">لوحة التحكم (Admin)</a>
+            <a onclick="showSection('cart')">سلة الشراء (<span id="cart-count">0</span>)</a>
         </nav>
     </header>
 
@@ -263,15 +310,31 @@
         </section>
     </div>
 
+    <!-- المنتجات -->
     <div class="container" id="products-section">
         <h3 class="section-title">تشكيلة لمسة من مرنونا المميزة</h3>
         <p class="section-subtitle">اختر اللحظة المناسبة، وسبقنا ننفذهالك بأجمل شكل</p>
         
-        <div class="products-grid" id="products-container">
-            <!-- المنتجات -->
+        <div class="products-grid" id="products-container"></div>
+    </div>
+
+    <!-- سلة المشتروات -->
+    <div class="container" id="cart-section" style="display: none;">
+        <h3 class="section-title">سلة المشتريات الخاصة بك</h3>
+        <div id="cart-items" style="background: #170d12; padding: 20px; border-radius: 10px; margin-bottom: 20px;"></div>
+        
+        <div class="cart-section">
+            <h3>إتمام الطلب عبر الواتساب</h3>
+            <div class="checkout-form">
+                <input type="text" id="client-name" placeholder="الاسم بالكامل">
+                <input type="text" id="client-address" placeholder="العنوان بالتفصيل">
+                <input type="text" id="client-phone" placeholder="رقم التليفون">
+                <button class="btn" onclick="sendOrderToWhatsApp()">إرسال الطلب عبر الواتساب</button>
+            </div>
         </div>
     </div>
 
+    <!-- تسجيل دخول الأدمن -->
     <div class="admin-box" id="admin-login">
         <h3>تسجيل دخول لوحة التحكم</h3>
         <div class="form-group">
@@ -283,8 +346,10 @@
             <input type="password" id="password" placeholder="اكتب كلمة المرور">
         </div>
         <button class="btn" style="width: 100%;" onclick="checkLogin()">دخول</button>
+        <button class="btn" style="width: 100%; background: #333; margin-top: 10px;" onclick="showSection('home')">إلغاء</button>
     </div>
 
+    <!-- لوحة التحكم لإضافة ورفع الصور -->
     <div class="admin-box" id="admin-panel">
         <h3>إدارة منتجات لمسة من مرنونا 🛠️</h3>
         <div class="form-group">
@@ -296,8 +361,8 @@
             <textarea id="p-desc" placeholder="تفاصيل المنتج..."></textarea>
         </div>
         <div class="form-group">
-            <label>السعر (خانة واحدة)</label>
-            <input type="text" id="p-price" placeholder="مثال: 500 جنيه">
+            <label>السعر</label>
+            <input type="text" id="p-price" placeholder="مثال: 750 جنيه">
         </div>
         <div class="form-group">
             <label>اختر صورة المنتج من جهازك</label>
@@ -316,6 +381,9 @@
 
     <footer>
         <p>جميع الحقوق محفوظة © 2026 - لمسة من مرنونا (Lamsa Min Marnouna)</p>
+        <!-- زرار مخفي تحت خالص تحت كلمة جميع الحقوق محفوظه للدخول للوحة التحكم -->
+        <br>
+        <button class="hidden-admin-trigger" onclick="showSection('admin-login')">إدارة الموقع</button>
     </footer>
 
     <script>
@@ -334,6 +402,7 @@
             }
         ];
 
+        let cart = JSON.parse(localStorage.getItem('lamsa_cart')) || [];
         let isAdmin = localStorage.getItem('lamsa_admin') === 'true';
 
         function renderProducts() {
@@ -349,17 +418,19 @@
                             <span class="price">${p.price}</span>
                         </div>
                         <div class="card-actions">
-                            <a href="https://wa.me/201100329703?text=مرحباً، مهتم بالاستفسار عن ${p.title}" target="_blank" class="whatsapp-btn">اطلب عبر واتساب</a>
+                            <button class="cart-btn" onclick="addToCart('${p.title}', '${p.price}')">إضافة إلى السلة</button>
                             <button class="delete-btn" style="display: ${isAdmin ? 'block' : 'none'};" onclick="deleteProduct(${index})">حذف المنتج</button>
                         </div>
                     </div>
                 `;
             });
+            document.getElementById('cart-count').innerText = cart.length;
         }
 
         function showSection(sectionId) {
             document.getElementById('home-section').style.display = 'none';
             document.getElementById('products-section').style.display = 'none';
+            document.getElementById('cart-section').style.display = 'none';
             document.getElementById('admin-login').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'none';
 
@@ -368,6 +439,9 @@
                 document.getElementById('products-section').style.display = 'block';
             } else if (sectionId === 'products') {
                 document.getElementById('products-section').style.display = 'block';
+            } else if (sectionId === 'cart') {
+                document.getElementById('cart-section').style.display = 'block';
+                renderCart();
             } else if (sectionId === 'admin-login') {
                 if (isAdmin) {
                     document.getElementById('admin-panel').style.display = 'block';
@@ -414,43 +488,21 @@
             if (fileInput.files && fileInput.files[0]) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    let base64Image = e.target.result;
-                    
-                    products.push({
-                        title: title,
-                        desc: desc || "تصميم راقي ومميز من لمسة من مرنونا",
-                        price: price,
-                        img: base64Image
-                    });
-
+                    products.push({ title, desc: desc || "تصميم راقي ومميز", price, img: e.target.result });
                     localStorage.setItem('lamsa_marnouna_products', JSON.stringify(products));
-                    alert('تم إضافة المنتج بالصورة بنجاح وتحديث الموقع!');
-                    
+                    alert('تم إضافة المنتج بنجاح!');
                     document.getElementById('p-title').value = '';
                     document.getElementById('p-desc').value = '';
                     document.getElementById('p-price').value = '';
                     fileInput.value = '';
-
                     showSection('products');
                     renderProducts();
                 }
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
-                // لو مرفعش صوره، بنحط صورة افتراضية
-                products.push({
-                    title: title,
-                    desc: desc || "تصميم راقي ومميز من لمسة من مرنونا",
-                    price: price,
-                    img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80"
-                });
-
+                products.push({ title, desc: desc || "تصميم راقي ومميز", price, img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80" });
                 localStorage.setItem('lamsa_marnouna_products', JSON.stringify(products));
-                alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
-                
-                document.getElementById('p-title').value = '';
-                document.getElementById('p-desc').value = '';
-                document.getElementById('p-price').value = '';
-
+                alert('تم إضافة المنتج بنجاح!');
                 showSection('products');
                 renderProducts();
             }
@@ -462,6 +514,56 @@
                 localStorage.setItem('lamsa_marnouna_products', JSON.stringify(products));
                 renderProducts();
             }
+        }
+
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            localStorage.setItem('lamsa_cart', JSON.stringify(cart));
+            document.getElementById('cart-count').innerText = cart.length;
+            alert('تم إضافة المنتج إلى السلة بنجاح!');
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #b08d95;">السلة فارغة حالياً.</p>';
+                return;
+            }
+            container.innerHTML = '<ul>';
+            cart.forEach((item, index) => {
+                container.innerHTML += `<li style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">${item.title} - <span style="color: #ff4d4d;">${item.price}</span> <button onclick="removeFromCart(${index})" style="background:#8b0000; color:white; border:none; padding:3px 8px; border-radius:4px; cursor:pointer;">حذف</button></li>`;
+            });
+            container.innerHTML += '</ul>';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('lamsa_cart', JSON.stringify(cart));
+            renderCart();
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function sendOrderToWhatsApp() {
+            let name = document.getElementById('client-name').value;
+            let address = document.getElementById('client-address').value;
+            let phone = document.getElementById('client-phone').value;
+
+            if (!name || !address || !phone) {
+                alert('من فضلك اكتب الاسم والعنوان ورقم التليفون!');
+                return;
+            }
+            if (cart.length === 0) {
+                alert('سلة المشتريات فارغة!');
+                return;
+            }
+
+            let orderText = `مرحباً، أريد إتمام طلب جديد:%0A*الاسم:* ${name}%0A*العنوان:* ${address}%0A*رقم التليفون:* ${phone}%0A%0A*المنتجات المطلوبة:*%0A`;
+            cart.forEach(item => {
+                orderText += `- ${item.title} (${item.price})%0A`;
+            });
+
+            let whatsappUrl = `https://wa.me/201100329703?text=${orderText}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         renderProducts();
