@@ -16,7 +16,7 @@
             color: #111111;
             line-height: 1.6;
         }
-        /* الهيدر المطابق تماماً لستايل فلوكا */
+        /* الهيدر المطابق تماماً لفلوكا */
         header {
             background-color: #ffffff;
             padding: 20px 60px;
@@ -54,7 +54,8 @@
         .header-icons {
             display: flex;
             gap: 20px;
-            font-size: 18px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
         }
 
@@ -99,7 +100,7 @@
             color: #ffffff;
         }
 
-        /* قسم المنتجات */
+        /* قسم المنتجات المطابق تماماً */
         .products-section {
             max-width: 1300px;
             margin: 80px auto;
@@ -130,7 +131,6 @@
             border-radius: 4px;
             overflow: hidden;
             transition: 0.3s;
-            cursor: pointer;
         }
         .product-card img {
             width: 100%;
@@ -187,7 +187,7 @@
 </head>
 <body>
 
-    <!-- الهيدر بنفس الستايل النظيف البسيط -->
+    <!-- الهيدر -->
     <header>
         <div class="logo">
             <h1>MARNOUNA</h1>
@@ -200,49 +200,52 @@
             </ul>
         </nav>
         <div class="header-icons">
-            <span>🛒 السلة</span>
+            <span>🛒 سلة المشتريات</span>
         </div>
     </header>
 
-    <!-- واجهة البداية -->
+    <!-- الواجهة الرئيسية -->
     <section class="hero">
         <h2>MARNOUNA COLLECTION</h2>
         <p>اكتشف أحدث تشكيلة مصممة خصيصاً لتناسب أروع ليلة في عمرك.</p>
         <a href="#shop" class="hero-btn">تسوق الآن</a>
     </section>
 
-    <!-- المنتجات -->
+    <!-- المنتجات بالأسعار والبيانات الأصلية بالمللي -->
     <section class="products-section" id="shop">
         <div class="section-header">
-            <h3>منتجاتنا المميزة</h3>
-            <p>اختر ما يعبر عن ذوقك الرفيع</p>
+            <h3>التشكيلة الحصرية</h3>
+            <p>تصاميم فريدة تعبر عن ذوقك الرفيع</p>
         </div>
 
         <div class="products-grid">
+            <!-- المنتج الأول -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="منتج 1">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80" alt="Luxury Bridal Bouquet">
                 <div class="product-details">
                     <h4>Luxury Bridal Bouquet</h4>
                     <span class="price">850 EGP</span>
-                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Luxury Bridal Bouquet" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
+                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Luxury Bridal Bouquet بسعر 850 EGP" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
                 </div>
             </div>
 
+            <!-- المنتج الثاني -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=600&q=80" alt="منتج 2">
+                <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=600&q=80" alt="Wedding Accessories Set">
                 <div class="product-details">
                     <h4>Wedding Accessories Set</h4>
                     <span class="price">1350 EGP</span>
-                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Wedding Accessories Set" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
+                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Wedding Accessories Set بسعر 1350 EGP" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
                 </div>
             </div>
 
+            <!-- المنتج الثالث -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80" alt="منتج 3">
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80" alt="Custom Rose Box">
                 <div class="product-details">
                     <h4>Custom Rose Box</h4>
                     <span class="price">550 EGP</span>
-                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Custom Rose Box" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
+                    <a href="https://wa.me/201100329703?text=مرحباً، أريد طلب Custom Rose Box بسعر 550 EGP" target="_blank" class="buy-btn">اطلب عبر الواتساب</a>
                 </div>
             </div>
         </div>
