@@ -1,411 +1,213 @@
-<!DOCTYPE html>
+دimport os
+import json
+import time
+from datetime import datetime
+from flask import Flask, send_from_directory, request, jsonify, redirect, session
+
+app = Flask(__name__)
+app.secret_key = "marnouna_brand_auto_autoplay_2026"
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_FOLDER = os.path.join(BASE_DIR, 'static', 'images')
+DATA_FILE = os.path.join(BASE_DIR, 'marnouna_store_items.json')
+ORDERS_FILE = os.path.join(BASE_DIR, 'marnouna_orders.json')
+SETTINGS_FILE = os.path.join(BASE_DIR, 'marnouna_settings.json')
+
+ADMIN_USERNAME = "مرنونا"
+ADMIN_PASSWORD = "112233"
+STORE_WHATSAPP = "201044474628" # حط رقم واتساب مرنونا هنا
+
+os.makedirs(IMAGE_FOLDER, exist_ok=True)
+
+def load_json(path, default):
+    if os.path.exists(path):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            return default
+    return default
+
+def save_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+def get_settings():
+    default_settings = {
+        "site_name": "مرنونا | Marnouna",
+        "logo_img": "",
+        "hero_video": "https://assets.mixkit.co/videos/preview/mixkit-beautiful-woman-posing-for-the-camera-in-a-studio-41584-large.mp4",
+        "top_notice": "✨ مرنونا • هاند ميد ومنتجات حصرية • شحن لجميع المحافظات ✨",
+        "hero_title": "عالم مرنونا للأعمال اليدوية والتشكيلات المميزة",
+        "hero_desc": "كل قطعة مصممة بحب وعناية لتناسب ذوقك الرفيع. تصفحي أرقى المنتجات المصنوعة خصيصاً لك.",
+        "one_size_img": "one_size.jpeg",
+        "big_size_img": "big_size.jpg.jpeg",
+        "retail_extra": 50,
+        "min_wholesale": 5,
+        "promo_code": "MARNOUNA1",
+        "promo_discount": 10
+    }
+    settings = load_json(SETTINGS_FILE, default_settings)
+    for k, v in default_settings.items():
+        if k not in settings:
+            settings[k] = v
+    return settings
+
+def get_products():
+    data = load_json(DATA_FILE, None)
+    if not isinstance(data, list):
+        initial = [
+            {
+                "id": 1,
+                "category": "COLLECTION",
+                "code": "M1",
+                "title": "Handmade Piece - CODE : M1",
+                "price": 250,
+                "stock": 30,
+                "description": "قطعة فنية يدوية مصممة بأعلى جودة وعناية فائقة.",
+                "images": ["+1 1 .jpeg", "+1 2 .jpeg"],
+                "out_of_stock": False
+            }
+        ]
+        save_json(DATA_FILE, initial)
+        return initial
+    return data
+
+@app.route('/static/images/<path:filename>')
+def custom_static(filename):
+    return send_from_directory(IMAGE_FOLDER, filename)
+
+def get_cat_logo_url():
+    ver = int(time.time())
+    if os.path.exists(os.path.join(IMAGE_FOLDER, 'my_cat.png')):
+        return f"/static/images/my_cat.png?v={ver}"
+    return f"/static/images/one_size.jpeg?v={ver}"
+
+COMMON_STYLE = """
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Tajawal:wght@400;500;700;900&display=swap');
+
+#splash-screen {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background-color: #0c0806; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; z-index: 99999;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#splash-screen.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+.splash-title {
+  margin-top: 25px; font-family: 'Tajawal', sans-serif; font-size: 26px;
+  font-weight: 900; letter-spacing: 2px; color: #fff;
+  text-shadow: 0 0 15px rgba(212, 160, 23, 0.6);
+}
+.brand-name, .royal-font { font-family: 'Tajawal', serif !important; }
+.mode-switch-bar { background: #1a1410; padding: 10px; display: flex; justify-content: center; gap: 15px; border-bottom: 1px solid #33261a; }
+.mode-btn { background: #2a1f17; color: #aaa; border: 1.5px solid #4d3826; padding: 8px 22px; border-radius: 25px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.3s; }
+.mode-btn.active { background: #d4a017; color: #000; border-color: #d4a017; box-shadow: 0 0 15px rgba(212,160,23,0.5); }
+.cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s; }
+.cart-overlay.open { opacity: 1; visibility: visible; }
+.cart-drawer { position: fixed; top: 0; left: -400px; width: 380px; max-width: 90%; height: 100%; background: #140f0c; border-right: 1px solid #33261a; z-index: 999; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; box-shadow: 5px 0 25px rgba(0,0,0,0.9); }
+.cart-drawer.open { left: 0; }
+.cart-head { padding: 20px; border-bottom: 1px solid #261d14; display: flex; justify-content: space-between; align-items: center; }
+.cart-head h3 { font-size: 18px; color: #d4a017; margin: 0; }
+.btn-close-cart { background: none; border: none; color: #aaa; font-size: 20px; cursor: pointer; }
+.cart-body { flex: 1; overflow-y: auto; padding: 15px; }
+.cart-item { display: flex; gap: 12px; background: #1f1712; border: 1px solid #33261a; padding: 10px; border-radius: 6px; margin-bottom: 12px; }
+.cart-item-img { width: 65px; height: 85px; object-fit: cover; border-radius: 4px; }
+.cart-item-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.cart-item-title { font-size: 13px; font-weight: bold; color: #eee; }
+.cart-item-price { font-size: 14px; color: #d4a017; font-weight: bold; }
+.qty-control { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+.qty-control button { background: #33261a; border: 1px solid #55412e; color: #fff; width: 24px; height: 24px; border-radius: 3px; cursor: pointer; }
+.cart-footer { padding: 15px 20px 20px; border-top: 1px solid #261d14; background: #0c0806; }
+.cart-total-box { display: flex; justify-content: space-between; font-size: 16px; font-weight: bold; margin-bottom: 12px; color: #fff; }
+.total-num { color: #d4a017; font-size: 18px; }
+.checkout-form { display: flex; flex-direction: column; gap: 8px; }
+.cart-input { width: 100%; padding: 10px; background: #000; border: 1px solid #33261a; color: #fff; border-radius: 4px; font-family: 'Tajawal'; font-size: 13px; }
+.btn-checkout { background: #25D366; color: #fff; border: none; padding: 12px; border-radius: 4px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 5px; }
+.nav-cart-btn { background: #1f1712; border: 1px solid #d4a017; color: #fff; padding: 8px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: bold; }
+.cart-badge { background: #d4a017; color: #000; border-radius: 50%; padding: 2px 7px; font-size: 11px; }
+"""
+
+@app.route("/")
+def home():
+    settings = get_settings()
+    mode = request.args.get("mode", "retail")
+    products = get_products()
+    cards = []
+
+    for p in products:
+        p_id = str(p.get("id", 1))
+        p_title = str(p.get("title", ""))
+        base_price = float(p.get("price", 0))
+        p_code = str(p.get("code", ""))
+        p_cat = str(p.get("category", "COLLECTION"))
+        stock = int(p.get("stock", 0))
+        imgs = p.get("images", [])
+        main_img = f"/static/images/{imgs[0]}" if imgs else "https://via.placeholder.com/350x450?text=Marnouna"
+
+        card = f"""
+        <div class="vs-product-card" onclick="location.href='/product/{p_id}?mode={mode}'" style="background:#140f0c; border:1px solid #33261a; border-radius:6px; overflow:hidden; cursor:pointer;">
+            <div style="width:100%; height:320px; background:#000; position:relative;">
+                <img src="{main_img}" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="padding:15px; text-align:center;">
+                <span style="font-size:11px; color:#d4a017; font-weight:bold;">CODE : {p_code}</span>
+                <h3 style="font-size:14px; font-weight:bold; color:#eee; margin:6px 0;">{p_title}</h3>
+                <div style="font-size:16px; font-weight:900; color:#d4a017; margin-bottom:10px;">{int(base_price)}.00 ج.م</div>
+                <button style="width:100%; background:#d4a017; color:#000; border:none; padding:9px; font-weight:bold; border-radius:4px; cursor:pointer;">عرض المنتج والطلب</button>
+            </div>
+        </div>
+        """
+        cards.append(card)
+
+    cards_html = "".join(cards)
+    logo_cat_src = get_cat_logo_url()
+
+    html = f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرنونا | Marnouna - بوكيهات ورد واكسسوارات أفراح</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #fcf6f8;
-            color: #4a3b40;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #ffffff;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(214, 51, 132, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        header h1 {
-            color: #d63384;
-            font-size: 26px;
-            font-weight: bold;
-        }
-        nav a {
-            text-decoration: none;
-            color: #6c5860;
-            margin-left: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        nav a:hover {
-            color: #d63384;
-        }
-        .hero {
-            text-align: center;
-            padding: 90px 20px;
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80') center/cover;
-            color: white;
-        }
-        .hero h2 {
-            font-size: 40px;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-        }
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-        }
-        .btn {
-            background-color: #d63384;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(214, 51, 132, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #b0246b;
-        }
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 40px 20px;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            color: #b0246b;
-            margin-bottom: 10px;
-        }
-        .section-subtitle {
-            text-align: center;
-            color: #777;
-            margin-bottom: 40px;
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid #fce4ec;
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .product-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        .product-info {
-            padding: 20px;
-        }
-        .product-card h4 {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .product-card p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .price {
-            font-weight: bold;
-            color: #d63384;
-            font-size: 18px;
-            display: block;
-            margin-bottom: 15px;
-        }
-        .card-actions {
-            padding: 0 20px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .whatsapp-btn {
-            background-color: #25d366;
-            color: white;
-            padding: 10px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            transition: 0.3s;
-        }
-        .whatsapp-btn:hover {
-            background-color: #1ebe57;
-        }
-        .delete-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: bold;
-            display: none;
-        }
-        .admin-box {
-            max-width: 450px;
-            margin: 60px auto;
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: right;
-            display: none;
-        }
-        .admin-box h3 {
-            color: #d63384;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #444;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-        }
-        .contact-section {
-            background-color: #fce4ec;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 50px auto;
-            max-width: 900px;
-            text-align: center;
-        }
-        footer {
-            background-color: #33292e;
-            color: white;
-            text-align: center;
-            padding: 25px;
-            margin-top: 50px;
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{settings.get("site_name")}</title>
+<link rel="icon" href="{logo_cat_src}">
+<style>
+* {{ box-sizing: border-box; margin: 0; padding: 0; }}
+body {{ font-family: 'Tajawal', sans-serif; background-color: #0c0806; color: #fff; }}
+{COMMON_STYLE}
+</style>
 </head>
 <body>
-
-    <header>
-        <h1>مرنونا | Marnouna</h1>
-        <nav>
-            <a onclick="showSection('home')">الرئيسية</a>
-            <a onclick="showSection('products')">المنتجات</a>
-            <a onclick="showSection('admin-login')">لوحة التحكم (Admin)</a>
-        </nav>
-    </header>
-
-    <div id="home-section">
-        <section class="hero">
-            <h2>أجمل بوكيهات الورد واكسسوارات الأفراح ✨</h2>
-            <p>مصنوعة بأعلى جودة وبأدق التفاصيل عشان ليلة العمر تكون أسطورية.</p>
-            <a onclick="showSection('products')" class="btn">تصفح المنتجات</a>
-        </section>
-    </div>
-
-    <div class="container" id="products-section">
-        <h3 class="section-title">تشكيلة مرنونا المميزة</h3>
-        <p class="section-subtitle">اختر اللحظة المناسبة، وسبقنا ننفذهالك بأجمل شكل</p>
-        
-        <div class="products-grid" id="products-container">
-            <!-- المنتجات -->
-        </div>
-    </div>
-
-    <div class="admin-box" id="admin-login">
-        <h3>تسجيل دخول لوحة التحكم</h3>
-        <div class="form-group">
-            <label>اسم المستخدم</label>
-            <input type="text" id="username" placeholder="اكتب اسم المستخدم">
-        </div>
-        <div class="form-group">
-            <label>كلمة المرور</label>
-            <input type="password" id="password" placeholder="اكتب كلمة المرور">
-        </div>
-        <button class="btn" style="width: 100%;" onclick="checkLogin()">دخول</button>
-    </div>
-
-    <div class="admin-box" id="admin-panel">
-        <h3>إدارة منتجات مرنونا 🛠️</h3>
-        <div class="form-group">
-            <label>اسم المنتج</label>
-            <input type="text" id="p-title" placeholder="مثال: بوكيه ورد ملكي">
-        </div>
-        <div class="form-group">
-            <label>وصف المنتج</label>
-            <textarea id="p-desc" placeholder="تفاصيل المنتج..."></textarea>
-        </div>
-        <div class="form-group">
-            <label>السعر / ملاحظة</label>
-            <input type="text" id="p-price" placeholder="مثال: حسب الطلب">
-        </div>
-        <div class="form-group">
-            <label>رابط الصورة (URL)</label>
-            <input type="text" id="p-img" placeholder="حط لينك الصورة هنا">
-        </div>
-        <button class="btn" style="width: 100%; margin-bottom: 10px;" onclick="addProduct()">إضافة المنتج للموقع</button>
-        <button class="btn" style="width: 100%; background-color: #666;" onclick="logoutAdmin()">تسجيل خروج</button>
-    </div>
-
-    <div class="contact-section" id="contact">
-        <h3>تواصل مع مرنونا مباشرة</h3>
-        <p>عندك تصميم معين في بالك؟ أو حابب تطلب بوكيه أو اكسسوار بمواصفات خاصة؟ كلمنا فوراً وهنساعدك!</p>
-        <br>
-        <a href="https://wa.me/201100329703" target="_blank" class="btn">تواصل معنا عبر واتساب</a>
-    </div>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © 2026 - مرنونا (Marnouna) لبوكيهات الورد واكسسوارات الأفراح</p>
-    </footer>
-
-    <script>
-        let products = JSON.parse(localStorage.getItem('marnouna_products')) || [
-            {
-                title: "بوكيه ورد عروسة فخم",
-                desc: "تنسيق راقي من الورد بتصميم مميز لليلة العمر.",
-                price: "حسب الطلب",
-                img: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                title: "طقم اكسسوارات خطوبة وأفراح",
-                desc: "تشكيلة أنيقة من الإكسسوارات الخاصة بالعرائس والمناسبات.",
-                price: "تصميم حسب الطلب",
-                img: "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=500&q=80"
-            }
-        ];
-
-        let isAdmin = localStorage.getItem('marnouna_admin') === 'true';
-
-        function renderProducts() {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
-            products.forEach((p, index) => {
-                container.innerHTML += `
-                    <div class="product-card">
-                        <img src="${p.img}" alt="${p.title}">
-                        <div class="product-info">
-                            <h4>${p.title}</h4>
-                            <p>${p.desc}</p>
-                            <span class="price">${p.price}</span>
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://wa.me/201100329703?text=مرحباً، مهتم بالاستفسار عن ${p.title}" target="_blank" class="whatsapp-btn">اطلب عبر واتساب</a>
-                            <button class="delete-btn" style="display: ${isAdmin ? 'block' : 'none'};" onclick="deleteProduct(${index})">حذف المنتج</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function showSection(sectionId) {
-            document.getElementById('home-section').style.display = 'none';
-            document.getElementById('products-section').style.display = 'none';
-            document.getElementById('admin-login').style.display = 'none';
-            document.getElementById('admin-panel').style.display = 'none';
-
-            if (sectionId === 'home') {
-                document.getElementById('home-section').style.display = 'block';
-                document.getElementById('products-section').style.display = 'block';
-            } else if (sectionId === 'products') {
-                document.getElementById('products-section').style.display = 'block';
-            } else if (sectionId === 'admin-login') {
-                if (isAdmin) {
-                    document.getElementById('admin-panel').style.display = 'block';
-                } else {
-                    document.getElementById('admin-login').style.display = 'block';
-                }
-            }
-        }
-
-        function checkLogin() {
-            let user = document.getElementById('username').value;
-            let pass = document.getElementById('password').value;
-
-            if (user === 'ميرنا' && pass === '112233') {
-                isAdmin = true;
-                localStorage.setItem('marnouna_admin', 'true');
-                alert('أهلاً بك يا ميرنا في لوحة التحكم!');
-                showSection('admin-login');
-                renderProducts();
-            } else {
-                alert('اسم المستخدم أو كلمة المرور خطأ!');
-            }
-        }
-
-        function logoutAdmin() {
-            isAdmin = false;
-            localStorage.setItem('marnouna_admin', 'false');
-            alert('تم تسجيل الخروج بنجاح');
-            showSection('home');
-            renderProducts();
-        }
-
-        function addProduct() {
-            let title = document.getElementById('p-title').value;
-            let desc = document.getElementById('p-desc').value;
-            let price = document.getElementById('p-price').value;
-            let img = document.getElementById('p-img').value;
-
-            if (!title || !price) {
-                alert('من فضلك اكتب اسم المنتج والسعر على الأقل!');
-                return;
-            }
-
-            products.push({
-                title: title,
-                desc: desc || "تصميم راقي ومميز من مرنونا",
-                price: price,
-                img: img || "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80"
-            });
-
-            localStorage.setItem('marnouna_products', JSON.stringify(products));
-            alert('تم إضافة المنتج بنجاح وتحديث الموقع!');
-            
-            document.getElementById('p-title').value = '';
-            document.getElementById('p-desc').value = '';
-            document.getElementById('p-price').value = '';
-            document.getElementById('p-img').value = '';
-
-            showSection('products');
-            renderProducts();
-        }
-
-        function deleteProduct(index) {
-            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
-                products.splice(index, 1);
-                localStorage.setItem('marnouna_products', JSON.stringify(products));
-                renderProducts();
-            }
-        }
-
-        renderProducts();
-    </script>
+<div style="background:#261d14; color:#d4a017; text-align:center; padding:8px; font-size:12px; font-weight:bold;">{settings.get("top_notice")}</div>
+<header style="background:rgba(12,8,6,0.95); padding:16px 35px; border-bottom:1px solid #261d14; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100;">
+  <a href="/" style="font-size:22px; font-weight:900; color:#d4a017; text-decoration:none;">{settings.get("site_name")}</a>
+  <button class="nav-cart-btn" onclick="openCart()">🛒 السلة <span class="cart-badge">0</span></button>
+</header>
+<div style="max-width:1200px; margin:40px auto; padding:0 25px;">
+  <h2 style="text-align:center; color:#d4a017; margin-bottom:30px; font-size:28px;">منتجات مرنونا المميزة</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:25px;">{cards_html}</div>
+</div>
 </body>
-</html>
+</html>"""
+    return html
+
+@app.route("/product/<int:prod_id>")
+def product_page(prod_id):
+    settings = get_settings()
+    products = get_products()
+    p = next((item for item in products if item.get("id") == prod_id), None)
+    if not p: return "المنتج غير موجود", 404
+    return f"<h1>{p.get('title')}</h1><p>{p.get('description')}</p><a href='/'>← رجوع للرئيسية</a>"
+
+@app.route("/admin", methods=["GET", "POST"])
+def admin_dashboard():
+    if not session.get("is_admin"): return redirect("/admin/login")
+    return "<h1>لوحة تحكم مرنونا قيد التشغيل ✅</h1><a href='/'>عرض المتجر</a>"
+
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    if request.method == "POST":
+        if request.form.get("username") == ADMIN_USERNAME and request.form.get("password") == ADMIN_PASSWORD:
+            session["is_admin"] = True
+            return redirect("/admin")
+    return '''<form method="POST"><input name="username" placeholder="اليوزر (مرنونا)"><input type="password" name="password" placeholder="الباسورد (112233)"><button>دخول</button></form>'''
+
+if __name__ == "__main__":
+    app.run()
