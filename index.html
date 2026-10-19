@@ -6,116 +6,44 @@
 <title>MARNONA | المتجر</title>
 <style>
 :root{--bg:#080607;--panel:#14090d;--panel2:#1d0b11;--red:#f3264b;--red2:#a50d2b;--gold:#e5bd69;--text:#fff7f8;--muted:#c5afb5;--line:#3a1721}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:12px 17px;background:var(--red);color:white;font-weight:bold}button:hover{filter:brightness(1.12)}.secondary{background:transparent;border:1px solid var(--line)}.top{background:#480d1b;text-align:center;padding:10px;color:white;font-size:13px}.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090607ed;backdrop-filter:blur(12px);z-index:4}.logo{font-family:Georgia,serif;font-weight:bold;font-size:35px;letter-spacing:1px}.logo span{color:var(--red)}.navlinks{display:flex;gap:15px;align-items:center}.navlinks a{color:white;text-decoration:none;font-size:14px;cursor:pointer}.hero{min-height:380px;display:grid;place-items:center;text-align:center;padding:60px 20px;background:radial-gradient(ellipse at 50% 30%,#5c1024 0%,#210a11 42%,#080607 75%);position:relative;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;width:460px;height:460px;border:1px solid #92213b55;border-radius:50%;pointer-events:none}.hero:after{width:600px;height:600px}.hero>*{position:relative;z-index:1}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:bold}.hero h1{font-size:clamp(32px,5vw,58px);margin:20px 0 12px}.hero h1 span{color:var(--red)}.hero p{color:#e3d1d5;max-width:650px;line-height:2;margin:0 auto 24px}.wrap{max-width:1200px;margin:auto;padding:42px 20px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;flex-wrap:wrap}.sectionhead h2{margin:0;font-size:27px}.sectionhead p{margin:7px 0 0;color:var(--muted);font-size:14px}.tools{display:flex;gap:9px;flex-wrap:wrap}.tools input{min-width:210px}.field,input,textarea{background:#0d080a;border:1px solid var(--line);border-radius:9px;padding:12px;color:white;outline:none;width:100%}.field:focus,input:focus,textarea:focus{border-color:var(--red)}.tools input{width:auto}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product{background:linear-gradient(150deg,#1a0b10,#0d080a);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s}.product:hover{transform:translateY(-3px);border-color:#8e263e}.product img{width:100%;height:290px;object-fit:cover;display:block;background:#180a0f}.placeholder{height:290px;display:grid;place-items:center;background:radial-gradient(circle,#481123,#10080b);font-family:Georgia,serif;font-size:42px;color:#f8e5e9}.pbody{padding:17px}.pbody h3{margin:0 0 9px;font-size:20px}.desc{color:var(--muted);font-size:14px;line-height:1.8;min-height:48px;white-space:pre-wrap}.price{color:var(--gold);font-size:22px;font-weight:bold;margin:15px 0}.pbody button{width:100%}.empty{border:1px dashed var(--line);border-radius:14px;padding:45px;text-align:center;color:var(--muted);grid-column:1/-1}.footer{border-top:1px solid var(--line);padding:28px 20px;text-align:center;color:var(--muted);font-size:13px}.modal{position:fixed;inset:0;background:#000b;z-index:1000;display:none;align-items:center;justify-content:center;padding:15px}.modal.active{display:flex}.modalbox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#10080b;border:1px solid #612034;border-radius:16px;padding:22px;box-shadow:0 25px 90px #000}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.modalhead h2{margin:0}.close{background:#2b1119;padding:7px 12px;color:white;cursor:pointer}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.full{grid-column:1/-1}label{display:block;font-size:13px;color:#e7cbd2;margin-bottom:7px}.formrow{margin-bottom:12px}.adminlist{display:grid;gap:9px;margin-top:20px}.adminitem{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:10px}.adminitem img{width:54px;height:54px;object-fit:cover;border-radius:7px}.adminitem .info{flex:1;min-width:0}.adminitem .info strong{display:block}.adminitem .info small{color:var(--muted)}.danger{background:#691026}.note{font-size:12px;line-height:1.8;color:#d6b9c1;background:#1a0b11;padding:12px;border-radius:9px;margin:14px 0}.cartcount{display:inline-grid;place-items:center;background:var(--red);border-radius:50%;min-width:23px;height:23px;font-size:12px;margin-right:5px}.cartitems{display:grid;gap:10px;margin:15px 0}.cartitem{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:9px}.cartitem small{color:var(--muted)}.qty{display:flex;align-items:center;gap:8px}.qty button{padding:4px 10px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:bold;padding:15px 0;border-top:1px solid var(--line)}.hidden{display:none!important}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:12px 17px;background:var(--red);color:white;font-weight:bold}button:hover{filter:brightness(1.12)}.secondary{background:transparent;border:1px solid var(--line)}.top{background:#480d1b;text-align:center;padding:10px;color:white;font-size:13px}.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090607ed;backdrop-filter:blur(12px);z-index:4}.logo{font-family:Georgia,serif;font-weight:bold;font-size:35px;letter-spacing:1px}.logo span{color:var(--red)}.navlinks{display:flex;gap:10px;align-items:center}.navlinks a{color:white;text-decoration:none;font-size:14px}.hero{min-height:380px;display:grid;place-items:center;text-align:center;padding:60px 20px;background:radial-gradient(ellipse at 50% 30%,#5c1024 0%,#210a11 42%,#080607 75%);position:relative;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;width:460px;height:460px;border:1px solid #92213b55;border-radius:50%;pointer-events:none}.hero:after{width:600px;height:600px}.hero>*{position:relative;z-index:1}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:bold}.hero h1{font-size:clamp(32px,5vw,58px);margin:20px 0 12px}.hero h1 span{color:var(--red)}.hero p{color:#e3d1d5;max-width:650px;line-height:2;margin:0 auto 24px}.wrap{max-width:1200px;margin:auto;padding:42px 20px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;flex-wrap:wrap}.sectionhead h2{margin:0;font-size:27px}.sectionhead p{margin:7px 0 0;color:var(--muted);font-size:14px}.tools{display:flex;gap:9px;flex-wrap:wrap}.tools input{min-width:210px}.field,input,textarea{background:#0d080a;border:1px solid var(--line);border-radius:9px;padding:12px;color:white;outline:none;width:100%}.field:focus,input:focus,textarea:focus{border-color:var(--red)}.tools input{width:auto}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product{background:linear-gradient(150deg,#1a0b10,#0d080a);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s}.product:hover{transform:translateY(-3px);border-color:#8e263e}.product img{width:100%;height:290px;object-fit:cover;display:block;background:#180a0f}.placeholder{height:290px;display:grid;place-items:center;background:radial-gradient(circle,#481123,#10080b);font-family:Georgia,serif;font-size:42px;color:#f8e5e9}.pbody{padding:17px}.pbody h3{margin:0 0 9px;font-size:20px}.desc{color:var(--muted);font-size:14px;line-height:1.8;min-height:48px;white-space:pre-wrap}.price{color:var(--gold);font-size:22px;font-weight:bold;margin:15px 0}.pbody button{width:100%}.empty{border:1px dashed var(--line);border-radius:14px;padding:45px;text-align:center;color:var(--muted);grid-column:1/-1}.footer{border-top:1px solid var(--line);padding:28px 20px;text-align:center;color:var(--muted);font-size:13px}.modal{position:fixed;inset:0;background:#000b;z-index:10;display:none;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.modalbox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#10080b;border:1px solid #612034;border-radius:16px;padding:22px;box-shadow:0 25px 90px #000}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.modalhead h2{margin:0}.close{background:#2b1119;padding:7px 12px;color:white;border-radius:6px;cursor:pointer}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.full{grid-column:1/-1}label{display:block;font-size:13px;color:#e7cbd2;margin-bottom:7px}.formrow{margin-bottom:12px}.adminlist{display:grid;gap:9px;margin-top:20px}.adminitem{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:10px}.adminitem img{width:54px;height:54px;object-fit:cover;border-radius:7px}.adminitem .info{flex:1;min-width:0}.adminitem .info strong{display:block}.adminitem .info small{color:var(--muted)}.danger{background:#691026}.note{font-size:12px;line-height:1.8;color:#d6b9c1;background:#1a0b11;padding:12px;border-radius:9px;margin:14px 0}.cartcount{display:inline-grid;place-items:center;background:var(--red);border-radius:50%;min-width:23px;height:23px;font-size:12px;margin-right:5px}.cartitems{display:grid;gap:10px;margin:15px 0}.cartitem{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:9px}.cartitem small{color:var(--muted)}.qty{display:flex;align-items:center;gap:8px}.qty button{padding:4px 10px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:bold;padding:15px 0;border-top:1px solid var(--line)}.hidden{display:none!important}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product img,.placeholder{height:230px}.nav{padding:14px 4%}.logo{font-size:28px}.navlinks a{font-size:12px}}
 @media(max-width:540px){.grid{grid-template-columns:1fr 1fr;gap:10px}.product img,.placeholder{height:170px}.pbody{padding:11px}.pbody h3{font-size:16px}.desc{font-size:12px;min-height:44px}.price{font-size:18px}.pbody button{padding:10px 6px;font-size:12px}.hero{min-height:350px}.navlinks a:not(:last-child){display:none}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.adminitem{flex-wrap:wrap}}
 </style>
 </head>
 <body>
 <div class="top">✨ MARNONA ✨ — اختار منتجك واطلب بسهولة عبر واتساب</div>
-<header class="nav">
-    <div class="logo">MAR<span>NO</span>NA</div>
-    <nav class="navlinks">
-        <a href="#home">الرئيسية</a>
-        <a href="#products">المنتجات</a>
-        <a onclick="openCart();return false">السلة <span class="cartcount" id="cartCount">0</span></a>
-        <!-- رابط لوحة التحكم ظاهر وواضح في الهيدر فوق -->
-        <a onclick="openAdmin();return false" style="color:var(--gold); font-weight:bold;">⚙ لوحة التحكم</a>
-    </nav>
-    <button class="secondary" onclick="openCart()">🛒 السلة</button>
-</header>
+<header class="nav"><div class="logo">MAR<span>NO</span>NA</div><nav class="navlinks"><a href="#home">الرئيسية</a><a href="#products">المنتجات</a><a href="#cart" onclick="openCart();return false">السلة <span class="cartcount" id="cartCount">0</span></a></nav><button class="secondary" onclick="openCart()">🛒 السلة</button></header>
+<section class="hero" id="home"><div><div class="eyebrow">MARNONA • YOUR STYLE</div><h1>اختيارات مميزة<br><span>على ذوقك</span></h1><p>اكتشف منتجات MARNONA، شوف الصور والأسعار والتفاصيل، وبعدها ابعت طلبك مباشرة على واتساب.</p><button onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">تصفح المنتجات</button></div></section>
+<main class="wrap" id="products"><div class="sectionhead"><div><h2>المنتجات</h2><p>كل المنتجات المتاحة في مكان واحد</p></div><div class="tools"><input id="search" placeholder="ابحث عن منتج..." oninput="renderProducts()"><button class="secondary" onclick="renderProducts()">بحث</button></div></div><div class="grid" id="productGrid"></div></main>
 
-<section class="hero" id="home">
-    <div>
-        <div class="eyebrow">MARNONA • YOUR STYLE</div>
-        <h1>اختيارات مميزة<br><span>على ذوقك</span></h1>
-        <p>اكتشف منتجات MARNONA، شوف الصور والأسعار والتفاصيل، وبعدها ابعت طلبك مباشرة على واتساب.</p>
-        <button onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">تصفح المنتجات</button>
+<!-- الفوتر مع زر إدارة واضح وصريح -->
+<footer class="footer">
+    <p>© <span id="year"></span> MARNONA — جميع الحقوق محفوظة</p>
+    <div style="margin-top:15px;">
+        <button onclick="openAdmin()" style="background:#2b1119; border:1px solid var(--line); font-size:13px; padding:8px 16px;">⚙ اضغط هنا لدخول لوحة التحكم</button>
     </div>
-</section>
+</footer>
 
-<main class="wrap" id="products">
-    <div class="sectionhead">
-        <div><h2>المنتجات</h2><p>كل المنتجات المتاحة في مكان واحد</p></div>
-        <div class="tools"><input id="search" placeholder="ابحث عن منتج..." oninput="renderProducts()"><button class="secondary" onclick="renderProducts()">بحث</button></div>
-    </div>
-    <div class="grid" id="productGrid"></div>
-</main>
-
-<footer class="footer">© <span id="year"></span> MARNONA — جميع الحقوق محفوظة</footer>
-
-<!-- نافذة لوحة التحكم -->
-<div class="modal" id="adminModal">
-    <div class="modalbox">
-        <div class="modalhead">
-            <h2>لوحة تحكم MARNONA</h2>
-            <button class="close" onclick="closeModal('adminModal')">✕</button>
-        </div>
-        <div id="loginPane">
-            <p style="color:var(--muted)">سجّل الدخول لإضافة المنتجات وتعديلها.</p>
-            <div class="formrow"><label>اسم المستخدم</label><input id="username" placeholder="اسم المستخدم (مرنونا)"></div>
-            <div class="formrow"><label>كلمة المرور</label><input id="password" type="password" placeholder="كلمة المرور (112233)"></div>
-            <button onclick="login()">دخول</button>
-            <p id="loginError" style="color:#ff7890; margin-top:10px;"></p>
-        </div>
-        <div id="dashboard" class="hidden">
-            <form id="productForm" onsubmit="saveProduct(event)">
-                <input id="editId" type="hidden">
-                <div class="formgrid">
-                    <div class="formrow full"><label>صورة المنتج (من جهازك)</label><input id="imageFile" type="file" accept="image/*"><div id="imagePreview" class="hidden" style="margin-top:10px"><img id="previewImg" style="max-width:150px;max-height:150px;object-fit:contain;border-radius:8px"></div></div>
-                    <div class="formrow"><label>اسم المنتج</label><input id="productName" required maxlength="100" placeholder="اسم المنتج"></div>
-                    <div class="formrow"><label>السعر بالجنيه المصري</label><input id="productPrice" type="number" min="0" step="0.01" required placeholder="مثال: 850"></div>
-                    <div class="formrow full"><label>الوصف</label><textarea id="productDesc" rows="3" maxlength="1000" placeholder="تفاصيل المنتج"></textarea></div>
-                </div>
-                <div style="display:flex;gap:9px;flex-wrap:wrap; margin-top:15px;">
-                    <button type="submit" id="saveBtn">حفظ المنتج</button>
-                    <button type="button" class="secondary" onclick="resetForm()">إلغاء التعديل</button>
-                    <button type="button" class="danger" onclick="logout()">تسجيل الخروج</button>
-                </div>
-            </form>
-            <h3 style="margin-top:25px;">المنتجات المضافة</h3>
-            <div class="adminlist" id="adminList"></div>
-        </div>
-    </div>
-</div>
-
-<!-- نافذة السلة -->
-<div class="modal" id="cartModal">
-    <div class="modalbox">
-        <div class="modalhead">
-            <h2>سلة الطلبات</h2>
-            <button class="close" onclick="closeModal('cartModal')">✕</button>
-        </div>
-        <div id="cartContent"></div>
-    </div>
-</div>
-
-<!-- نافذة إتمام الطلب -->
-<div class="modal" id="checkoutModal">
-    <div class="modalbox">
-        <div class="modalhead">
-            <h2>بيانات الطلب</h2>
-            <button class="close" onclick="closeModal('checkoutModal')">✕</button>
-        </div>
-        <form onsubmit="sendOrder(event)">
-            <div class="formgrid">
-                <div class="formrow"><label>الاسم بالكامل</label><input id="customerName" required maxlength="100"></div>
-                <div class="formrow"><label>رقم الموبايل</label><input id="customerPhone" required type="tel" maxlength="25"></div>
-                <div class="formrow full"><label>العنوان بالتفصيل</label><textarea id="customerAddress" required rows="3" maxlength="500"></textarea></div>
-                <div class="formrow full"><label>ملاحظات (اختياري)</label><textarea id="customerNotes" rows="2" maxlength="500"></textarea></div>
-            </div>
-            <p style="color:var(--muted);font-size:13px; margin:15px 0;">بعد الضغط على إرسال الطلب، هيفتح واتساب على رقم MARNONA برسالة فيها بياناتك والمنتجات والإجمالي.</p>
-            <button type="submit">إرسال الطلب على واتساب</button>
-        </form>
-    </div>
-</div>
-
+<div class="modal" id="adminModal"><div class="modalbox"><div class="modalhead"><h2>لوحة تحكم MARNONA</h2><button class="close" onclick="closeModal('adminModal')">✕</button></div>
+<div id="loginPane"><p style="color:var(--muted)">سجّل الدخول لإضافة المنتجات وتعديلها.</p><div class="formrow"><label>اسم المستخدم</label><input id="username" autocomplete="username" placeholder="اسم المستخدم (مرنونا)"></div><div class="formrow"><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" placeholder="كلمة المرور (112233)"></div><button onclick="login()">دخول</button><p id="loginError" style="color:#ff7890"></p></div>
+<div id="dashboard" class="hidden">
+<form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="formgrid">
+<div class="formrow full"><label>صورة المنتج (من جهازك)</label><input id="imageFile" type="file" accept="image/*"><div id="imagePreview" class="hidden" style="margin-top:10px"><img id="previewImg" style="max-width:150px;max-height:150px;object-fit:contain;border-radius:8px"></div></div>
+<div class="formrow"><label>اسم المنتج</label><input id="productName" required maxlength="100" placeholder="اسم المنتج"></div>
+<div class="formrow"><label>السعر بالجنيه المصري</label><input id="productPrice" type="number" min="0" step="0.01" required placeholder="مثال: 250"></div>
+<div class="formrow full"><label>الوصف</label><textarea id="productDesc" rows="3" maxlength="1000" placeholder="تفاصيل المنتج"></textarea></div>
+</div><div style="display:flex;gap:9px;flex-wrap:wrap"><button type="submit" id="saveBtn">حفظ المنتج</button><button type="button" class="secondary" onclick="resetForm()">إلغاء التعديل</button><button type="button" class="danger" onclick="logout()">تسجيل الخروج</button></div></form>
+<h3>المنتجات المضافة</h3><div class="adminlist" id="adminList"></div><button class="secondary" style="margin-top:14px" onclick="exportProducts()">تصدير نسخة احتياطية للمنتجات</button><div class="formrow" style="margin-top:12px"><label>استيراد نسخة احتياطية</label><input id="importFile" type="file" accept=".json,application/json" onchange="importProducts(event)"></div>
+</div></div></div>
+<div class="modal" id="cartModal"><div class="modalbox"><div class="modalhead"><h2>سلة الطلبات</h2><button class="close" onclick="closeModal('cartModal')">✕</button></div><div id="cartContent"></div></div></div>
+<div class="modal" id="checkoutModal"><div class="modalbox"><div class="modalhead"><h2>بيانات الطلب</h2><button class="close" onclick="closeModal('checkoutModal')">✕</button></div><form onsubmit="sendOrder(event)"><div class="formgrid"><div class="formrow"><label>الاسم بالكامل</label><input id="customerName" required maxlength="100"></div><div class="formrow"><label>رقم الموبايل</label><input id="customerPhone" required type="tel" maxlength="25"></div><div class="formrow full"><label>العنوان بالتفصيل</label><textarea id="customerAddress" required rows="3" maxlength="500"></textarea></div><div class="formrow full"><label>ملاحظات (اختياري)</label><textarea id="customerNotes" rows="2" maxlength="500"></textarea></div></div><p style="color:var(--muted);font-size:13px">بعد الضغط على إرسال الطلب، هيفتح واتساب على رقم MARNONA برسالة فيها بياناتك والمنتجات والإجمالي. راجع الرسالة واضغط إرسال داخل واتساب.</p><button type="submit">إرسال الطلب على واتساب</button></form></div></div>
 <script>
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_products_floukaa_v7';
-const CART_KEY='marnona_cart_v7';
+const PRODUCTS_KEY='marnona_products_floukaa_v8';
+const CART_KEY='marnona_cart_v8';
 let products=[],cart={},currentImage='',loggedIn=false;
 const $=id=>document.getElementById(id);
 
@@ -161,22 +89,20 @@ function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','
 function money(n){return new Intl.NumberFormat('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2}).format(Number(n)||0)}
 function renderProducts(){const q=$('search').value.trim().toLowerCase();const list=products.filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q));$('productGrid').innerHTML=list.length?list.map(p=>`<article class="product">${p.image?`<img src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy">`:`<div class="placeholder">MARNONA</div>`}<div class="pbody"><h3>${escapeHtml(p.name)}</h3><div class="desc">${escapeHtml(p.desc||'')}</div><div class="price">${money(p.price)}</div><button onclick="addToCart('${p.id}')">أضف للسلة</button></div></article>`).join(''):'<div class="empty">لسه مفيش منتجات مضافة.</div>'}
 
-function openModal(id){$(id).classList.add('active')}
-function closeModal(id){$(id).classList.remove('active')}
+function openModal(id){$(id).classList.add('open')}
+function closeModal(id){$(id).classList.remove('open')}
 
 function openAdmin(){
-    $('adminModal').classList.add('active');
-    $('loginPane').classList.toggle('hidden', loggedIn);
-    $('dashboard').classList.toggle('hidden', !loggedIn);
+    $('adminModal').classList.add('open');
+    $('loginPane').classList.toggle('hidden', loggedIn);$('dashboard').classList.toggle('hidden', !loggedIn);
     if(loggedIn) renderAdmin();
 }
 
 function login(){
-    if($('username').value===ADMIN_USER && $('password').value===ADMIN_PASS){
+    if($('username').value===ADMIN_USER &&$('password').value===ADMIN_PASS){
         loggedIn=true;
         $('loginError').textContent='';
-        $('loginPane').classList.add('hidden');
-        $('dashboard').classList.remove('hidden');
+        $('loginPane').classList.add('hidden');$('dashboard').classList.remove('hidden');
         renderAdmin();
     }else{
         $('loginError').textContent='اسم المستخدم أو كلمة المرور غير صحيحة.';
@@ -185,18 +111,18 @@ function login(){
 function logout(){loggedIn=false;$('username').value='';$('password').value='';$('dashboard').classList.add('hidden');$('loginPane').classList.remove('hidden')}
 function renderAdmin(){$('adminList').innerHTML=products.length?products.map(p=>`<div class="adminitem">${p.image?`<img src="${p.image}" alt="">`:`<div class="placeholder" style="width:54px;height:54px;font-size:12px">M</div>`}<div class="info"><strong>${escapeHtml(p.name)}</strong><small>${money(p.price)}</small></div><button class="secondary" onclick="editProduct('${p.id}')">تعديل</button><button class="danger" onclick="deleteProduct('${p.id}')">حذف</button></div>`).join(''):'<p style="color:var(--muted)">لا توجد منتجات حتى الآن.</p>'}
 $('imageFile').addEventListener('change',()=>{const file=$('imageFile').files[0];if(!file){return}if(!file.type.startsWith('image/')){alert('اختار ملف صورة صحيح.');return}const r=new FileReader();r.onload=()=>{const source=new Image();source.onload=()=>{const maxSide=1000,scale=Math.min(1,maxSide/Math.max(source.width,source.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(source.width*scale));canvas.height=Math.max(1,Math.round(source.height*scale));const ctx=canvas.getContext('2d');ctx.drawImage(source,0,0,canvas.width,canvas.height);currentImage=canvas.toDataURL('image/jpeg',0.72);$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')};source.onerror=()=>alert('مش قادر أقرأ الصورة، جرّب صورة تانية.');source.src=r.result};r.readAsDataURL(file)});
-function saveProduct(e){e.preventDefault();if(!loggedIn)return;const id=$('editId').value||('p'+Date.now());const old=products.find(p=>p.id===id);const p={id,name:$('productName').value.trim(),price:Number($('productPrice').value),desc:$('productDesc').value.trim(),image:currentImage||old?.image||''};if(!p.name||!Number.isFinite(p.price)||p.price<0){alert('راجع اسم المنتج والسعر.');return}if(old)products=products.map(x=>x.id===id?p:x);else products.unshift(p);saveData();resetForm();renderProducts();renderAdmin()}
-function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;$('editId').value=p.id;$('productName').value=p.name;$('productPrice').value=p.price;$('productDesc').value=p.desc||'';currentImage=p.image||'';if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}else $('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ التعديلات';$('productForm').scrollIntoView({behavior:'smooth'})}
+function saveProduct(e){e.preventDefault();if(!loggedIn)return;const id=$('editId').value\vert{}\vert{}('p'+Date.now());const old=products.find(p=>p.id===id);const p={id,name:$('productName').value.trim(),price:Number($('productPrice').value),desc:$('productDesc').value.trim(),image:currentImage||old?.image||''};if(!p.name||!Number.isFinite(p.price)||p.price<0){alert('راجع اسم المنتج والسعر.');return}if(old)products=products.map(x=>x.id===id?p:x);else products.unshift(p);saveData();resetForm();renderProducts();renderAdmin()}
+function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;$('editId').value=p.id;$('productName').value=p.name;$('productPrice').value=p.price;$('productDesc').value=p.desc\vert{}\vert{}'';currentImage=p.image\vert{}\vert{}'';if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}else$('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ التعديلات';$('productForm').scrollIntoView({behavior:'smooth'})}
 function resetForm(){$('productForm').reset();$('editId').value='';currentImage='';$('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ المنتج'}
 function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm('متأكد إنك عايز تحذف المنتج ده؟'))return;products=products.filter(x=>x.id!==id);delete cart[id];saveData();renderProducts();renderAdmin();renderCart()}
 function addToCart(id){cart[id]=(cart[id]||0)+1;saveData();updateCartCount();alert('اتضاف للسلة');}
 function updateCartCount(){$('cartCount').textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
 function cartRows(){return Object.entries(cart).map(([id,qty])=>({p:products.find(p=>p.id===id),qty})).filter(x=>x.p&&x.qty>0)}
-function renderCart(){const rows=cartRows();if(!rows.length){$('cartContent').innerHTML='<div class="empty">السلة فاضية. اختار المنتجات الأول.</div>';return}let total=0;$('cartContent').innerHTML='<div class="cartitems">'+rows.map(({p,qty})=>{total+=p.price*qty;return `<div class="cartitem"><div><strong>${escapeHtml(p.name)}</strong><br><small>${money(p.price)} ×${qty}</small></div><div class="qty"><button class="secondary" onclick="changeQty('${p.id}',1)">+</button><span>${qty}</span><button class="secondary" onclick="changeQty('${p.id}',-1)">−</button></div></div>`}).join('')+'</div><div class="total"><span>الإجمالي</span><span>'+money(total)+'</span></div><button style="width:100%" onclick="openCheckout()">إكمال الطلب</button>'}
+function renderCart(){const rows=cartRows();if(!rows.length){$('cartContent').innerHTML='<div class="empty">السلة فاضية. اختار المنتجات الأول.</div>';return}let total=0;$('cartContent').innerHTML='<div class="cartitems">'+rows.map(({p,qty})=>{total+=p.price*qty;return `<div class="cartitem"><div><strong>${escapeHtml(p.name)}</strong><br><small>${money(p.price)} × ${qty}</small></div><div class="qty"><button class="secondary" onclick="changeQty('${p.id}',1)">+</button><span>${qty}</span><button class="secondary" onclick="changeQty('${p.id}',-1)">−</button></div></div>`}).join('')+'</div><div class="total"><span>الإجمالي</span><span>'+money(total)+'</span></div><button style="width:100%" onclick="openCheckout()">إكمال الطلب</button>'}
 function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];saveData();updateCartCount();renderCart()}
 function openCart(){renderCart();openModal('cartModal')}
 function openCheckout(){if(!cartRows().length){alert('السلة فاضية');return}closeModal('cartModal');openModal('checkoutModal')}
-function sendOrder(e){e.preventDefault();const rows=cartRows();if(!rows.length){alert('السلة فاضية');return}const name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim(),notes=$('customerNotes').value.trim();let total=0;const items=rows.map(({p,qty})=>{total+=p.price*qty;return `• ${p.name} — عدد ${qty} × ${money(p.price)} =${money(p.price*qty)}`}).join('\n');const msg=`طلب جديد من متجر MARNONA\n\nالاسم: ${name}\nرقم الموبايل: ${phone}\nالعنوان: ${address}\n\nالمنتجات:\n${items}\n\nالإجمالي: `${money(total)}\n${notes?'ملاحظات: '+notes+'\n':''}\nبرجاء تأكيد الطلب والتوصيل.`;window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener');}
+function sendOrder(e){e.preventDefault();const rows=cartRows();if(!rows.length){alert('السلة فاضية');return}const name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim(),notes=$('customerNotes').value.trim();let total=0;const items=rows.map(({p,qty})=>{total+=p.price*qty;return `• ${p.name} — عدد ${qty} × ${money(p.price)} = ${money(p.price*qty)}`}).join('\n');const msg=`طلب جديد من متجر MARNONA\n\nالاسم: ${name}\nرقم الموبايل: ${phone}\nالعنوان: ${address}\n\nالمنتجات:\n${items}\n\nالإجمالي: ${money(total)}\n${notes?'ملاحظات: '+notes+'\n':''}\nبرجاء تأكيد الطلب والتوصيل.`;window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener');}
 
 loadData();renderProducts();updateCartCount();$('year').textContent=new Date().getFullYear();
 </script>
