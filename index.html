@@ -34,12 +34,12 @@
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_products_floukaa_v3'; // مفتاح جديد عشان يتحدث غصب عن المتصفح
-const CART_KEY='marnona_cart_v3';
+const PRODUCTS_KEY='marnona_products_floukaa_v4'; // مفتاح جديد تماماً لإجبار التحميل
+const CART_KEY='marnona_cart_v4';
 let products=[],cart={},currentImage='',loggedIn=false;
 const $=id=>document.getElementById(id);
 
-// منتجات فلوكا الأصلية بالأسعار والبيانات
+// منتجات فلوكا الأصلية التي ستظهر فوراً بدون شروط
 const defaultProducts = [
     {
         id: 'p1',
@@ -65,17 +65,10 @@ const defaultProducts = [
 ];
 
 function loadData(){
-    // فرض المنتجات الافتراضية مباشرة لضمان ظهورها
+    // إجبار النظام على اعتماد منتجات فلوكا فوراً
     products = defaultProducts;
-    try{
-        const saved = localStorage.getItem(PRODUCTS_KEY);
-        if(saved){
-            const parsed = JSON.parse(saved);
-            if(parsed && parsed.length > 0) products = parsed;
-        } else {
-            localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
-        }
-    }catch(e){}
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(defaultProducts));
+    
     try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
 }
 function saveData(){try{localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){alert('مساحة التخزين في المتصفح لا تكفي.');}}
