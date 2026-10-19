@@ -34,12 +34,12 @@
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_products_floukaa_v2';
-const CART_KEY='marnona_cart_v2';
+const PRODUCTS_KEY='marnona_products_floukaa_v3'; // مفتاح جديد عشان يتحدث غصب عن المتصفح
+const CART_KEY='marnona_cart_v3';
 let products=[],cart={},currentImage='',loggedIn=false;
 const $=id=>document.getElementById(id);
 
-// منتجات فلوكا بالأسعار والبيانات الأصلية المطلوبة
+// منتجات فلوكا الأصلية بالأسعار والبيانات
 const defaultProducts = [
     {
         id: 'p1',
@@ -65,17 +65,17 @@ const defaultProducts = [
 ];
 
 function loadData(){
+    // فرض المنتجات الافتراضية مباشرة لضمان ظهورها
+    products = defaultProducts;
     try{
         const saved = localStorage.getItem(PRODUCTS_KEY);
         if(saved){
-            products = JSON.parse(saved);
+            const parsed = JSON.parse(saved);
+            if(parsed && parsed.length > 0) products = parsed;
         } else {
-            products = defaultProducts;
             localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
         }
-    }catch(e){
-        products = defaultProducts;
-    }
+    }catch(e){}
     try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
 }
 function saveData(){try{localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){alert('مساحة التخزين في المتصفح لا تكفي.');}}
@@ -101,8 +101,8 @@ function openCart(){renderCart();openModal('cartModal')}
 function openCheckout(){if(!cartRows().length){alert('السلة فاضية');return}closeModal('cartModal');openModal('checkoutModal')}
 function sendOrder(e){e.preventDefault();const rows=cartRows();if(!rows.length){alert('السلة فاضية');return}const name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim(),notes=$('customerNotes').value.trim();let total=0;const items=rows.map(({p,qty})=>{total+=p.price*qty;return `• ${p.name} — عدد ${qty} × ${money(p.price)} = ${money(p.price*qty)}`}).join('\n');const msg=`طلب جديد من متجر MARNONA\n\nالاسم: ${name}\nرقم الموبايل: ${phone}\nالعنوان: ${address}\n\nالمنتجات:\n${items}\n\nالإجمالي: ${money(total)}\n${notes?'ملاحظات: '+notes+'\n':''}\nبرجاء تأكيد الطلب والتوصيل.`;window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener');}
 function exportProducts(){const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='marnona-products-backup.json';a.click();URL.revokeObjectURL(a.href)}
-function importProducts(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw new Error();products=data.filter(p=>p&&p.id&&p.name&&Number.isFinite(Number(p.price)));saveData();renderProducts();renderadmin();alert('تم استيراد المنتجات.')}catch(err){alert('ملف النسخة الاحتياطية غير صالح.')}e.target.value=''};r.readAsText(file)}
-loadData();renderProducts();updateCartCount();$('year').nationality && ($('year').textContent=new Date().getFullYear());$('year').textContent=new Date().getFullYear();
+function importProducts(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw new Error();products=data.filter(p=>p&&p.id&&p.name&&Number.isFinite(Number(p.price)));saveData();renderProducts();renderAdmin();alert('تم استيراد المنتجات.')}catch(err){alert('ملف النسخة الاحتياطية غير صالح.')}e.target.value=''};r.readAsText(file)}
+loadData();renderProducts();updateCartCount();$('year').textContent=new Date().getFullYear();
 </script>
 </body>
 </html>
