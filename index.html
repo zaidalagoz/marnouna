@@ -34,12 +34,11 @@
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_products_floukaa_v4'; // مفتاح جديد تماماً لإجبار التحميل
-const CART_KEY='marnona_cart_v4';
+const PRODUCTS_KEY='marnona_products_floukaa_v5';
+const CART_KEY='marnona_cart_v5';
 let products=[],cart={},currentImage='',loggedIn=false;
 const $=id=>document.getElementById(id);
 
-// منتجات فلوكا الأصلية التي ستظهر فوراً بدون شروط
 const defaultProducts = [
     {
         id: 'p1',
@@ -65,10 +64,16 @@ const defaultProducts = [
 ];
 
 function loadData(){
-    // إجبار النظام على اعتماد منتجات فلوكا فوراً
     products = defaultProducts;
-    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(defaultProducts));
-    
+    try{
+        const saved = localStorage.getItem(PRODUCTS_KEY);
+        if(saved){
+            const parsed = JSON.parse(saved);
+            if(parsed && parsed.length > 0) products = parsed;
+        } else {
+            localStorage.setItem(PRODUCTS_KEY, JSON.stringify(defaultProducts));
+        }
+    }catch(e){}
     try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
 }
 function saveData(){try{localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){alert('مساحة التخزين في المتصفح لا تكفي.');}}
@@ -76,7 +81,14 @@ function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','
 function money(n){return new Intl.NumberFormat('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2}).format(Number(n)||0)}
 function renderProducts(){const q=$('search').value.trim().toLowerCase();const list=products.filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q));$('productGrid').innerHTML=list.length?list.map(p=>`<article class="product">${p.image?`<img src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy">`:`<div class="placeholder">MARNONA</div>`}<div class="pbody"><h3>${escapeHtml(p.name)}</h3><div class="desc">${escapeHtml(p.desc||'')}</div><div class="price">${money(p.price)}</div><button onclick="addToCart('${p.id}')">أضف للسلة</button></div></article>`).join(''):'<div class="empty">لسه مفيش منتجات مضافة.</div>'}
 function openModal(id){$(id).classList.add('open')}function closeModal(id){$(id).classList.remove('open')}
-function openAdmin(){openModal('adminModal');$('loginPane').classList.toggle('hidden',loggedIn);$('dashboard').classList.toggle('hidden',!loggedIn);if(loggedIn)renderAdmin()}
+
+// دالة فتح لوحة التحكم المحسنة والمضمونة
+function openAdmin(){
+    openModal('adminModal');
+    $('loginPane').classList.toggle('hidden', loggedIn);$('dashboard').classList.toggle('hidden', !loggedIn);
+    if(loggedIn) renderAdmin();
+}
+
 function login(){if($('username').value===ADMIN_USER&&$('password').value===ADMIN_PASS){loggedIn=true;$('loginError').textContent='';$('loginPane').classList.add('hidden');$('dashboard').classList.remove('hidden');renderAdmin()}else{$('loginError').textContent='اسم المستخدم أو كلمة المرور غير صحيحة.'}}
 function logout(){loggedIn=false;$('username').value='';$('password').value='';$('dashboard').classList.add('hidden');$('loginPane').classList.remove('hidden')}
 function renderAdmin(){$('adminList').innerHTML=products.length?products.map(p=>`<div class="adminitem">${p.image?`<img src="${p.image}" alt="">`:`<div class="placeholder" style="width:54px;height:54px;font-size:12px">M</div>`}<div class="info"><strong>${escapeHtml(p.name)}</strong><small>${money(p.price)}</small></div><button class="secondary" onclick="editProduct('${p.id}')">تعديل</button><button class="danger" onclick="deleteProduct('${p.id}')">حذف</button></div>`).join(''):'<p style="color:var(--muted)">لا توجد منتجات حتى الآن.</p>'}
