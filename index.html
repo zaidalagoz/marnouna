@@ -68,7 +68,6 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 
 <header class="nav">
   <div class="logo-area">
-    <!-- صورة اللوجو (ارفع صورة اللوجو باسم logo.jpg في نفس المجلد) -->
     <img src="logo.jpg" alt="مرنونا">
     <div class="logo">MARNONA</div>
   </div>
@@ -181,9 +180,9 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
+const PRODUCTS_KEY='marnona_local_backup_v1';
 const CART_KEY='marnona_cart_v3';
 
-// إعدادات السحابة الخاصة بك
 const BIN_ID='6ad949effd5d160538104bf';
 const API_KEY='$2a$10$ZrCgl24HkcyDTzB16qaPXOMdwc9lUo1jYwU9CX/YgH18WrIA4SwQO';
 
@@ -192,16 +191,29 @@ const $=id=>document.getElementById(id);
 
 async function loadData(){
   try{
+    const localData = localStorage.getItem(PRODUCTS_KEY);
+    if(localData){
+      products = JSON.parse(localData);
+      renderProducts();
+    }
+  }catch(e){}
+
+  try{
     const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
       headers: { 'X-Master-Key': API_KEY }
     });
     if(res.ok){
       const data = await res.json();
-      products = data.record?.products || [];
+      const cloudProducts = data.record?.products || [];
+      if(cloudProducts.length > 0 || products.length === 0){
+        products = cloudProducts;
+        localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+      }
     }
   }catch(e){
-    products = [];
+    console.log('Using local fallback');
   }
+  
   try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
   renderProducts();
   updateCartCount();
@@ -209,6 +221,7 @@ async function loadData(){
 
 async function syncToCloud(){
   try{
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
     await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
       method: 'PUT',
       headers: {
@@ -288,7 +301,7 @@ async function saveProduct(e){
   resetForm();
   renderProducts();
   renderAdmin();
-  alert('تم حفظ المنتج سحابياً بنجاح ويظهر الآن للجميع! 💕');
+  alert('تم حفظ المنتج وتحديثه للجميع بنجاح! 💕');
 }
 
 function editProduct(id){
