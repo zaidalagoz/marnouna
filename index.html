@@ -9,6 +9,7 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 20px;background:var(--pink);color:white;font-weight:bold;transition:0.2s}button:hover{background:var(--pink-dark)}.secondary{background:transparent;border:1px solid var(--line);color:var(--text)}.secondary:hover{background:var(--panel2)}.top{background:var(--pink);text-align:center;padding:10px;color:white;font-size:13px;font-weight:bold}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(12px);z-index:4}
 .logo-area{display:flex;align-items:center;gap:10px}
+.logo-area img{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid var(--pink)}
 .logo{font-family:Georgia,serif;font-weight:bold;font-size:28px;color:var(--pink-dark);letter-spacing:1px}
 .navlinks{display:flex;gap:15px;align-items:center}.navlinks a{color:var(--text);text-decoration:none;font-size:14px;font-weight:bold}.navlinks a:hover{color:var(--pink)}
 .hero{min-height:360px;display:grid;place-items:center;text-align:center;padding:50px 20px;background:linear-gradient(135deg, #ffe3ec 0%, #fff5f8 100%);border-bottom:1px solid var(--line)}
@@ -67,6 +68,8 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 
 <header class="nav">
   <div class="logo-area">
+    <!-- صورة اللوجو (ارفع صورة اللوجو باسم logo.jpg في نفس المجلد) -->
+    <img src="logo.jpg" alt="مرنونا">
     <div class="logo">MARNONA</div>
   </div>
   <nav class="navlinks">
@@ -180,7 +183,7 @@ const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
 const CART_KEY='marnona_cart_v3';
 
-// إعدادات سحابية لربط JSONBin أوتوماتيك
+// إعدادات السحابة الخاصة بك
 const BIN_ID='6ad949effd5d160538104bf';
 const API_KEY='$2a$10$ZrCgl24HkcyDTzB16qaPXOMdwc9lUo1jYwU9CX/YgH18WrIA4SwQO';
 
@@ -223,7 +226,7 @@ function saveCartLocal(){
   try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){}
 }
 
-function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;P'}[c]))}
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function money(n){return new Intl.NumberFormat('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2}).format(Number(n)||0)}
 
 function renderProducts(){
