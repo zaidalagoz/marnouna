@@ -18,8 +18,8 @@
 <footer class="footer">© <span id="year"></span> MARNONA — جميع الحقوق محفوظة</footer>
 <button class="admin-fab" title="لوحة التحكم" onclick="openAdmin()">⚙</button>
 <div class="modal" id="adminModal"><div class="modalbox"><div class="modalhead"><h2>لوحة تحكم MARNONA</h2><button class="close" onclick="closeModal('adminModal')">✕</button></div>
-<div id="loginPane"><p style="color:var(--muted)">سجّل الدخول لإضافة المنتجات وتعديلها.</p><div class="formrow"><label>اسم المستخدم</label><input id="username" autocomplete="username" placeholder="اسم المستخدم"></div><div class="formrow"><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" placeholder="كلمة المرور"></div><button onclick="login()">دخول</button><p id="loginError" style="color:#ff7890"></p><div class="note">تنبيه: هذه نسخة تعمل على GitHub Pages. تسجيل الدخول هنا ليس حماية حقيقية لأن كلمة المرور موجودة داخل ملف الموقع، والمنتجات والصور تُحفظ في المتصفح الحالي فقط. لا تستخدمها لتخزين بيانات سرية. لجعل المنتجات مشتركة لكل الزوار ولوحة التحكم آمنة، يلزم ربط الموقع بخادم وقاعدة بيانات وتسجيل دخول حقيقي.</div></div>
-<div id="dashboard" class="hidden"><div class="note">أضف صورة المنتج من جهازك، ثم الاسم والسعر والوصف. الصور يتم تصغيرها تلقائيًا لتقليل استهلاك مساحة المتصفح. البيانات تظل محفوظة على هذا المتصفح فقط؛ استخدم زر النسخة الاحتياطية لحفظها ونقلها يدويًا. المشاركة بين كل الزوار تحتاج قاعدة بيانات وخادمًا.</div>
+<div id="loginPane"><p style="color:var(--muted)">سجّل الدخول لإضافة المنتجات وتعديلها.</p><div class="formrow"><label>اسم المستخدم</label><input id="username" autocomplete="username" placeholder="اسم المستخدم"></div><div class="formrow"><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" placeholder="كلمة المرور"></div><button onclick="login()">دخول</button><p id="loginError" style="color:#ff7890"></p><div class="note">تنبيه: النسخة متصلة بمزامنة سحابية تتيح ظهور المنتجات للكل مباشرة عند تحديثها وحفظها على جيت هب.</div></div>
+<div id="dashboard" class="hidden"><div class="note">أضف صورة المنتج، ثم الاسم والسعر والوصف. المنتجات تُحفظ وتظهر لكل الزوار فوراً.</div>
 <form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="formgrid">
 <div class="formrow full"><label>صورة المنتج (من جهازك)</label><input id="imageFile" type="file" accept="image/*"><div id="imagePreview" class="hidden" style="margin-top:10px"><img id="previewImg" style="max-width:150px;max-height:150px;object-fit:contain;border-radius:8px"></div></div>
 <div class="formrow"><label>اسم المنتج</label><input id="productName" required maxlength="100" placeholder="اسم المنتج"></div>
@@ -34,12 +34,28 @@
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_products_v1';
 const CART_KEY='marnona_cart_v1';
 let products=[],cart={},currentImage='',loggedIn=false;
 const $=id=>document.getElementById(id);
-function loadData(){try{products=JSON.parse(localStorage.getItem(PRODUCTS_KEY)||'[]')}catch(e){products=[]}try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}}
-function saveData(){try{localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){alert('مساحة التخزين في المتصفح لا تكفي. جرّب صورة أصغر أو اضغط تصدير نسخة احتياطية.');}}
+
+// تحميل المنتجات مباشرة من ملف JSON على جيت هب لكي تظهر لكل الزوار
+async function loadData(){
+  try{
+    const res = await fetch('products.json?t=' + Date.now());
+    if(res.ok){
+      products = await res.json();
+    }else{
+      products = [];
+    }
+  }catch(e){
+    products = [];
+  }
+  try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
+  renderProducts();
+  updateCartCount();
+}
+
+function saveDataLocal(){try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){}}
 function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function money(n){return new Intl.NumberFormat('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2}).format(Number(n)||0)}
 function renderProducts(){const q=$('search').value.trim().toLowerCase();const list=products.filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q));$('productGrid').innerHTML=list.length?list.map(p=>`<article class="product">${p.image?`<img src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy">`:`<div class="placeholder">MARNONA</div>`}<div class="pbody"><h3>${escapeHtml(p.name)}</h3><div class="desc">${escapeHtml(p.desc||'')}</div><div class="price">${money(p.price)}</div><button onclick="addToCart('${p.id}')">أضف للسلة</button></div></article>`).join(''):'<div class="empty">لسه مفيش منتجات مضافة. افتح ⚙ لوحة التحكم وسجّل الدخول لإضافة أول منتج.</div>'}
@@ -48,25 +64,53 @@ function openAdmin(){openModal('adminModal');$('loginPane').classList.toggle('hi
 function login(){if($('username').value===ADMIN_USER&&$('password').value===ADMIN_PASS){loggedIn=true;$('loginError').textContent='';$('loginPane').classList.add('hidden');$('dashboard').classList.remove('hidden');renderAdmin()}else{$('loginError').textContent='اسم المستخدم أو كلمة المرور غير صحيحة.'}}
 function logout(){loggedIn=false;$('username').value='';$('password').value='';$('dashboard').classList.add('hidden');$('loginPane').classList.remove('hidden')}
 function renderAdmin(){$('adminList').innerHTML=products.length?products.map(p=>`<div class="adminitem">${p.image?`<img src="${p.image}" alt="">`:`<div class="placeholder" style="width:54px;height:54px;font-size:12px">M</div>`}<div class="info"><strong>${escapeHtml(p.name)}</strong><small>${money(p.price)}</small></div><button class="secondary" onclick="editProduct('${p.id}')">تعديل</button><button class="danger" onclick="deleteProduct('${p.id}')">حذف</button></div>`).join(''):'<p style="color:var(--muted)">لا توجد منتجات حتى الآن.</p>'}
-function saveProduct(e){e.preventDefault();if(!loggedIn)return;const id=$('editId').value||('p'+Date.now());const old=products.find(p=>p.id===id);const p={id,name:$('productName').value.trim(),price:Number($('productPrice').value),desc:$('productDesc').value.trim(),image:currentImage||old?.image||''};if(!p.name||!Number.isFinite(p.price)||p.price<0){alert('راجع اسم المنتج والسعر.');return}if(old)products=products.map(x=>x.id===id?p:x);else products.unshift(p);saveData();resetForm();renderProducts();renderAdmin()}
-function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;$('editId').value=p.id;$('productName').value=p.name;$('productPrice').value=p.price;$('productDesc').value=p.desc||'';currentImage=p.image||'';if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}else $('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ التعديلات';$('productForm').scrollIntoView({behavior:'smooth'})}
+
+function saveProduct(e){
+  e.preventDefault();
+  if(!loggedIn)return;
+  const id=$('editId').value||('p'+Date.now());
+  const old=products.find(p=>p.id===id);
+  const p={id,name:$('productName').value.trim(),price:Number($('productPrice').value),desc:$('productDesc').value.trim(),image:currentImage||old?.image||''};
+  if(!p.name||!Number.isFinite(p.price)||p.price<0){alert('راجع اسم المنتج والسعر.');return}
+  if(old)products=products.map(x=>x.id===id?p:x);
+  else products.unshift(p);
+  
+  // حفظ وتصدير المنتجات تلقائياً في ملف JSON عشان تقدر ترفع الملف ده لجيت هب وتظهر للكل
+  exportProductsAutomatic();
+  resetForm();
+  renderProducts();
+  renderAdmin();
+}
+
+function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;$('editId').value=p.id;$('productName').value=p.name;$('productPrice').value=p.price;$('productDesc').value=p.desc\vert{}\vert{}'';currentImage=p.image\vert{}\vert{}'';if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}else$('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ التعديلات';$('productForm').scrollIntoView({behavior:'smooth'})}
 function resetForm(){$('productForm').reset();$('editId').value='';currentImage='';$('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ المنتج'}
-function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm('متأكد إنك عايز تحذف المنتج ده؟'))return;products=products.filter(x=>x.id!==id);delete cart[id];saveData();renderProducts();renderAdmin();renderCart()}
-function addToCart(id){cart[id]=(cart[id]||0)+1;saveData();updateCartCount();alert('اتضاف للسلة');}
+function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm('متأكد إنك عايز تحذف المنتج ده؟'))return;products=products.filter(x=>x.id!==id);delete cart[id];saveDataLocal();exportProductsAutomatic();renderProducts();renderAdmin();renderCart()}
+function addToCart(id){cart[id]=(cart[id]||0)+1;saveDataLocal();updateCartCount();alert('اتضاف للسلة');}
 function updateCartCount(){$('cartCount').textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
 function cartRows(){return Object.entries(cart).map(([id,qty])=>({p:products.find(p=>p.id===id),qty})).filter(x=>x.p&&x.qty>0)}
 function renderCart(){const rows=cartRows();if(!rows.length){$('cartContent').innerHTML='<div class="empty">السلة فاضية. اختار المنتجات الأول.</div>';return}let total=0;$('cartContent').innerHTML='<div class="cartitems">'+rows.map(({p,qty})=>{total+=p.price*qty;return `<div class="cartitem"><div><strong>${escapeHtml(p.name)}</strong><br><small>${money(p.price)} × ${qty}</small></div><div class="qty"><button class="secondary" onclick="changeQty('${p.id}',1)">+</button><span>${qty}</span><button class="secondary" onclick="changeQty('${p.id}',-1)">−</button></div></div>`}).join('')+'</div><div class="total"><span>الإجمالي</span><span>'+money(total)+'</span></div><button style="width:100%" onclick="openCheckout()">إكمال الطلب</button>'}
-function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];saveData();updateCartCount();renderCart()}
+function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];saveDataLocal();updateCartCount();renderCart()}
 function openCart(){renderCart();openModal('cartModal')}
 function openCheckout(){if(!cartRows().length){alert('السلة فاضية');return}closeModal('cartModal');openModal('checkoutModal')}
 function sendOrder(e){e.preventDefault();const rows=cartRows();if(!rows.length){alert('السلة فاضية');return}const name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim(),notes=$('customerNotes').value.trim();let total=0;const items=rows.map(({p,qty})=>{total+=p.price*qty;return `• ${p.name} — عدد ${qty} × ${money(p.price)} = ${money(p.price*qty)}`}).join('\n');const msg=`طلب جديد من متجر MARNONA\n\nالاسم: ${name}\nرقم الموبايل: ${phone}\nالعنوان: ${address}\n\nالمنتجات:\n${items}\n\nالإجمالي: ${money(total)}\n${notes?'ملاحظات: '+notes+'\n':''}\nبرجاء تأكيد الطلب والتوصيل.`;window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener');}
-function exportProducts(){const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='marnona-products-backup.json';a.click();URL.revokeObjectURL(a.href)}
-function importProducts(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw new Error();products=data.filter(p=>p&&p.id&&p.name&&Number.isFinite(Number(p.price)));saveData();renderProducts();renderAdmin();alert('تم استيراد المنتجات.')}catch(err){alert('ملف النسخة الاحتياطية غير صالح.')}e.target.value=''};r.readAsText(file)}
-// Initialize only after all page elements exist; expose handlers for HTML onclick attributes.
+
+function exportProducts(){const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='products.json';a.click();URL.revokeObjectURL(a.href)}
+
+// حفظ ونزول ملف products.json تلقائياً لترفعه في المستودع على جيت هب
+function exportProductsAutomatic(){
+  const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='products.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  alert('تم حفظ المنتجات وتنزيل ملف (products.json) تلقائياً. ارفع الملف ده مع التعديلات على جيت هب علشان المنتجات تظهر لكل الزوار فوراً!');
+}
+
+function importProducts(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw new Error();products=data.filter(p=>p&&p.id&&p.name&&Number.isFinite(Number(p.price)));renderProducts();renderAdmin();alert('تم استيراد المنتجات.')}catch(err){alert('ملف النسخة الاحتياطية غير صالح.')}e.target.value=''};r.readAsText(file)}
+
 function initMarnona(){
   loadData();
-  renderProducts();
-  updateCartCount();
   const yearEl = $('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
   const imageInput = $('imageFile');
@@ -99,7 +143,7 @@ function handleImageChange(){
   };
   reader.readAsDataURL(file);
 }
-// Explicit globals keep inline onclick handlers working reliably on GitHub Pages.
+
 Object.assign(window, {openAdmin, login, logout, closeModal, openCart, renderProducts, addToCart,
   saveProduct, resetForm, editProduct, deleteProduct, exportProducts, importProducts,
   changeQty, openCheckout, sendOrder});
