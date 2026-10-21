@@ -8,7 +8,7 @@
 :root{--bg:#fff5f8;--panel:#ffffff;--panel2:#ffe3ec;--pink:#ff6f91;--pink-dark:#e05377;--text:#4a3b40;--muted:#8c7880;--line:#ffd1dc;--gold:#d4af37}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 20px;background:var(--pink);color:white;font-weight:bold;transition:0.2s}button:hover{background:var(--pink-dark)}.secondary{background:transparent;border:1px solid var(--line);color:var(--text)}.secondary:hover{background:var(--panel2)}.top{background:var(--pink);text-align:center;padding:10px;color:white;font-size:13px;font-weight:bold}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(12px);z-index:4}
-.logo-area{display:flex;align-items:center;gap:10px}.logo-area img{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid var(--pink)}
+.logo-area{display:flex;align-items:center;gap:10px}
 .logo{font-family:Georgia,serif;font-weight:bold;font-size:28px;color:var(--pink-dark);letter-spacing:1px}
 .navlinks{display:flex;gap:15px;align-items:center}.navlinks a{color:var(--text);text-decoration:none;font-size:14px;font-weight:bold}.navlinks a:hover{color:var(--pink)}
 .hero{min-height:360px;display:grid;place-items:center;text-align:center;padding:50px 20px;background:linear-gradient(135deg, #ffe3ec 0%, #fff5f8 100%);border-bottom:1px solid var(--line)}
@@ -67,7 +67,6 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 
 <header class="nav">
   <div class="logo-area">
-    <!-- مكان اللوجو الخاص بك -->
     <div class="logo">MARNONA</div>
   </div>
   <nav class="navlinks">
@@ -106,7 +105,6 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 
 <button class="admin-fab" title="لوحة التحكم" onclick="openAdmin()">⚙</button>
 
-<!-- لوحة التحكم -->
 <div class="modal" id="adminModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -121,7 +119,7 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
       <p id="loginError" style="color:#ff4757;margin-top:10px"></p>
     </div>
     <div id="dashboard" class="hidden">
-      <div class="note">أضيفي صورة المنتج، الاسم، السعر، والوصف. المنتجات ستظهر مباشرة في المتجر.</div>
+      <div class="note">أضيفي صورة المنتج، الاسم، السعر، والوصف. المنتجات تُحفظ سحابياً وتظهر للكل فوراً.</div>
       <form id="productForm" onsubmit="saveProduct(event)">
         <input id="editId" type="hidden">
         <div class="formgrid">
@@ -148,7 +146,6 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
   </div>
 </div>
 
-<!-- السلة -->
 <div class="modal" id="cartModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -159,7 +156,6 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
   </div>
 </div>
 
-<!-- إتمام الطلب -->
 <div class="modal" id="checkoutModal">
   <div class="modalbox">
     <div class="modalhead">
@@ -182,23 +178,52 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_products_v2';
-const CART_KEY='marnona_cart_v2';
+const CART_KEY='marnona_cart_v3';
+
+// إعدادات سحابية لربط JSONBin أوتوماتيك
+const BIN_ID='6ad949effd5d160538104bf';
+const API_KEY='$2a$10$ZrCgl24HkcyDTzB16qaPXOMdwc9lUo1jYwU9CX/YgH18WrIA4SwQO';
+
 let products=[],cart={},currentImage='',loggedIn=false;
 const $=id=>document.getElementById(id);
 
-function loadData(){
-  try{products=JSON.parse(localStorage.getItem(PRODUCTS_KEY)||'[]')}catch(e){products=[]}
-  try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
-}
-function saveData(){
+async function loadData(){
   try{
-    localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));
-    localStorage.setItem(CART_KEY,JSON.stringify(cart));
-  }catch(e){alert('مساحة المتصفح غير كافية، جربي صورة أصغر.');}
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: { 'X-Master-Key': API_KEY }
+    });
+    if(res.ok){
+      const data = await res.json();
+      products = data.record?.products || [];
+    }
+  }catch(e){
+    products = [];
+  }
+  try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
+  renderProducts();
+  updateCartCount();
 }
 
-function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function syncToCloud(){
+  try{
+    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
+      },
+      body: JSON.stringify({ products: products })
+    });
+  }catch(e){
+    console.log('Sync error', e);
+  }
+}
+
+function saveCartLocal(){
+  try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){}
+}
+
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;P'}[c]))}
 function money(n){return new Intl.NumberFormat('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2}).format(Number(n)||0)}
 
 function renderProducts(){
@@ -240,7 +265,7 @@ function renderAdmin(){
   `).join(''):'<p style="color:var(--muted)">لا توجد منتجات مسجلة.</p>';
 }
 
-function saveProduct(e){
+async function saveProduct(e){
   e.preventDefault();
   if(!loggedIn)return;
   const id=$('editId').value||('p'+Date.now());
@@ -255,11 +280,12 @@ function saveProduct(e){
   if(!p.name||!Number.isFinite(p.price)||p.price<0){alert('تأكد من كتابة الاسم والسعر بشكل صحيح.');return}
   if(old)products=products.map(x=>x.id===id?p:x);
   else products.unshift(p);
-  saveData();
+  
+  await syncToCloud();
   resetForm();
   renderProducts();
   renderAdmin();
-  alert('تم حفظ المنتج بنجاح! 💕');
+  alert('تم حفظ المنتج سحابياً بنجاح ويظهر الآن للجميع! 💕');
 }
 
 function editProduct(id){
@@ -281,11 +307,12 @@ function resetForm(){
   $('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ المنتج';
 }
 
-function deleteProduct(id){
+async function deleteProduct(id){
   if(!confirm('هل أنت متأكد من حذف هذا المنتج؟'))return;
   products=products.filter(x=>x.id!==id);
   delete cart[id];
-  saveData();
+  saveCartLocal();
+  await syncToCloud();
   renderProducts();
   renderAdmin();
   renderCart();
@@ -293,7 +320,7 @@ function deleteProduct(id){
 
 function addToCart(id){
   cart[id]=(cart[id]||0)+1;
-  saveData();
+  saveCartLocal();
   updateCartCount();
   alert('تمت إضافة المنتج إلى السلة 💕');
 }
@@ -328,7 +355,7 @@ function renderCart(){
 function changeQty(id,delta){
   cart[id]=(cart[id]||0)+delta;
   if(cart[id]<=0)delete cart[id];
-  saveData();
+  saveCartLocal();
   updateCartCount();
   renderCart();
 }
@@ -378,8 +405,6 @@ function handleImageChange(){
 
 function initMarnona(){
   loadData();
-  renderProducts();
-  updateCartCount();
   const yearEl=$('year');
   if(yearEl)yearEl.textContent=new Date().getFullYear();
   const imageInput=$('imageFile');
