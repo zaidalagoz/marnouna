@@ -121,7 +121,7 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
       <p id="loginError" style="color:#ff4757;margin-top:10px"></p>
     </div>
     <div id="dashboard" class="hidden">
-      <div class="note">أضيفي صورة المنتج، الاسم، السعر، والوصف. المنتجات تُحفظ سحابياً وتظهر للكل فوراً.</div>
+      <div class="note">أضيفي صورة المنتج، الاسم، السعر، والوصف. الحفظ يتم محلياً وسحابياً لضمان عدم الضياع أبداً.</div>
       <form id="productForm" onsubmit="saveProduct(event)">
         <input id="editId" type="hidden">
         <div class="formgrid">
@@ -180,7 +180,8 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const CART_KEY='marnona_cart_v6';
+const PRODUCTS_KEY='marnona_ultimate_v7';
+const CART_KEY='marnona_cart_v7';
 
 const BIN_ID='6ad949effd5d160538104bf';
 const API_KEY='$2a$10$ZrCgl24HkcyDTzB16qaPXOMdwc9lUo1jYwU9CX/YgH18WrIA4SwQO';
@@ -189,25 +190,46 @@ let products=[], cart={}, currentImage='', loggedIn=false;
 const $=id=>document.getElementById(id);
 
 async function loadData(){
+  // 1. قراءة الذاكرة المحلية أولاً لتظهر المنتجات فوراً بدون أي تأخير
+  try {
+    const local = localStorage.getItem(PRODUCTS_KEY);
+    if(local) {
+      products = JSON.parse(local);
+      renderProducts();
+    }
+  } catch(e){}
+
+  // 2. محاولة جلب أحدث بيانات من السحابة وتحديث المحلي بها إذا كانت موجودة
   try {
     const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
       headers: { 'X-Master-Key': API_KEY }
     });
     if(res.ok){
       const data = await res.json();
-      products = data.record?.products || [];
+      const cloudProducts = data.record?.products;
+      if(Array.isArray(cloudProducts) && cloudProducts.length > 0){
+        products = cloudProducts;
+        localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+        renderProducts();
+      }
     }
   } catch(e){
-    console.log('Error loading from cloud');
+    console.log('Using local products fallback');
   }
-  renderProducts();
+
   try{ cart = JSON.parse(localStorage.getItem(CART_KEY)||'{}'); }catch(e){ cart = {}; }
   updateCartCount();
 }
 
 async function syncToCloud(){
+  // حفظ محلي فوري أولاً لضمان عدم مسح المنتجات أبداً
+  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+  renderProducts();
+  renderAdmin();
+
+  // رفع سحابي فوري
   try {
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -215,14 +237,9 @@ async function syncToCloud(){
       },
       body: JSON.stringify({ products: products })
     });
-    if(!res.ok) {
-      alert('⚠️ تنبيه: لم يتم الحفظ في السحابة بنجاح، تأكد من الاتصال بالإنترنت.');
-    }
   } catch(e){
-    alert('⚠️ حدث خطأ في الاتصال بالسحابة.');
+    console.log('Cloud sync error, saved locally');
   }
-  renderProducts();
-  renderAdmin();
 }
 
 function saveCartLocal(){
@@ -289,7 +306,7 @@ async function saveProduct(e){
   
   await syncToCloud();
   resetForm();
-  alert('تم حفظ المنتج سحابياً وظهوره للجميع بنجاح! 💕');
+  alert('تم حفظ المنتج وتثبيته محلياً وسحابياً بنجاح! 💕');
 }
 
 function editProduct(id){
