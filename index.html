@@ -121,7 +121,7 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
       <p id="loginError" style="color:#ff4757;margin-top:10px"></p>
     </div>
     <div id="dashboard" class="hidden">
-      <div class="note">أضيفي صورة المنتج، الاسم، السعر، والوصف. المنتجات تُحفظ محلياً وسحابياً فوراً.</div>
+      <div class="note">أضيفي صورة المنتج، الاسم، السعر، والوصف. المنتجات تُحفظ وتظهر للكل فوراً.</div>
       <form id="productForm" onsubmit="saveProduct(event)">
         <input id="editId" type="hidden">
         <div class="formgrid">
@@ -180,65 +180,63 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 const WHATSAPP_NUMBER='201100329703';
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
-const PRODUCTS_KEY='marnona_safe_products_v4';
-const CART_KEY='marnona_cart_v4';
+const PRODUCTS_KEY='marnona_safe_v5';
+const CART_KEY='marnona_cart_v5';
 
 const BIN_ID='6ad949effd5d160538104bf';
 const API_KEY='$2a$10$ZrCgl24HkcyDTzB16qaPXOMdwc9lUo1jYwU9CX/YgH18WrIA4SwQO';
 
-let products=[],cart={},currentImage='',loggedIn=false;
+let products=[], cart={}, currentImage='', loggedIn=false;
 const $=id=>document.getElementById(id);
 
 async function loadData(){
-  // جلب البيانات من الذاكرة المحلية أولاً لتظهر فوراً بلا تأخير
-  try{
-    const local=localStorage.getItem(PRODUCTS_KEY);
-    if(local){
-      products=JSON.parse(local);
-      renderProducts();
-    }
-  }catch(e){}
+  // 1. تحميل محلي فوري لمنع أي فراغ
+  try {
+    const local = localStorage.getItem(PRODUCTS_KEY);
+    if(local) products = JSON.parse(local);
+  } catch(e){}
+  renderProducts();
 
-  // جلب التحديثات من السحابة في الخلفية
-  try{
-    const res=await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`,{
-      headers:{'X-Master-Key':API_KEY}
+  // 2. جلب الأحدث من السحابة وتحديث البيانات بأمان تام
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: { 'X-Master-Key': API_KEY }
     });
     if(res.ok){
-      const data=await res.json();
-      const cloudProducts=data.record?.products;
-      if(Array.isArray(cloudProducts)&&cloudProducts.length>=0){
-        products=cloudProducts;
-        localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));
+      const data = await res.json();
+      const cloudProducts = data.record?.products;
+      if(Array.isArray(cloudProducts)){
+        products = cloudProducts;
+        localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
         renderProducts();
       }
     }
-  }catch(e){
-    console.log('Offline mode active');
+  } catch(e){
+    console.log('Offline / Local mode');
   }
 
-  try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}}
+  try{ cart = JSON.parse(localStorage.getItem(CART_KEY)||'{}'); }catch(e){ cart = {}; }
   updateCartCount();
 }
 
 async function syncToCloud(){
-  // حفظ محلي فوري أولاً لتثبيت المنتجات تماماً
-  localStorage.setItem(PRODUCTS_KEY,JSON.stringify(products));
+  // حفظ فوري على المتصفح أولاً لضمان عدم الضياع
+  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
   renderProducts();
   renderAdmin();
 
-  // إرسال البيانات للسحابة في الخلفية
-  try{
-    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`,{
-      method:'PUT',
-      headers:{
-        'Content-Type':'application/json',
-        'X-Master-Key':API_KEY
+  // إرسال سحابي فوري
+  try {
+    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY
       },
-      body:JSON.stringify({products:products})
+      body: JSON.stringify({ products: products })
     });
-  }catch(e){
-    console.log('Cloud sync pending');
+  } catch(e){
+    console.log('Cloud sync error');
   }
 }
 
@@ -306,7 +304,7 @@ async function saveProduct(e){
   
   await syncToCloud();
   resetForm();
-  alert('تم حفظ المنتج وتثبيته بنجاح للجميع! 💕');
+  alert('تم حفظ المنتج وتثبيته للجميع بنجاح! 💕');
 }
 
 function editProduct(id){
@@ -318,14 +316,17 @@ function editProduct(id){
   $('productDesc').value=p.desc||'';
   currentImage=p.image||'';
   if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}
-  else $('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ التعديلات';
+  else $('imagePreview').classList.add('hidden');
+  $('saveBtn').textContent='حفظ التعديلات';
   $('productForm').scrollIntoView({behavior:'smooth'});
 }
 
 function resetForm(){
-  $('productForm').reset();$('editId').value='';
+  $('productForm').reset();
+  $('editId').value='';
   currentImage='';
-  $('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ المنتج';
+  $('imagePreview').classList.add('hidden');
+  $('saveBtn').textContent='حفظ المنتج';
 }
 
 async function deleteProduct(id){
