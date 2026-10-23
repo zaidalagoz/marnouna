@@ -1,73 +1,417 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MARNONA | المتجر</title>
-<style>
-:root{--bg:#080607;--panel:#14090d;--panel2:#1d0b11;--red:#f3264b;--red2:#a50d2b;--gold:#e5bd69;--text:#fff7f8;--muted:#c5afb5;--line:#3a1721}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:12px 17px;background:var(--red);color:white;font-weight:bold}button:hover{filter:brightness(1.12)}.secondary{background:transparent;border:1px solid var(--line)}.top{background:#480d1b;text-align:center;padding:10px;color:white;font-size:13px}.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090607ed;backdrop-filter:blur(12px);z-index:4}.logo{font-family:Georgia,serif;font-weight:bold;font-size:35px;letter-spacing:1px}.logo span{color:var(--red)}.navlinks{display:flex;gap:10px;align-items:center}.navlinks a{color:white;text-decoration:none;font-size:14px}.hero{min-height:380px;display:grid;place-items:center;text-align:center;padding:60px 20px;background:radial-gradient(ellipse at 50% 30%,#5c1024 0%,#210a11 42%,#080607 75%);position:relative;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;width:460px;height:460px;border:1px solid #92213b55;border-radius:50%;pointer-events:none}.hero:after{width:600px;height:600px}.hero>*{position:relative;z-index:1}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:bold}.hero h1{font-size:clamp(32px,5vw,58px);margin:20px 0 12px}.hero h1 span{color:var(--red)}.hero p{color:#e3d1d5;max-width:650px;line-height:2;margin:0 auto 24px}.wrap{max-width:1200px;margin:auto;padding:42px 20px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;flex-wrap:wrap}.sectionhead h2{margin:0;font-size:27px}.sectionhead p{margin:7px 0 0;color:var(--muted);font-size:14px}.tools{display:flex;gap:9px;flex-wrap:wrap}.tools input{min-width:210px}.field,input,textarea{background:#0d080a;border:1px solid var(--line);border-radius:9px;padding:12px;color:white;outline:none;width:100%}.field:focus,input:focus,textarea:focus{border-color:var(--red)}.tools input{width:auto}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product{background:linear-gradient(150deg,#1a0b10,#0d080a);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s}.product:hover{transform:translateY(-3px);border-color:#8e263e}.product img{width:100%;height:290px;object-fit:cover;display:block;background:#180a0f}.placeholder{height:290px;display:grid;place-items:center;background:radial-gradient(circle,#481123,#10080b);font-family:Georgia,serif;font-size:42px;color:#f8e5e9}.pbody{padding:17px}.pbody h3{margin:0 0 9px;font-size:20px}.desc{color:var(--muted);font-size:14px;line-height:1.8;min-height:48px;white-space:pre-wrap}.price{color:var(--gold);font-size:22px;font-weight:bold;margin:15px 0}.pbody button{width:100%}.empty{border:1px dashed var(--line);border-radius:14px;padding:45px;text-align:center;color:var(--muted);grid-column:1/-1}.footer{border-top:1px solid var(--line);padding:28px 20px;text-align:center;color:var(--muted);font-size:13px}.admin-fab{position:fixed;bottom:18px;left:18px;z-index:5;border-radius:50%;width:52px;height:52px;padding:0;font-size:21px;box-shadow:0 8px 28px #0008}.modal{position:fixed;inset:0;background:#000b;z-index:10;display:none;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.modalbox{width:min(760px,100%);max-height:92vh;overflow:auto;background:#10080b;border:1px solid #612034;border-radius:16px;padding:22px;box-shadow:0 25px 90px #000}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.modalhead h2{margin:0}.close{background:#2b1119;padding:7px 12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.full{grid-column:1/-1}label{display:block;font-size:13px;color:#e7cbd2;margin-bottom:7px}.formrow{margin-bottom:12px}.adminlist{display:grid;gap:9px;margin-top:20px}.adminitem{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:10px}.adminitem img{width:54px;height:54px;object-fit:cover;border-radius:7px}.adminitem .info{flex:1;min-width:0}.adminitem .info strong{display:block}.adminitem .info small{color:var(--muted)}.danger{background:#691026}.note{font-size:12px;line-height:1.8;color:#d6b9c1;background:#1a0b11;padding:12px;border-radius:9px;margin:14px 0}.cartcount{display:inline-grid;place-items:center;background:var(--red);border-radius:50%;min-width:23px;height:23px;font-size:12px;margin-right:5px}.cartitems{display:grid;gap:10px;margin:15px 0}.cartitem{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:9px}.cartitem small{color:var(--muted)}.qty{display:flex;align-items:center;gap:8px}.qty button{padding:4px 10px}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:bold;padding:15px 0;border-top:1px solid var(--line)}.hidden{display:none!important}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product img,.placeholder{height:230px}.nav{padding:14px 4%}.logo{font-size:28px}.navlinks a{font-size:12px}}
-@media(max-width:540px){.grid{grid-template-columns:1fr 1fr;gap:10px}.product img,.placeholder{height:170px}.pbody{padding:11px}.pbody h3{font-size:16px}.desc{font-size:12px;min-height:44px}.price{font-size:18px}.pbody button{padding:10px 6px;font-size:12px}.hero{min-height:350px}.navlinks a:not(:last-child){display:none}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.adminitem{flex-wrap:wrap}}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MARNONA | مرنونا</title>
+<!-- مكتبة Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#fff5f8;--panel:#ffffff;--panel2:#ffe3ec;--pink:#ff6f91;--pink-dark:#e05377;--text:#4a3b40;--muted:#8c7880;--line:#ffd1dc;--gold:#d4af37}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 20px;background:var(--pink);color:white;font-weight:bold;transition:0.2s}button:hover{background:var(--pink-dark)}.secondary{background:transparent;border:1px solid var(--line);color:var(--text)}.secondary:hover{background:var(--panel2)}.top{background:var(--pink);text-align:center;padding:10px;color:white;font-size:13px;font-weight:bold}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(12px);z-index:4}
+.logo-area{display:flex;align-items:center;gap:10px}
+.logo-area img{width:45px;height:45px;border-radius:50%;object-fit:cover;border:2px solid var(--pink)}
+.logo{font-family:Georgia,serif;font-weight:bold;font-size:28px;color:var(--pink-dark);letter-spacing:1px}
+.navlinks{display:flex;gap:15px;align-items:center}.navlinks a{color:var(--text);text-decoration:none;font-size:14px;font-weight:bold}.navlinks a:hover{color:var(--pink)}
+.hero{min-height:360px;display:grid;place-items:center;text-align:center;padding:50px 20px;background:linear-gradient(135deg, #ffe3ec 0%, #fff5f8 100%);border-bottom:1px solid var(--line)}
+.hero .eyebrow{color:var(--pink-dark);letter-spacing:2px;font-size:13px;font-weight:bold;margin-bottom:10px}
+.hero h1{font-size:clamp(28px,4vw,46px);margin:10px 0 15px;color:var(--text)}
+.hero h1 span{color:var(--pink)}
+.hero p{color:var(--muted);max-width:600px;line-height:1.8;margin:0 auto 20px;font-size:16px}
+.wrap{max-width:1200px;margin:auto;padding:40px 20px}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px;flex-wrap:wrap}
+.sectionhead h2{margin:0;font-size:26px;color:var(--text)}
+.tools{display:flex;gap:10px;flex-wrap:wrap}.tools input{min-width:220px}
+input,textarea{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--text);outline:none;width:100%}
+input:focus,textarea:focus{border-color:var(--pink)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.product{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(255,111,145,0.08);transition:.2s}
+.product:hover{transform:translateY(-4px);border-color:var(--pink)}
+.product img{width:100%;height:260px;object-fit:cover;display:block;background:#fff0f3}
+.placeholder{height:260px;display:grid;place-items:center;background:#fff0f3;font-family:Georgia,serif;font-size:30px;color:var(--pink)}
+.pbody{padding:18px}
+.pbody h3{margin:0 0 8px;font-size:19px;color:var(--text)}
+.desc{color:var(--muted);font-size:14px;line-height:1.7;min-height:45px;white-space:pre-wrap}
+.price{color:var(--pink-dark);font-size:20px;font-weight:bold;margin:12px 0}
+.pbody button{width:100%}
+.empty{border:2px dashed var(--line);border-radius:16px;padding:40px;text-align:center;color:var(--muted);grid-column:1/-1;background:white}
+.footer{border-top:1px solid var(--line);padding:25px;text-align:center;color:var(--muted);font-size:13px;background:white}
+.admin-fab{position:fixed;bottom:20px;left:20px;z-index:5;border-radius:50%;width:50px;height:50px;padding:0;font-size:20px;box-shadow:0 5px 20px rgba(0,0,0,0.15);background:var(--pink);color:white}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10;display:none;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(4px)}
+.modal.open{display:flex}
+.modalbox{width:min(700px,100%);max-height:90vh;overflow:auto;background:white;border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 10px 40px rgba(0,0,0,0.1)}
+.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modalhead h2{margin:0;color:var(--text)}
+.close{background:var(--panel2);color:var(--text);padding:6px 12px;border-radius:8px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.full{grid-column:1/-1}
+label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weight:bold}
+.formrow{margin-bottom:12px}
+.adminlist{display:grid;gap:10px;margin-top:20px}
+.adminitem{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff0f3}
+.adminitem img{width:50px;height:50px;object-fit:cover;border-radius:8px}
+.adminitem .info{flex:1;min-width:0}.adminitem .info strong{display:block;color:var(--text)}
+.adminitem .info small{color:var(--muted)}
+.danger{background:#ff4757}
+.note{font-size:12px;line-height:1.7;color:var(--muted);background:#fff5f8;padding:12px;border-radius:10px;margin:12px 0;border:1px solid var(--line)}
+.cartcount{display:inline-grid;place-items:center;background:var(--pink);color:white;border-radius:50%;min-width:22px;height:22px;font-size:11px;margin-right:5px}
+.cartitems{display:grid;gap:10px;margin:15px 0}
+.cartitem{display:flex;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff5f8}
+.cartitem small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:8px}.qty button{padding:3px 10px;background:var(--pink)}
+.total{display:flex;justify-content:space-between;font-size:18px;font-weight:bold;padding:15px 0;border-top:1px solid var(--line);color:var(--text)}
+.hidden{display:none!important}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.grid{grid-template-columns:1fr;gap:12px}}
+</style>
 </head>
 <body>
-<div class="top">✨ MARNONA ✨ — اختار منتجك واطلب بسهولة عبر واتساب</div>
-<header class="nav"><div class="logo">MAR<span>NO</span>NA</div><nav class="navlinks"><a href="#home">الرئيسية</a><a href="#products">المنتجات</a><a href="#cart" onclick="openCart();return false">السلة <span class="cartcount" id="cartCount">0</span></a></nav><button class="secondary" onclick="openCart()">🛒 السلة</button></header>
-<section class="hero" id="home"><div><div class="eyebrow">MARNONA • YOUR STYLE</div><h1>اختيارات مميزة<br><span>على ذوقك</span></h1><p>اكتشف منتجات MARNONA، شوف الصور والأسعار والتفاصيل، وبعدها ابعت طلبك مباشرة على واتساب.</p><button onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">تصفح المنتجات</button></div></section>
-<main class="wrap" id="products"><div class="sectionhead"><div><h2>المنتجات</h2><p>كل المنتجات المتاحة في مكان واحد</p></div><div class="tools"><input id="search" placeholder="ابحث عن منتج..." oninput="renderProducts()"><button class="secondary" onclick="renderProducts()">بحث</button></div></div><div class="grid" id="productGrid"></div></main>
-<footer class="footer">© <span id="year"></span> MARNONA — جميع الحقوق محفوظة</footer>
+
+<div class="top">🌸 أهلاً بكم في عالم مرنونا لكل ما يخصكِ 🌸</div>
+
+<header class="nav">
+  <div class="logo-area">
+    <img src="logo.jpg" alt="مرنونا">
+    <div class="logo">MARNONA</div>
+  </div>
+  <nav class="navlinks">
+    <a href="#home">الرئيسية</a>
+    <a href="#products">المنتجات</a>
+    <a href="#cart" onclick="openCart();return false">السلة <span class="cartcount" id="cartCount">0</span></a>
+  </nav>
+  <button class="secondary" onclick="openCart()">🛒 السلة</button>
+</header>
+
+<section class="hero" id="home">
+  <div>
+    <div class="eyebrow">✨ MARNONA STORE ✨</div>
+    <h1>كل ما يخصك فى مكان واحد 💕</h1>
+    <p>تصفحي أجمل المنتجات المختارة بعناية خصيصاً لأجلك، اختاري ما يعجبك واطلبي بسهولة عبر واتساب.</p>
+    <button onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">تسوقي المنتجات الآن</button>
+  </div>
+</section>
+
+<main class="wrap" id="products">
+  <div class="sectionhead">
+    <div>
+      <h2>منتجاتنا المميزة</h2>
+      <p style="color:var(--muted);margin:5px 0 0">اكتشفي أحدث التشكيلات المتاحة</p>
+    </div>
+    <div class="tools">
+      <input id="search" placeholder="ابحثي عن منتج..." oninput="renderProducts()">
+    </div>
+  </div>
+  <div class="grid" id="productGrid"></div>
+</main>
+
+<footer class="footer">
+  © <span id="year"></span> MARNONA — جميع الحقوق محفوظة
+</footer>
+
 <button class="admin-fab" title="لوحة التحكم" onclick="openAdmin()">⚙</button>
-<div class="modal" id="adminModal"><div class="modalbox"><div class="modalhead"><h2>لوحة تحكم MARNONA</h2><button class="close" onclick="closeModal('adminModal')">✕</button></div>
-<div id="loginPane"><p style="color:var(--muted)">سجّل الدخول لإضافة المنتجات وتعديلها.</p><div class="formrow"><label>البريد الإلكتروني لحساب الإدارة في Supabase</label><input id="username" type="email" autocomplete="username" placeholder="البريد الإلكتروني" required></div><div class="formrow"><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" placeholder="كلمة المرور"></div><button onclick="login()">دخول</button><p id="loginError" style="color:#ff7890"></p><div class="note">الدخول هنا بحساب الإدارة الذي تنشئه في Supabase Authentication. المنتجات والصور تُحفظ على السحابة وتظهر لكل الزوار.</div></div>
-<div id="dashboard" class="hidden"><div class="note">أضف صورة المنتج من جهازك، ثم الاسم والسعر والوصف. اضغط حفظ وانتظر رسالة نجاح الحفظ السحابي.</div>
-<form id="productForm" onsubmit="saveProduct(event)"><input id="editId" type="hidden"><div class="formgrid">
-<div class="formrow full"><label>صورة المنتج (من جهازك)</label><input id="imageFile" type="file" accept="image/*"><div id="imagePreview" class="hidden" style="margin-top:10px"><img id="previewImg" style="max-width:150px;max-height:150px;object-fit:contain;border-radius:8px"></div></div>
-<div class="formrow"><label>اسم المنتج</label><input id="productName" required maxlength="100" placeholder="اسم المنتج"></div>
-<div class="formrow"><label>السعر بالجنيه المصري</label><input id="productPrice" type="number" min="0" step="0.01" required placeholder="مثال: 250"></div>
-<div class="formrow full"><label>الوصف</label><textarea id="productDesc" rows="3" maxlength="1000" placeholder="تفاصيل المنتج"></textarea></div>
-</div><div style="display:flex;gap:9px;flex-wrap:wrap"><button type="submit" id="saveBtn">حفظ المنتج</button><button type="button" class="secondary" onclick="resetForm()">إلغاء التعديل</button><button type="button" class="danger" onclick="logout()">تسجيل الخروج</button></div></form>
-<h3>المنتجات المضافة</h3><div class="adminlist" id="adminList"></div><button class="secondary" style="margin-top:14px" onclick="exportProducts()">تصدير نسخة احتياطية للمنتجات</button><div class="formrow" style="margin-top:12px"><label>استيراد نسخة احتياطية</label><input id="importFile" type="file" accept=".json,application/json" onchange="importProducts(event)"></div>
-</div></div></div>
-<div class="modal" id="cartModal"><div class="modalbox"><div class="modalhead"><h2>سلة الطلبات</h2><button class="close" onclick="closeModal('cartModal')">✕</button></div><div id="cartContent"></div></div></div>
-<div class="modal" id="checkoutModal"><div class="modalbox"><div class="modalhead"><h2>بيانات الطلب</h2><button class="close" onclick="closeModal('checkoutModal')">✕</button></div><form onsubmit="sendOrder(event)"><div class="formgrid"><div class="formrow"><label>الاسم بالكامل</label><input id="customerName" required maxlength="100"></div><div class="formrow"><label>رقم الموبايل</label><input id="customerPhone" required type="tel" maxlength="25"></div><div class="formrow full"><label>العنوان بالتفصيل</label><textarea id="customerAddress" required rows="3" maxlength="500"></textarea></div><div class="formrow full"><label>ملاحظات (اختياري)</label><textarea id="customerNotes" rows="2" maxlength="500"></textarea></div></div><p style="color:var(--muted);font-size:13px">بعد الضغط على إرسال الطلب، هيفتح واتساب على رقم MARNONA برسالة فيها بياناتك والمنتجات والإجمالي. راجع الرسالة واضغط إرسال داخل واتساب.</p><button type="submit">إرسال الطلب على واتساب</button></form></div></div>
+
+<div class="modal" id="adminModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <h2>لوحة تحكم مرنونا</h2>
+      <button class="close" onclick="closeModal('adminModal')">✕</button>
+    </div>
+    <div id="loginPane">
+      <p style="color:var(--muted)">سجلي الدخول لإدارة المنتجات.</p>
+      <div class="formrow"><label>اسم المستخدم</label><input id="username" placeholder="اسم المستخدم"></div>
+      <div class="formrow"><label>كلمة المرور</label><input id="password" type="password" placeholder="كلمة المرور"></div>
+      <button onclick="login()">دخول</button>
+      <p id="loginError" style="color:#ff4757;margin-top:10px"></p>
+    </div>
+    <div id="dashboard" class="hidden">
+      <div class="note">أضيفي المنتجات، وتُحفظ في Supabase وتظهر للجميع فوراً.</div>
+      <form id="productForm" onsubmit="saveProduct(event)">
+        <input id="editId" type="hidden">
+        <div class="formgrid">
+          <div class="formrow full">
+            <label>صورة المنتج</label>
+            <input id="imageFile" type="file" accept="image/*">
+            <div id="imagePreview" class="hidden" style="margin-top:10px">
+              <img id="previewImg" style="max-width:120px;max-height:120px;object-fit:contain;border-radius:8px;border:1px solid var(--line)">
+            </div>
+          </div>
+          <div class="formrow"><label>اسم المنتج</label><input id="productName" required placeholder="اسم المنتج"></div>
+          <div class="formrow"><label>السعر (جنيه مصري)</label><input id="productPrice" type="number" min="0" step="0.01" required placeholder="مثال: 250"></div>
+          <div class="formrow full"><label>الوصف</label><textarea id="productDesc" rows="3" placeholder="تفاصيل المنتج"></textarea></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button type="submit" id="saveBtn">حفظ المنتج</button>
+          <button type="button" class="secondary" onclick="resetForm()">إلغاء</button>
+          <button type="button" class="danger" onclick="logout()">خروج</button>
+        </div>
+      </form>
+      <h3 style="margin-top:25px">المنتجات الحالية</h3>
+      <div class="adminlist" id="adminList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="cartModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <h2>سلة الطلبات</h2>
+      <button class="close" onclick="closeModal('cartModal')">✕</button>
+    </div>
+    <div id="cartContent"></div>
+  </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+  <div class="modalbox">
+    <div class="modalhead">
+      <h2>بيانات الشحن والطلب</h2>
+      <button class="close" onclick="closeModal('checkoutModal')">✕</button>
+    </div>
+    <form onsubmit="sendOrder(event)">
+      <div class="formgrid">
+        <div class="formrow"><label>الاسم بالكامل</label><input id="customerName" required></div>
+        <div class="formrow"><label>رقم الموبايل</label><input id="customerPhone" required type="tel"></div>
+        <div class="formrow full"><label>العنوان بالتفصيل</label><textarea id="customerAddress" required rows="3"></textarea></div>
+        <div class="formrow full"><label>ملاحظات (اختياري)</label><textarea id="customerNotes" rows="2"></textarea></div>
+      </div>
+      <button type="submit" style="width:100%;margin-top:15px">إرسال الطلب عبر واتساب 💕</button>
+    </form>
+  </div>
+</div>
+
 <script>
 const WHATSAPP_NUMBER='201100329703';
-// ضع بيانات مشروعك من Supabase > Project Settings > API
-const SUPABASE_URL='https://zudmlmnysqgqmmfrjeut.supabase.co';
-const SUPABASE_ANON_KEY='sb_publishable_xKDI62cRa71k5JRoZ9rSbg_2uFSEwAG';
-const CART_KEY='marnona_cart_v1';
-const supabaseConfigured = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('PASTE_') && !SUPABASE_ANON_KEY.includes('PASTE_');
-const sb = supabaseConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-let products=[],cart={},currentImage='',loggedIn=false;
+
+// بيانات الدخول للترس (⚙) زي ما طلبت تماماً
+const ADMIN_USER='مرنونا';
+const ADMIN_PASS='112233';
+
+const CART_KEY='marnona_cart_v9';
+
+// إعدادات Supabase الخاصة بك
+const SUPABASE_URL = 'https://zudmlmnysqgqmmfrjeut.supabase.co';
+const SUPABASE_KEY = 'حط_المفتاح_هنا'; // حط مفتاح الـ Publishable Key بتاعك هنا بين العلامتين
+
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let products=[], cart={}, currentImage='', loggedIn=false;
 const $=id=>document.getElementById(id);
-function ensureConfig(){if(!sb){alert('لازم تحط رابط مشروع Supabase ومفتاح anon/publishable في أول الكود.');return false}return true}
-async function loadData(){try{cart=JSON.parse(localStorage.getItem(CART_KEY)||'{}')}catch(e){cart={}} if(!ensureConfig()){renderProducts();updateCartCount();return} const {data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});if(error){console.error(error);alert('تعذر تحميل المنتجات من Supabase: '+error.message);products=[]}else{products=(data||[]).map(row=>({id:row.id,name:row.name,price:Number(row.price)||0,desc:row.description||'',image:row.image||''}))}renderProducts();updateCartCount()}
-function saveCart(){try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){}}
+
+async function loadData(){
+  try {
+    const { data, error } = await supabaseClient.from('products').select('*').order('id', { ascending: false });
+    if(!error && data){ products = data; } else { products = []; }
+  } catch(e){ products = []; }
+  renderProducts();
+  try{ cart = JSON.parse(localStorage.getItem(CART_KEY)||'{}'); }catch(e){ cart = {}; }
+  updateCartCount();
+}
+
+async function saveProduct(e){
+  e.preventDefault();
+  if(!loggedIn)return;
+  const editId = $('editId').value;
+  const name = $('productName').value.trim();
+  const price = Number($('productPrice').value);
+  const desc = $('productDesc').value.trim();
+  const image = currentImage || '';
+
+  if(!name || !Number.isFinite(price) || price < 0){
+    alert('تأكد من كتابة الاسم والسعر بشكل صحيح.');
+    return;
+  }
+
+  if(editId){
+    const { error } = await supabaseClient.from('products').update({ name, price, desc, image }).eq('id', editId);
+    if(error){ alert('خطأ: ' + error.message); return; }
+  } else {
+    const { error } = await supabaseClient.from('products').insert([{ name, price, desc, image }]);
+    if(error){ alert('خطأ: ' + error.message); return; }
+  }
+
+  await loadData();
+  resetForm();
+  renderAdmin();
+  alert('تم حفظ المنتج في قاعدة بيانات Supabase بنجاح! 💕');
+}
+
+async function deleteProduct(id){
+  if(!confirm('هل أنت متأكد من حذف هذا المنتج؟'))return;
+  const { error } = await supabaseClient.from('products').delete().eq('id', id);
+  if(error){ alert('خطأ: ' + error.message); return; }
+  delete cart[id];
+  saveCartLocal();
+  await loadData();
+  renderAdmin();
+  renderCart();
+}
+
+function editProduct(id){
+  const p=products.find(x=>x.id == id);
+  if(!p)return;
+  $('editId').value=p.id;
+  $('productName').value=p.name;
+  $('productPrice').value=p.price;
+  $('productDesc').value=p.desc||'';
+  currentImage=p.image||'';
+  if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}
+  else $('imagePreview').classList.add('hidden');
+  $('saveBtn').textContent='حفظ التعديلات';
+  $('productForm').scrollIntoView({behavior:'smooth'});
+}
+
+function resetForm(){
+  $('productForm').reset();
+  $('editId').value='';
+  currentImage='';
+  $('imagePreview').classList.add('hidden');
+  $('saveBtn').textContent='حفظ المنتج';
+}
+
+function saveCartLocal(){
+  try{localStorage.setItem(CART_KEY,JSON.stringify(cart))}catch(e){}
+}
+
 function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function money(n){return new Intl.NumberFormat('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2}).format(Number(n)||0)}
-function renderProducts(){const q=$('search').value.trim().toLowerCase();const list=products.filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q));$('productGrid').innerHTML=list.length?list.map(p=>`<article class="product">${p.image?`<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy">`:`<div class="placeholder">MARNONA</div>`}<div class="pbody"><h3>${escapeHtml(p.name)}</h3><div class="desc">${escapeHtml(p.desc||'')}</div><div class="price">${money(p.price)}</div><button onclick="addToCart('${p.id}')">أضف للسلة</button></div></article>`).join(''):'<div class="empty">لسه مفيش منتجات مضافة. افتح ⚙ لوحة التحكم وسجّل الدخول لإضافة أول منتج.</div>'}
-function openModal(id){$(id).classList.add('open')}function closeModal(id){$(id).classList.remove('open')}
+
+function renderProducts(){
+  const q=$('search').value.trim().toLowerCase();
+  const list=products.filter(p=>(p.name+' '+p.desc).toLowerCase().includes(q));
+  $('productGrid').innerHTML=list.length?list.map(p=>`
+    <article class="product">
+      ${p.image?`<img src="${p.image}" alt="${escapeHtml(p.name)}" loading="lazy">`:`<div class="placeholder">MARNONA</div>`}
+      <div class="pbody">
+        <h3>${escapeHtml(p.name)}</h3>
+        <div class="desc">${escapeHtml(p.desc||'')}</div>
+        <div class="price">${money(p.price)}</div>
+        <button onclick="addToCart('${p.id}')">أضف للسلة 💕</button>
+      </div>
+    </article>
+  `).join(''):'<div class="empty">لا توجد منتجات مضافة حالياً. افتح لوحة التحكم (⚙) لإضافة أول منتج!</div>';
+}
+
+function openModal(id){$(id).classList.add('open')}
+function closeModal(id){$(id).classList.remove('open')}
 function openAdmin(){openModal('adminModal');$('loginPane').classList.toggle('hidden',loggedIn);$('dashboard').classList.toggle('hidden',!loggedIn);if(loggedIn)renderAdmin()}
-async function login(){if(!ensureConfig())return;const email=$('username').value.trim(),password=$('password').value;const {data,error}=await sb.auth.signInWithPassword({email,password});if(error){$('loginError').textContent='فشل الدخول: '+error.message;return}loggedIn=!!data.session;$('loginError').textContent='';$('loginPane').classList.add('hidden');$('dashboard').classList.remove('hidden');renderAdmin()}
-async function logout(){if(sb)await sb.auth.signOut();loggedIn=false;$('username').value='';$('password').value='';$('dashboard').classList.add('hidden');$('loginPane').classList.remove('hidden')}
-function renderAdmin(){$('adminList').innerHTML=products.length?products.map(p=>`<div class="adminitem">${p.image?`<img src="${escapeHtml(p.image)}" alt="">`:`<div class="placeholder" style="width:54px;height:54px;font-size:12px">M</div>`}<div class="info"><strong>${escapeHtml(p.name)}</strong><small>${money(p.price)}</small></div><button class="secondary" onclick="editProduct('${p.id}')">تعديل</button><button class="danger" onclick="deleteProduct('${p.id}')">حذف</button></div>`).join(''):'<p style="color:var(--muted)">لا توجد منتجات حتى الآن.</p>'}
-$('imageFile').addEventListener('change',()=>{const file=$('imageFile').files[0];if(!file)return;if(!file.type.startsWith('image/')){alert('اختار ملف صورة صحيح.');return}if(file.size>5*1024*1024){alert('حجم الصورة أكبر من 5 ميجابايت. اختار صورة أصغر.');$('imageFile').value='';return}const r=new FileReader();r.onload=()=>{const source=new Image();source.onload=()=>{const maxSide=1200,scale=Math.min(1,maxSide/Math.max(source.width,source.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(source.width*scale));canvas.height=Math.max(1,Math.round(source.height*scale));canvas.getContext('2d').drawImage(source,0,0,canvas.width,canvas.height);currentImage=canvas.toDataURL('image/jpeg',0.78);$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')};source.onerror=()=>alert('مش قادر أقرأ الصورة، جرّب صورة تانية.');source.src=r.result};r.readAsDataURL(file)});
-async function uploadImage(dataUrl,id){if(!dataUrl||!dataUrl.startsWith('data:image/'))return dataUrl||'';const blob=await (await fetch(dataUrl)).blob();const path=id+'-'+Date.now()+'.jpg';const {error}=await sb.storage.from('product-images').upload(path,blob,{contentType:'image/jpeg',upsert:true});if(error)throw error;const {data}=sb.storage.from('product-images').getPublicUrl(path);return data.publicUrl}
-async function saveProduct(e){e.preventDefault();if(!loggedIn){alert('سجّل الدخول الأول.');return}if(!ensureConfig())return;const id=$('editId').value||('p'+Date.now());const old=products.find(p=>p.id===id);const name=$('productName').value.trim(),price=Number($('productPrice').value),desc=$('productDesc').value.trim();if(!name||!Number.isFinite(price)||price<0){alert('راجع اسم المنتج والسعر.');return}const btn=$('saveBtn');btn.disabled=true;btn.textContent='جاري الحفظ...';try{const image=await uploadImage(currentImage||old?.image||'',id);const row={id,name,price,description:desc,image};const {error}=await sb.from('products').upsert(row,{onConflict:'id'});if(error)throw error;await loadData();resetForm();renderAdmin();alert('تم حفظ المنتج على السحابة بنجاح، وهيظهر على الأجهزة الأخرى.')}catch(err){console.error(err);alert('لم يتم الحفظ. تأكد من إعدادات Supabase وسياسات الجدول والصور. التفاصيل: '+(err.message||err))}finally{btn.disabled=false;btn.textContent=$('editId').value?'حفظ التعديلات':'حفظ المنتج'}}
-function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;$('editId').value=p.id;$('productName').value=p.name;$('productPrice').value=p.price;$('productDesc').value=p.desc||'';currentImage=p.image||'';if(currentImage){$('previewImg').src=currentImage;$('imagePreview').classList.remove('hidden')}else $('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ التعديلات';$('productForm').scrollIntoView({behavior:'smooth'})}
-function resetForm(){$('productForm').reset();$('editId').value='';currentImage='';$('imagePreview').classList.add('hidden');$('saveBtn').textContent='حفظ المنتج'}
-async function deleteProduct(id){const p=products.find(x=>x.id===id);if(!p||!confirm('متأكد إنك عايز تحذف المنتج ده؟'))return;if(!ensureConfig())return;const {error}=await sb.from('products').delete().eq('id',id);if(error){alert('فشل الحذف: '+error.message);return}products=products.filter(x=>x.id!==id);delete cart[id];saveCart();renderProducts();renderAdmin();renderCart()}
-function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();updateCartCount();alert('اتضاف للسلة');}
-function updateCartCount(){$('cartCount').textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
-function cartRows(){return Object.entries(cart).map(([id,qty])=>({p:products.find(p=>p.id===id),qty})).filter(x=>x.p&&x.qty>0)}
-function renderCart(){const rows=cartRows();if(!rows.length){$('cartContent').innerHTML='<div class="empty">السلة فاضية. اختار المنتجات الأول.</div>';return}let total=0;$('cartContent').innerHTML='<div class="cartitems">'+rows.map(({p,qty})=>{total+=p.price*qty;return `<div class="cartitem"><div><strong>${escapeHtml(p.name)}</strong><br><small>${money(p.price)} × ${qty}</small></div><div class="qty"><button class="secondary" onclick="changeQty('${p.id}',1)">+</button><span>${qty}</span><button class="secondary" onclick="changeQty('${p.id}',-1)">−</button></div></div>`}).join('')+'</div><div class="total"><span>الإجمالي</span><span>'+money(total)+'</span></div><button style="width:100%" onclick="openCheckout()">إكمال الطلب</button>'}
-function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];saveCart();updateCartCount();renderCart()}
+
+function login(){
+  if($('username').value===ADMIN_USER && $('password').value===ADMIN_PASS){
+    loggedIn=true;$('loginError').textContent='';$('loginPane').classList.add('hidden');$('dashboard').classList.remove('hidden');renderAdmin();
+  }else{$('loginError').textContent='اسم المستخدم أو كلمة المرور غير صحيحة.';}
+}
+
+function logout(){loggedIn=false;$('username').value='';$('password').value='';$('dashboard').classList.add('hidden');$('loginPane').classList.remove('hidden')}
+
+function renderAdmin(){
+  $('adminList').innerHTML=products.length?products.map(p=>`
+    <div class="adminitem">
+      ${p.image?`<img src="${p.image}" alt="">`:`<div class="placeholder" style="width:50px;height:50px;font-size:12px">M</div>`}
+      <div class="info"><strong>${escapeHtml(p.name)}</strong><small>${money(p.price)}</small></div>
+      <button class="secondary" onclick="editProduct('${p.id}')">تعديل</button>
+      <button class="danger" onclick="deleteProduct('${p.id}')">حذف</button>
+    </div>
+  `).join(''):'<p style="color:var(--muted)">لا توجد منتجات مسجلة.</p>';
+}
+
+function addToCart(id){
+  cart[id]=(cart[id]||0)+1;
+  saveCartLocal();
+  updateCartCount();
+  alert('تمت إضافة المنتج إلى السلة 💕');
+}
+
+function updateCartCount(){
+  $('cartCount').textContent=Object.values(cart).reduce((a,b)=>a+b,0);
+}
+
+function cartRows(){
+  return Object.entries(cart).map(([id,qty])=>({p:products.find(p=>p.id == id),qty})).filter(x=>x.p&&x.qty>0);
+}
+
+function renderCart(){
+  const rows=cartRows();
+  if(!rows.length){$('cartContent').innerHTML='<div class="empty">السلة فارغة حالياً.</div>';return}
+  let total=0;
+  $('cartContent').innerHTML='<div class="cartitems">'+rows.map(({p,qty})=>{
+    total+=p.price*qty;
+    return `
+      <div class="cartitem">
+        <div><strong>${escapeHtml(p.name)}</strong><br><small>${money(p.price)} × ${qty}</small></div>
+        <div class="qty">
+          <button class="secondary" onclick="changeQty('${p.id}',1)">+</button>
+          <span>${qty}</span>
+          <button class="secondary" onclick="changeQty('${p.id}',-1)">−</button>
+        </div>
+      </div>
+    `;
+  }).join('')+'</div><div class="total"><span>الإجمالي</span><span>'+money(total)+'</span></div><button style="width:100%;margin-top:15px" onclick="openCheckout()">إتمام الطلب عبر واتساب</button>';
+}
+
+function changeQty(id,delta){
+  cart[id]=(cart[id]||0)+delta;
+  if(cart[id]<=0)delete cart[id];
+  saveCartLocal();
+  updateCartCount();
+  renderCart();
+}
+
 function openCart(){renderCart();openModal('cartModal')}
-function openCheckout(){if(!cartRows().length){alert('السلة فاضية');return}closeModal('cartModal');openModal('checkoutModal')}
-function sendOrder(e){e.preventDefault();const rows=cartRows();if(!rows.length){alert('السلة فاضية');return}const name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim(),notes=$('customerNotes').value.trim();let total=0;const items=rows.map(({p,qty})=>{total+=p.price*qty;return `• ${p.name} — عدد ${qty} × ${money(p.price)} = ${money(p.price*qty)}`}).join('\n');const msg=`طلب جديد من متجر MARNONA\n\nالاسم: ${name}\nرقم الموبايل: ${phone}\nالعنوان: ${address}\n\nالمنتجات:\n${items}\n\nالإجمالي: ${money(total)}\n${notes?'ملاحظات: '+notes+'\n':''}\nبرجاء تأكيد الطلب والتوصيل.`;window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener')}
-function exportProducts(){const blob=new Blob([JSON.stringify(products,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='marnona-products-backup.json';a.click();URL.revokeObjectURL(a.href)}
-async function importProducts(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=async()=>{try{const data=JSON.parse(r.result);if(!Array.isArray(data))throw new Error('الملف ليس قائمة منتجات');for(const p of data.filter(p=>p&&p.id&&p.name&&Number.isFinite(Number(p.price)))){const image=await uploadImage(p.image||'',String(p.id));const {error}=await sb.from('products').upsert({id:String(p.id),name:String(p.name),price:Number(p.price),description:String(p.desc||p.description||''),image},{onConflict:'id'});if(error)throw error}await loadData();renderAdmin();alert('تم استيراد المنتجات إلى السحابة.')}catch(err){alert('فشل الاستيراد: '+(err.message||err))}e.target.value=''};r.readAsText(file)}
-(async()=>{if(sb){const {data}=await sb.auth.getSession();loggedIn=!!data.session;if(loggedIn){$('loginPane').classList.add('hidden');$('dashboard').classList.remove('hidden')}}await loadData();if(loggedIn)renderAdmin();$('year').textContent=new Date().getFullYear()})();
+function openCheckout(){if(!cartRows().length){alert('السلة فارغة');return}closeModal('cartModal');openModal('checkoutModal')}
+
+function sendOrder(e){
+  e.preventDefault();
+  const rows=cartRows();
+  if(!rows.length){alert('السلة فارغة');return}
+  const name=$('customerName').value.trim(),
+        phone=$('customerPhone').value.trim(),
+        address=$('customerAddress').value.trim(),
+        notes=$('customerNotes').value.trim();
+  let total=0;
+  const items=rows.map(({p,qty})=>{
+    total+=p.price*qty;
+    return `• ${p.name} — عدد ${qty} × ${money(p.price)} = ${money(p.price*qty)}`;
+  }).join('\n');
+  const msg=`طلب جديد من متجر MARNONA 🌸\n\nالاسم: ${name}\nرقم الموبايل: ${phone}\nالعنوان: ${address}\n\nالمنتجات:\n${items}\n\nالإجمالي: ${money(total)}\n${notes?'ملاحظات: '+notes+'\n':''}\nبرجاء تأكيد الطلب 💕`;
+  window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener');
+}
+
+function handleImageChange(){
+  const file=$('imageFile').files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const source=new Image();
+    source.onload=()=>{
+      const maxSide=900;
+      const scale=Math.min(1,maxSide/Math.max(source.width,source.height));
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.round(source.width*scale);
+      canvas.height=Math.round(source.height*scale);
+      const ctx=canvas.getContext('2d');
+      ctx.drawImage(source,0,0,canvas.width,canvas.height);
+      currentImage=canvas.toDataURL('image/jpeg',0.8);
+      $('previewImg').src=currentImage;
+      $('imagePreview').classList.remove('hidden');
+    };
+    source.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function initMarnona(){
+  loadData();
+  const yearEl=$('year');
+  if(yearEl)yearEl.textContent=new Date().getFullYear();
+  const imageInput=$('imageFile');
+  if(imageInput&&!imageInput.dataset.bound){
+    imageInput.dataset.bound='1';
+    imageInput.addEventListener('change',handleImageChange);
+  }
+}
+
+Object.assign(window,{openAdmin,login,logout,closeModal,openCart,renderProducts,addToCart,saveProduct,resetForm,editProduct,deleteProduct,changeQty,openCheckout,sendOrder});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initMarnona);
+else initMarnona();
 </script>
-</body></html>
+</body>
+</html>
