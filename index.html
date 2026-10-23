@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MARNONA | مرنونا</title>
-<!-- مكتبة Supabase للاتصال بقاعدة البيانات الحقيقية -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#fff5f8;--panel:#ffffff;--panel2:#ffe3ec;--pink:#ff6f91;--pink-dark:#e05377;--text:#4a3b40;--muted:#8c7880;--line:#ffd1dc;--gold:#d4af37}
@@ -180,16 +179,12 @@ label{display:block;font-size:13px;color:var(--text);margin-bottom:6px;font-weig
 
 <script>
 const WHATSAPP_NUMBER='201100329703';
-
-// بيانات الدخول للترس (⚙)
 const ADMIN_USER='مرنونا';
 const ADMIN_PASS='112233';
+const CART_KEY='marnona_cart_v11';
 
-const CART_KEY='marnona_cart_v10';
-
-// إعدادات Supabase الخاصة بك
-const SUPABASE_URL = 'https://zudmlmnysqgqmmfrjeut.supabase.co'; //[cite: 4]
-const SUPABASE_KEY = 'PUT_YOUR_SUPABASE_KEY_HERE'; // <--- ضع مفتاح الـ Publishable key هنا بين العلامتين وبدون حروف عربية نهائياً!
+const SUPABASE_URL = 'https://zudmlmnysqgqmmfrjeut.supabase.co';[cite: 4]
+const SUPABASE_KEY = 'PUT_YOUR_SUPABASE_KEY_HERE';
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -405,12 +400,9 @@ function initMarnona(){
   const imageInput=$('imageFile');
   if(imageInput&&!imageInput.dataset.bound){
     imageInput.dataset.bound='1';
-    imageInput.addEventListener('change',handleImageHandleChange);
+    imageInput.addEventListener('change',handleImageChange);
   }
 }
-
-// تصحيح بسيط للربط
-function handleImageHandleChange(){ handleImageChange(); }
 
 Object.assign(window,{openAdmin,login,logout,closeModal,openCart,renderProducts,addToCart,saveProduct,resetForm,editProduct,deleteProduct,changeQty,openCheckout,sendOrder});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initMarnona);
